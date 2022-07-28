@@ -51,15 +51,6 @@ class MainController extends Controller
         }
     }
 
-    public function home()
-    {
-        // $user = DB::selectOne("select ('orderlist') as value from dual");
-        // $totalBayar = DB::selectOne("select hitungTotalBayar(1) as value from dual");
-        // $users = DB::table('users')->get();
-        $users = Orderlist::all();
-        return view('pages.home', compact('users'));
-    }
-
     public function credits()
     {
         return view('pages.credits');
@@ -68,5 +59,40 @@ class MainController extends Controller
     public function faq()
     {
         return view('pages.faq');
+    }
+    ////////////////////////////////////////////////////////////
+    // TOKOBOT TEMPLATE
+    
+    // HOME DASHBOARD
+    public function home()
+    {
+        if (session()->has('hasLogin')) {
+            $customer = DB::selectOne("select totalCustomers() as value from dual");
+            $saldo = DB::table('customer')->get();
+            $sales = DB::selectOne("select numberOfOrders() as value from dual");
+
+            return view('home', compact('customer', 'sales'));
+        } else {
+            echo "<script>alert('Anda harus login terlebih dahulu');</script>";
+            return redirect()->route('home');
+        }
+    }
+
+    // PRIVACY POLICY
+    public function privacy_policy()
+    {
+        return view('extra.privacy-policy');
+    }
+
+    // TERMS OF SERVICE
+    public function terms_of_service()
+    {
+        return view('extra.terms-of-service');
+    }
+
+    // DUAL TONE ICON
+    public function dual_tone_icon()
+    {
+        return view('icons.dual-tone');
     }
 }

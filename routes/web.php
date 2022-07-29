@@ -50,3 +50,5 @@ Route::get('/app/sales', 'App\Http\Controllers\AppController@sales')->name('sale
 Route::get('/app/reports/posisi-keuangan', 'App\Http\Controllers\AppController@posisi_keuangan')->name('posisi_keuangan');
 Route::get('/app/reports/arus-kas-bulan', 'App\Http\Controllers\AppController@arus_kas_bulan')->name('arus_kas_bulan');
 Route::get('/app/reports/laba-rugi', 'App\Http\Controllers\AppController@laba_rugi')->name('laba_rugi');
+
+

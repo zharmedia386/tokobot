@@ -44,7 +44,10 @@ class AuthController extends Controller
         $username_user = $credentials['username'];
         $role_user = DB::selectOne("select getRoleUser('$username_user') as value from dual")->value;
 
-        // dd($role_user);
+        $user_id = $query[0]->user_id;
+        $email_user = DB::selectOne("select getEmailUser('$user_id') as value from dual")->value;
+
+        // dd($email_user);
         
         $user_id = DB::selectOne("select getUserId('$username_user') as value from dual")->value;
 
@@ -54,6 +57,7 @@ class AuthController extends Controller
             $request->session()->put('role', $role_user);
             $request->session()->put('username', $username_user);
             $request->session()->put('user_id', $user_id);
+            $request->session()->put('email', $email_user);
             return redirect()->intended('/');
         } else {
             return back()->with('loginError', 'Login Failed!');
@@ -86,7 +90,7 @@ class AuthController extends Controller
 
         $pelaku_umkm->save();
 
-        return redirect('/')->with('success', 'Registration Success! Please Login');
+        return redirect('/auth/login')->with('successLogin', 'Registration Success! Please Login');
     }
 
     // LOGOUT PELAKU UMKM :POST
@@ -98,7 +102,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('home');
+        return redirect()->route('login');
     }
 
     // UPDATE PASSWORD PELAKU UMKM :GET

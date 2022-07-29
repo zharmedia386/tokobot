@@ -2,7 +2,7 @@
     <!--Nav Start-->
     <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
         <div class="container-fluid navbar-inner">
-            <a href="../dashboard/index.html" class="navbar-brand">
+            <a href="{{ route('home') }}" class="navbar-brand">
                 <!--Logo start-->
                 <div class="logo">
                     <svg width="40" height="43" class="text-primary" viewBox="0 0 60 63" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2011,7 +2011,7 @@
                     </svg>
                 </div>
                 <div class="logo-hover">
-                    <img src="../assets/images/favicon.png" class="img-fluid logo-img" alt="img4" />
+                    <img src="{{ asset('assets/images/favicon.png') }}" class="img-fluid logo-img" alt="img4" />
                 </div>
 
                 <!--logo End-->
@@ -2066,7 +2066,7 @@
                                 <div class="card-body p-0">
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
-                                            <img class="avatar-40 rounded-pill" src="../assets/images/layouts/01.png" alt="" />
+                                            <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/01.png') }}" alt="" />
                                             <div class="ms-3 w-100">
                                                 <h6 class="mb-0">Emma Watson Bni</h6>
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -2079,7 +2079,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded-pill" src="../assets/images/layouts/02.png" alt="" />
+                                                <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/02.png') }}" alt="" />
                                             </div>
                                             <div class="ms-3 w-100">
                                                 <h6 class="mb-0">New customer is join</h6>
@@ -2092,7 +2092,7 @@
                                     </a>
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
-                                            <img class="avatar-40 rounded-pill" src="../assets/images/layouts/03.png" alt="" />
+                                            <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/03.png') }}" alt="" />
                                             <div class="ms-3 w-100">
                                                 <h6 class="mb-0">Two customer is left</h6>
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -2104,7 +2104,7 @@
                                     </a>
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
-                                            <img class="avatar-40 rounded-pill" src="../assets/images/layouts/04.png" alt="" />
+                                            <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/04.png') }}" alt="" />
                                             <div class="w-100 ms-3">
                                                 <h6 class="mb-0">New Mail from Fenny</h6>
                                                 <div class="d-flex justify-content-between align-items-center">
@@ -2144,7 +2144,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded-pill" src="../assets/images/layouts/01.png" alt="" />
+                                                <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/01.png') }}" alt="" />
                                             </div>
                                             <div class="ms-3">
                                                 <h6 class="mb-0">Bni Emma Watson</h6>
@@ -2155,7 +2155,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded-pill" src="../assets/images/layouts/02.png" alt="" />
+                                                <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/02.png') }}" alt="" />
                                             </div>
                                             <div class="ms-3">
                                                 <h6 class="mb-0">Lorem Ipsum Watson</h6>
@@ -2166,7 +2166,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded-pill" src="../assets/images/layouts/03.png" alt="" />
+                                                <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/03.png') }}" alt="" />
                                             </div>
                                             <div class="ms-3">
                                                 <h6 class="mb-0">Why do we use it?</h6>
@@ -2177,7 +2177,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded-pill" src="../assets/images/layouts/04.png" alt="" />
+                                                <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/04.png') }}" alt="" />
                                             </div>
                                             <div class="ms-3">
                                                 <h6 class="mb-0">Variations Passages</h6>
@@ -2188,7 +2188,7 @@
                                     <a href="#" class="iq-sub-card">
                                         <div class="d-flex align-items-center">
                                             <div class="">
-                                                <img class="avatar-40 rounded-pill" src="../assets/images/layouts/01.png" alt="" />
+                                                <img class="avatar-40 rounded-pill" src="{{ asset('assets/images/layouts/01.png') }}" alt="" />
                                             </div>
                                             <div class="ms-3">
                                                 <h6 class="mb-0">Lorem Ipsum generators</h6>
@@ -2202,17 +2202,20 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../assets/images/avatars/01.png" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" />
+                            <img src="{{ asset('assets/images/avatars/01.png') }}" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" />
                             <div class="caption ms-3 d-none d-md-block">
                                 <h6 class="mb-0 caption-title">{{ session()->get('username') }}</h6>
-                                <p class="mb-0 caption-sub-title">Marketing Administrator</p>
+                                <p class="mb-0 caption-sub-title">{{ session()->get('email') }}</p>
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="../dashboard/app/user-profile.html">Profile</a></li>
-                            <li><a class="dropdown-item" href="../dashboard/app/user-privacy-setting.html">Privacy Setting</a></li>
+                            <li><a class="dropdown-item" href="{{ route('edit_profile') }}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('privacy_setting') }}">Privacy Setting</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="../dashboard/auth/sign-in.html">Logout</a></li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item has-icon text-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                            </form>
                         </ul>
                     </li>
                 </ul>

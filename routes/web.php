@@ -35,3 +35,18 @@ Route::get('/auth/register', 'App\Http\Controllers\AuthController@register')->na
 Route::post('/auth/store', 'App\Http\Controllers\AuthController@store')->name('register.store');
 Route::get('/auth/login', 'App\Http\Controllers\AuthController@login')->name('login');
 Route::post('/auth/login', 'App\Http\Controllers\AuthController@authenticate')->name('login_post');
+
+////////////////////////////////////////////////////////////////////////////////
+// APPLICATION
+Route::get('/app/profile', 'App\Http\Controllers\AppController@user_profile')->name('user_profile');
+Route::get('/app/edit-profile', 'App\Http\Controllers\AppController@edit_profile')->name('edit_profile');
+Route::get('/app/privacy-setting', 'App\Http\Controllers\AppController@privacy_setting')->name('privacy_setting');
+
+// PENJUALAN
+Route::get('/app/purchase', 'App\Http\Controllers\AppController@purchase')->name('purchase');
+Route::get('/app/sales', 'App\Http\Controllers\AppController@sales')->name('sales');
+
+// REPORT
+Route::get('/app/reports/posisi-keuangan', 'App\Http\Controllers\AppController@posisi_keuangan')->name('posisi_keuangan');
+Route::get('/app/reports/arus-kas-bulan', 'App\Http\Controllers\AppController@arus_kas_bulan')->name('arus_kas_bulan');
+Route::get('/app/reports/laba-rugi', 'App\Http\Controllers\AppController@laba_rugi')->name('laba_rugi');

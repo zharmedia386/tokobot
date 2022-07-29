@@ -13,6 +13,27 @@
                     <br><br>
                     <h2 class="mb-2 text-center">Sign In</h2>
                     <p class="text-center">Sign in to stay connected.</p>
+
+                    <!-- ALERT LOGIN FIRST -->
+                    @if (session()->has('loginFirst'))
+                    <div id="alerts-disimissible-component">
+                        <div class="alert alert-left alert-info  alert-dismissible fade show fs-7" role="alert">
+                            {{ session('loginFirst') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+                        </div>
+                    </div>
+                    @endif
+
+                    <!-- ALERT SUCCESSFULLY LOGIN -->
+                    @if (session()->has('successLogin'))
+                    <div id="alerts-disimissible-component">
+                        <div class="alert alert-left alert-success  alert-dismissible fade show fs-7" role="alert">
+                            {{ session('loginFirst') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+                        </div>
+                    </div>
+                    @endif
+
                     <form action="{{ route('login_post') }}" method="POST" class="needs-validation" novalidate="">
                     @csrf
                         <div class="row">

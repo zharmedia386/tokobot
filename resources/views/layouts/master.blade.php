@@ -54,5 +54,25 @@
 
         <!-- moment JavaScript -->
         <script src="{{ asset('assets/vendor/moment.min.js') }}"></script>
+        
+        <!-- Widgetchart JavaScript -->
+        <script src="{{ asset('assets/js/charts/widgetcharts.js') }}"></script>
+
+        <!-- Mapchart JavaScript -->
+        <script src="{{ asset('assets/js/charts/vectore-chart.js') }}"></script>
+
+        <!-- Admin Dashboard Chart -->
+        <script src="{{ asset('assets/js/charts/admin.js') }}"></script>
+        
+        <!-- GSAP Animation -->
+        <script src="{{ asset('assets/vendor/gsap/gsap.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/gsap/ScrollTrigger.min.js') }}"></script>
+        <script src="{{ asset('assets/js/animation/gsap-init.js') }}"></script>
+        
+        <!-- Stepper Plugin -->
+        <script src="{{ asset('assets/js/stepper.js') }}"></script>
+        
+        <!-- Form Wizard Script -->
+        <script src="{{ asset('assets/js/form-wizard.js') }}"></script>
     </body>
 </html>

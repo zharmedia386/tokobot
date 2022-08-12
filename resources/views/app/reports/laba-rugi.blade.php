@@ -13,7 +13,7 @@
                 </div>
                 <!-- START PENDAPATAN -->
                 <div class="card-body px-0">
-                    <p class="card-header text-dark">◉ Pendapatan</p>
+                    <p class="text-dark">◉ Pendapatan</p>
                     <div class="table-responsive">
                         <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
                             <thead>
@@ -794,7 +794,7 @@
 
                 <!-- START BEBAN -->
                 <div class="card-body px-0">
-                    <p class="card-header text-dark">◉ Beban</p>
+                    <p class="text-dark">◉ Beban</p>
                     <div class="table-responsive">
                         <table id="user-list-table" class="table table-striped" role="grid" data-toggle="data-table">
                             <thead>

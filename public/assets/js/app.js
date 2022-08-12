@@ -13,6 +13,7 @@ Index Of Script
 
 :: Tooltip
 :: Popover
+:: Circle Progress
 :: NoUiSlider
 :: CopyToClipboard
 :: Vanila Datepicker
@@ -60,6 +61,25 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
 
 
+/*---------------------------------------------------------------------
+              Circle Progress
+-----------------------------------------------------------------------*/
+
+const progressBar = document.getElementsByClassName('circle-progress')
+Array.from(progressBar, (elem) => {
+    const minValue = elem.getAttribute('data-min-value')
+    const maxValue = elem.getAttribute('data-max-value')
+    const value = elem.getAttribute('data-value')
+    const  type = elem.getAttribute('data-type')
+    if (elem.getAttribute('id') !== '' && elem.getAttribute('id') !== null) {
+      new CircleProgress('#'+elem.getAttribute('id'), {
+        min: minValue,
+        max: maxValue,
+        value: value,
+        textFormat: type,
+    });
+    }
+})
 
 /*---------------------------------------------------------------------
 Progress Bar
@@ -197,7 +217,7 @@ if (jQuery(".data-scrollbar").length) {
 if($.fn.DataTable){
   if($('[data-toggle="data-table"]').length) {
     const table = $('[data-toggle="data-table"]').DataTable({
-      "dom": '<"row align-items-center"<"col-md-6" l><"col-md-6" f>><"table-responsive border-bottom my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">',
+      "dom": '<"row align-items-center"<"col-md-6" l><"col-md-6" f>><"table-responsive my-3" rt><"row align-items-center" <"col-md-6" i><"col-md-6" p>><"clear">',
     });
   }
 }
@@ -257,12 +277,11 @@ const resizePlugins = () => {
 
 const loaderInit = () => {
   const loader = document.querySelector('.loader')
-  setTimeout(() => {
+ 
     loader.classList.add('animate__animated', 'animate__fadeOut')
     setTimeout(() => {
       loader.classList.add('d-none')
     }, 1000)
-  }, 500)
 }
 
 /*---------------------------------------------------------------------
@@ -413,3 +432,15 @@ window.addEventListener('load', function() {
         }, false);
       });
 }, false);
+
+const actionButtons = document.querySelectorAll('[data-action="click"]')
+Array.from(actionButtons, (btn) => {
+  btn.addEventListener("click", (e) => {
+    const closestId = btn.getAttribute('data-closest')
+    Array.from(btn.closest(closestId).querySelectorAll('.btn'), (ele) => {
+      ele.classList.add('d-none')
+    })
+    btn.classList.remove('d-none')
+    btn.classList.add('d-block','checked')
+  })
+})

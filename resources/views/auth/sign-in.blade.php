@@ -24,11 +24,11 @@
                     </div>
                     @endif
 
-                    <!-- ALERT SUCCESSFULLY LOGIN -->
-                    @if (session()->has('successLogin'))
+                    <!-- ALERT SUCCESSFULLY REGISTER, PLEASE LOGIN -->
+                    @if (session()->has('successRegister'))
                     <div id="alerts-disimissible-component">
                         <div class="alert alert-left alert-success  alert-dismissible fade show fs-7" role="alert">
-                            {{ session('loginFirst') }}
+                            {{ session('successRegister') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
                         </div>
                     </div>

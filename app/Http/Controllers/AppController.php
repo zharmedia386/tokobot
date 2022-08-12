@@ -52,6 +52,14 @@ class AppController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
+    public function purchase_form()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/purchase_form');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
     // SALES
     public function sales()
     {

@@ -44,6 +44,7 @@ Route::get('/app/privacy-setting', 'App\Http\Controllers\AppController@privacy_s
 
 // PENJUALAN
 Route::get('/app/purchase', 'App\Http\Controllers\AppController@purchase')->name('purchase');
+Route::get('/app/purchase/form', 'App\Http\Controllers\AppController@purchase_form')->name('purchase_form');
 Route::get('/app/sales', 'App\Http\Controllers\AppController@sales')->name('sales');
 
 // REPORT

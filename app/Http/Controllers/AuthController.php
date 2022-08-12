@@ -19,8 +19,7 @@ class AuthController extends Controller
     public function login()
     {
         if (session()->has('hasLogin')) {
-            echo "<script>alert('You already signed in')</script>";
-            return view('home');
+            return redirect('/')->with('alreadyLogin', 'You already signed in! No need to login anymore!');
         }
         return view('auth.sign-in');
     }
@@ -90,7 +89,7 @@ class AuthController extends Controller
 
         $pelaku_umkm->save();
 
-        return redirect('/auth/login')->with('successLogin', 'Registration Success! Please Login');
+        return redirect('/auth/login')->with('successRegister', 'Registration Success! Please Login');
     }
 
     // LOGOUT PELAKU UMKM :POST

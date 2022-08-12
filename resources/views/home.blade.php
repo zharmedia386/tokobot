@@ -5,6 +5,17 @@
 <div class="row">
     <div class="col-md-12 col-lg-8">
         <div class="card">
+            
+            <!-- ALERT ALREADY LOGIN -->
+            @if (session()->has('alreadyLogin'))
+            <div id="alerts-disimissible-component">
+                <div class="alert alert-left alert-info  alert-dismissible fade show fs-7" role="alert">
+                    {{ session('alreadyLogin') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+                </div>
+            </div>
+            @endif
+
             <div class="hero-image p-3" style="background: url('../assets/images/layouts/01.png') no-repeat center right; background-size: cover; background-position: center;">
                 <div class="card-body p-5">
                     <div class="row banner-container">

@@ -27,9 +27,9 @@
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
+                                <th>Nomor transaksi</th>
+                                <th>Tanggal</th>
+                                <th>Nama Barang</th>
                                 <th>Age</th>
                                 <th>Start date</th>
                                 <th>Salary</th>

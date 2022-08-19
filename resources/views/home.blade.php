@@ -139,7 +139,7 @@
         <div class="card-transparent bg-transparent mb-0">
             <div class="card-header border-0">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3>Menu category</h3>
+                    <h3>Menu</h3>
                     <a href="#" class="text-dark d-flex">
                         View All
                         <svg width="24" height="24" class="ms-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

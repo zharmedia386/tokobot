@@ -27,6 +27,22 @@
                 </div>
             </div>
             <div class="card-body">
+                <ul class="nav nav-tabs" id="myTab-1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tunai-tab" data-bs-toggle="tab" href="#tunai" role="tab" aria-controls="tunai" aria-selected="true">Tunai</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="kredit-tab" data-bs-toggle="tab" href="#kredit" role="tab" aria-controls="kredit" aria-selected="false">Kredit</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent-2">
+                    <div class="tab-pane fade show active" id="tunai" role="tabpanel" aria-labelledby="tunai-tab">
+                        <p>Tunai</p>
+                    </div>
+                    <div class="tab-pane fade" id="kredit" role="tabpanel" aria-labelledby="kredit-tab">
+                        <p>Kredit</p>
+                    </div>
+                </div>
                 <br>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">

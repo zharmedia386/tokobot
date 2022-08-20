@@ -80,7 +80,7 @@
                                         <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
                                         <td>{{ $data->produk_yang_dibeli }}</td>
                                         <td>{{ $data->total_pembelian }}</td>
-                                        <td><button type="button" class="btn btn-warning">Detail</button> </td>
+                                        <td><a href="{{ route('purchase_tunai_detail', $data->purchase_tunai_id) }}" class="btn btn-warning">Detail</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -119,7 +119,7 @@
                                         <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
                                         <td>{{ $data->produk_yang_dibeli }}</td>
                                         <td>{{ $data->total_pembelian }}</td>
-                                        <td><button type="button" class="btn btn-warning">Detail</button> </td>
+                                        <td><a href="{{ route('purchase_kredit_detail', $data->purchase_kredit_id) }}" class="btn btn-warning">Detail</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

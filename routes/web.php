@@ -43,12 +43,17 @@ Route::get('/app/edit-profile', 'App\Http\Controllers\AppController@edit_profile
 Route::get('/app/privacy-setting', 'App\Http\Controllers\AppController@privacy_setting')->name('privacy_setting');
 
 // PENJUALAN
+//// PURCHASE
 Route::get('/app/purchase', 'App\Http\Controllers\AppController@purchase')->name('purchase');
 Route::get('/app/purchase/form_tunai', 'App\Http\Controllers\AppController@purchase_form_tunai')->name('purchase_form_tunai');
 Route::post('/app/purchase/form_tunai', 'App\Http\Controllers\AppController@purchase_form_tunai_post')->name('purchase_form_tunai_post');
+Route::get('/app/purchase/purchase_tunai_detail/{user_id}', 'App\Http\Controllers\AppController@purchase_tunai_detail')->name('purchase_tunai_detail');
 
 Route::get('/app/purchase/form_kredit', 'App\Http\Controllers\AppController@purchase_form_kredit')->name('purchase_form_kredit');
 Route::post('/app/purchase/form_kredit', 'App\Http\Controllers\AppController@purchase_form_kredit_post')->name('purchase_form_kredit_post');
+Route::get('/app/purchase/purchase_kredit_detail/{user_id}', 'App\Http\Controllers\AppController@purchase_kredit_detail')->name('purchase_kredit_detail');
+
+//// SALES
 Route::get('/app/sales', 'App\Http\Controllers\AppController@sales')->name('sales');
 
 // REPORT

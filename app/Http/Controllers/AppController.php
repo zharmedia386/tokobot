@@ -67,11 +67,13 @@ class AppController extends Controller
 
     public function purchase_form_tunai_post(Request $request)
     {
-        // dd($request->metodePembayaran);
+        // $test = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
+        // dd($test);
 
         // Purchase Form Tunai
         $purchase_form_tunai = new Purchase_Form_Tunai();
         $purchase_form_tunai->user_id = session()->get('user_id');
+        $purchase_form_tunai->purchase_tunai_id = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
         $purchase_form_tunai->nomor_transaksi = $request->nomorTransaksi;
         $purchase_form_tunai->tanggal_transaksi = $request->tanggalTransaksi;
         $purchase_form_tunai->metode_pembayaran = $request->metodePembayaran;
@@ -85,6 +87,15 @@ class AppController extends Controller
         return redirect()->route('purchase')->with('successPurchaseFormTunai', 'Pemasukan Pembayaran Secara Tunai Sukses!');
     }
 
+    public function purchase_tunai_detail($purchase_tunai_id)
+    {
+        if (session()->has('hasLogin')) {
+            $purchase_form_tunai = DB::select('select * from purchase_form_tunai where purchase_form_tunai.purchase_tunai_id = ' . $purchase_tunai_id);
+            return view('app/purchase_tunai_detail', compact('purchase_form_tunai'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
     public function purchase_form_kredit_post(Request $request)
     {
         // dd($request->metodePembayaran);
@@ -93,6 +104,7 @@ class AppController extends Controller
         // Purchase Form Kredit
         $purchase_form_kredit = new Purchase_Form_Kredit();
         $purchase_form_kredit->user_id = session()->get('user_id');
+        $purchase_form_kredit->purchase_kredit_id = DB::selectOne("select getNewId('purchase_form_kredit') as value from dual")->value;
         $purchase_form_kredit->nomor_transaksi = $request->nomorTransaksi;
         $purchase_form_kredit->tanggal_transaksi = $request->tanggalTransaksi;
         $purchase_form_kredit->metode_pembayaran = $request->metodePembayaran;
@@ -113,6 +125,15 @@ class AppController extends Controller
     {
         if (session()->has('hasLogin')) {
             return view('app/purchase_form_kredit');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function purchase_kredit_detail($purchase_kredit_id)
+    {
+        if (session()->has('hasLogin')) {
+            $purchase_form_kredit = DB::select('select * from purchase_form_kredit where purchase_form_kredit.purchase_kredit_id = ' . $purchase_kredit_id);
+            return view('app/purchase_kredit_detail', compact('purchase_form_kredit'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

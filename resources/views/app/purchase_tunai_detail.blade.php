@@ -9,15 +9,14 @@
         </div>
     </div>
     <div class="card-body">
-        <form action="{{ route('purchase_form_tunai_post') }}" method="POST">
-            @csrf
+        <form method="GET">
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nomor Transaksi</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="nomorTransaksi" placeholder="Masukkan Nomor Transaksi.." />
+                <input type="text" class="form-control" id="exampleInputText1" name="nomorTransaksi" disabled value="{{ $purchase_form_tunai[0]->nomor_transaksi }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Tanggal Transaksi</label>
-                <input type="date" class="form-control" name="tanggalTransaksi" id="exampleInputdate" />
+                <input type="date" class="form-control" name="tanggalTransaksi" id="exampleInputdate" disabled value="{{ $purchase_form_tunai[0]->tanggal_transaksi }}"/>
             </div>
             <div class="form-group">
                 <label class="form-label">Metode Pembayaran</label>
@@ -29,25 +28,22 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Diskon Pembelian</label>
-                <input type="text" class="form-control" name="diskonPembelian" id="exampleInputText1" placeholder="Masukkan Diskon Pembelian.." />
+                <input type="text" class="form-control" name="diskonPembelian" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->diskon_pembelian }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Produk yang dibeli</label>
-                <input type="text" class="form-control" name="produkYangDibeli" id="exampleInputText1" placeholder="Masukkan Produk yang dibeli.." />
+                <input type="text" class="form-control" name="produkYangDibeli" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->produk_yang_dibeli }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Pajak</label>
-                <input type="text" class="form-control" name="pajak" id="exampleInputText1" placeholder="Masukkan Pajak.." />
+                <input type="text" class="form-control" name="pajak" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->pajak }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Total Pembelian</label>
-                <input type="text" class="form-control" name="totalPembelian" id="exampleInputText1" placeholder="Masukkan Total Pembelian.." />
+                <input type="text" class="form-control" name="totalPembelian" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->total_pembelian }}" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
         </form>
     </div>
 </div>
-
-
 @endsection

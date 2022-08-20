@@ -226,4 +226,21 @@ class AppController extends Controller
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
+
+    // MODAL
+    public function modal()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/modal/modal');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_modal()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/modal/tambah_modal');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
 }

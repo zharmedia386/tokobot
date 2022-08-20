@@ -5,44 +5,46 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <div class="header-title">
-            <h4 class="card-title">Purchase Invoice | Tunai</h4>
+            <h4 class="card-title">Pembayaran Tunai</h4>
         </div>
     </div>
     <div class="card-body">
-        <form>
+        <form action="{{ route('purchase_form_tunai_post') }}" method="POST">
+            @csrf
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nomor Transaksi</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Nomor Transaksi.." />
+                <input type="text" class="form-control" id="exampleInputText1" name="nomorTransaksi" placeholder="Masukkan Nomor Transaksi.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Tanggal Transaksi</label>
-                <input type="date" class="form-control" id="exampleInputdate" />
+                <input type="date" class="form-control" name="tanggalTransaksi" id="exampleInputdate" />
             </div>
             <div class="form-group">
                 <label class="form-label">Metode Pembayaran</label>
-                <select class="form-select mb-3 shadow-none" disabled="">
-                    <option selected="">Tunai</option>
-                    <option value="1">Kredit</option>
+                <select class="form-select mb-3 shadow-none" value="tunai" name="metodePembayaran" disabled="disabled">
+                    <option value="tunai" selected="" name="metodePembayaran">Tunai</option>
+                    <option value="kredit" name="metodePembayaran">Kredit</option>
                 </select>
+                <input type="hidden" value="tunai" name="metodePembayaran" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Diskon Pembelian</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Diskon Pembelian.." />
+                <input type="text" class="form-control" name="diskonPembelian" id="exampleInputText1" placeholder="Masukkan Diskon Pembelian.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Produk yang dibeli</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Produk yang dibeli.." />
+                <input type="text" class="form-control" name="produkYangDibeli" id="exampleInputText1" placeholder="Masukkan Produk yang dibeli.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Pajak</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Pajak.." />
+                <input type="text" class="form-control" name="pajak" id="exampleInputText1" placeholder="Masukkan Pajak.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Total Pembelian</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Total Pembelian.." />
+                <input type="text" class="form-control" name="totalPembelian" id="exampleInputText1" placeholder="Masukkan Total Pembelian.." />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <button type="submit" class="btn btn-danger rounded">cancel</button>
+            <button type="submit" class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</button>
         </form>
     </div>
 </div>

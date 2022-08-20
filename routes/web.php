@@ -62,3 +62,7 @@ Route::get('/app/asset/tambah_asset_lancar', 'App\Http\Controllers\AppController
 Route::get('/app/kewajiban', 'App\Http\Controllers\AppController@kewajiban')->name('kewajiban');
 Route::get('/app/kewajiban/jangka_panjang', 'App\Http\Controllers\AppController@jangka_panjang')->name('jangka_panjang');
 Route::get('/app/kewajiban/jangka_pendek', 'App\Http\Controllers\AppController@jangka_pendek')->name('jangka_pendek');
+
+// MODAL
+Route::get('/app/modal', 'App\Http\Controllers\AppController@modal')->name('modal');
+Route::get('/app/tambah_modal', 'App\Http\Controllers\AppController@tambah_modal')->name('tambah_modal');

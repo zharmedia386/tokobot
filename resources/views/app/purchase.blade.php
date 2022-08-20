@@ -21,8 +21,8 @@
                         Purchase invoice
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{ route('purchase_form') }}">Tunai</a></li>
-                        <li><a class="dropdown-item" href="{{ route('purchase_form') }}">Kredit</a></li>
+                        <li><a class="dropdown-item" href="{{ route('purchase_form_tunai') }}">Tunai</a></li>
+                        <li><a class="dropdown-item" href="{{ route('purchase_form_kredit') }}">Kredit</a></li>
                     </ul>
                 </div>
             </div>

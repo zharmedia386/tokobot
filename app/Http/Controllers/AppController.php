@@ -131,4 +131,29 @@ class AppController extends Controller
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
+
+    // KEWAJIBAN
+    public function kewajiban()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/kewajiban/kewajiban');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function jangka_panjang()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/kewajiban/form_jangka_panjang');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function jangka_pendek()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/kewajiban/form_jangka_pendek');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
 }

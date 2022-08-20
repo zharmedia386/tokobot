@@ -1,22 +1,22 @@
 @extends('layouts.master-1')
-@section('title', 'Form Asset Lancar')
+@section('title', 'Form Jangka Panjang')
 @section('content')
 
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <div class="header-title">
-            <h4 class="card-title">Tambah Asset Lancar</h4>
+            <h4 class="card-title">Tambah Kewajiban Jangka Panjang</h4>
         </div>
     </div>
     <div class="card-body">
         <form>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Nama Asset</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Masukkan nama asset anda" />
+                <label class="form-label" for="exampleInputText1">Nama Kewajiban</label>
+                <input type="text" class="form-control" id="exampleInputText1" placeholder="Masukkan nama kewajiban(utang) anda" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Asset)</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Masukkan nominal harga asset anda" />
+                <label class="form-label" for="exampleInputdate">Nominal</label>
+                <input type="text" class="form-control" id="exampleInputText1" placeholder="Masukkan nominal kewajiban(utang) anda" />
             </div>
             <!--<div class="form-group">
                 <label class="form-label">Metode Pembayaran</label>
@@ -42,7 +42,8 @@
                 <input type="text" class="form-control" id="exampleInputText1" placeholder="Total Pembelian.." />
             </div>-->
             <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <button type="button" class="btn btn-danger rounded" href="{{ route('asset') }}">cancel</button>
+            <button type="button" class="btn btn-danger rounded" href="{{ route('kewajiban') }}">Cancel</button>
+            
         </form>
     </div>
 </div>

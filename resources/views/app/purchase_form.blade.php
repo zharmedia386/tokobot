@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <div class="header-title">
-            <h4 class="card-title">Purchase Invoice</h4>
+            <h4 class="card-title">Purchase Invoice | Tunai</h4>
         </div>
     </div>
     <div class="card-body">
@@ -20,11 +20,9 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Metode Pembayaran</label>
-                <select class="form-select mb-3 shadow-none">
+                <select class="form-select mb-3 shadow-none" disabled="">
                     <option selected="">Tunai</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option value="1">Kredit</option>
                 </select>
             </div>
             <div class="form-group">

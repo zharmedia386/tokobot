@@ -122,7 +122,7 @@
                                         fill="#FFF59D"
                                     />
                                 </svg>
-                                <small>Deal of the weekend</small>
+                                <small>Deal of the weekdays</small>
                             </span>
                             <div class="banner-text pt-3">
                                 <h1 class="fw-bold mb-4">

@@ -25,7 +25,9 @@
         
         @yield('content')
 
-
+        <!-- Child Javascript -->
+        @stack('child-js')
+        
         <!-- Required Library Bundle Script -->
         <script src="{{ asset('assets/js/core/libs.min.js') }}"></script>
 

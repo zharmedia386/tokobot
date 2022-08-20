@@ -5,7 +5,7 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <div class="header-title">
-            <h4 class="card-title">Pembayaran Kredit</h4>
+            <h4 class="card-title">Pembelian Kredit</h4>
         </div>
     </div>
     <div class="card-body">

@@ -13,6 +13,9 @@
 
         <!-- Custom Css -->
         <link rel="stylesheet" href="{{ asset('assets/css/aprycot.min.css?v=1.0.0') }}" />
+
+        <!-- Child CSS -->
+        @stack('child-css')
     </head>
     <body class="  " style="background: url(assets/images/dashboard.png); background-attachment: fixed; background-size: cover;">
         <!-- loader START -->
@@ -36,7 +39,9 @@
 
         </main>
 
-
+        <!-- Child Javascript -->
+        @stack('child-js')
+        
         <!-- Required Library Bundle Script -->
         <script src="{{ asset('assets/js/core/libs.min.js') }}"></script>
 

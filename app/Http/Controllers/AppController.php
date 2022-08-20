@@ -52,7 +52,7 @@ class AppController extends Controller
             $purchase_form_tunai = DB::table('purchase_form_tunai')->get();
             $purchase_form_kredit = DB::table('purchase_form_kredit')->get();
 
-            return view('app/purchase', compact('purchase_form_tunai', 'purchase_form_kredit'));
+            return view('app/purchase/purchase', compact('purchase_form_tunai', 'purchase_form_kredit'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -60,7 +60,7 @@ class AppController extends Controller
     public function purchase_form_tunai()
     {
         if (session()->has('hasLogin')) {
-            return view('app/purchase_form_tunai');
+            return view('app/purchase/purchase_form_tunai');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -91,7 +91,7 @@ class AppController extends Controller
     {
         if (session()->has('hasLogin')) {
             $purchase_form_tunai = DB::select('select * from purchase_form_tunai where purchase_form_tunai.purchase_tunai_id = ' . $purchase_tunai_id);
-            return view('app/purchase_tunai_detail', compact('purchase_form_tunai'));
+            return view('app/purchase/purchase_tunai_detail', compact('purchase_form_tunai'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -124,7 +124,7 @@ class AppController extends Controller
     public function purchase_form_kredit()
     {
         if (session()->has('hasLogin')) {
-            return view('app/purchase_form_kredit');
+            return view('app/purchase/purchase_form_kredit');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -133,7 +133,7 @@ class AppController extends Controller
     {
         if (session()->has('hasLogin')) {
             $purchase_form_kredit = DB::select('select * from purchase_form_kredit where purchase_form_kredit.purchase_kredit_id = ' . $purchase_kredit_id);
-            return view('app/purchase_kredit_detail', compact('purchase_form_kredit'));
+            return view('app/purchase/purchase_kredit_detail', compact('purchase_form_kredit'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

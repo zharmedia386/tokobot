@@ -44,7 +44,8 @@ Route::get('/app/privacy-setting', 'App\Http\Controllers\AppController@privacy_s
 
 // PENJUALAN
 Route::get('/app/purchase', 'App\Http\Controllers\AppController@purchase')->name('purchase');
-Route::get('/app/purchase/form', 'App\Http\Controllers\AppController@purchase_form')->name('purchase_form');
+Route::get('/app/purchase/form_tunai', 'App\Http\Controllers\AppController@purchase_form_tunai')->name('purchase_form_tunai');
+Route::get('/app/purchase/form_kredit', 'App\Http\Controllers\AppController@purchase_form_kredit')->name('purchase_form_kredit');
 Route::get('/app/sales', 'App\Http\Controllers\AppController@sales')->name('sales');
 
 // REPORT

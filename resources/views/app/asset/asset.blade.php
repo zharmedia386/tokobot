@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Purchase')
+@section('title', 'Asset')
 @section('content')
 
 <div class="row">
@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between pb-0 border-0">
                 <div class="header-title">
-                    <h4 class="card-title">Pembayaran</h4>
+                    <h4 class="card-title">Asset</h4>
                 </div> 
                 <div class="dropdown">
                     <a class="btn btn-outline-primary rounded" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -18,29 +18,29 @@
                                 fill="currentColor"
                             ></path>
                         </svg> -->
-                        + Invoice Pembayaran
+                        + Tambah Asset
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{ route('purchase_form_tunai') }}">Tunai</a></li>
-                        <li><a class="dropdown-item" href="{{ route('purchase_form_kredit') }}">Kredit</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tambah_asset_tetap') }}">Asset Tetap</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tambah_asset_lancar') }}">Asset Lancar</a></li>
                     </ul>
                 </div>
             </div>
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab-1" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="tunai-tab" data-bs-toggle="tab" href="#tunai" role="tab" aria-controls="tunai" aria-selected="true">Tunai</a>
+                        <a class="nav-link active" id="Tetap-tab" data-bs-toggle="tab" href="#Tetap" role="tab" aria-controls="Tetap" aria-selected="true">Asset Tetap</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="kredit-tab" data-bs-toggle="tab" href="#kredit" role="tab" aria-controls="kredit" aria-selected="false">Kredit</a>
+                        <a class="nav-link" id="Asset Lancar-tab" data-bs-toggle="tab" href="#Asset Lancar" role="tab" aria-controls="Asset Lancar" aria-selected="false">Asset Lancar</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent-2">
-                    <div class="tab-pane fade show active" id="tunai" role="tabpanel" aria-labelledby="tunai-tab">
-                        <p>Tunai</p>
+                    <div class="tab-pane fade show active" id="Tetap" role="tabpanel" aria-labelledby="Tetap-tab">
+                        <p>Asset Tetap</p>
                     </div>
-                    <div class="tab-pane fade" id="kredit" role="tabpanel" aria-labelledby="kredit-tab">
-                        <p>Kredit</p>
+                    <div class="tab-pane fade" id="Asset Lancar" role="tabpanel" aria-labelledby="Asset Lancar-tab">
+                        <p>Asset Lancar</p>
                     </div>
                 </div>
                 <br>
@@ -48,10 +48,10 @@
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
                         <thead>
                             <tr>
-                                <th>Nomor Transaksi</th>
-                                <th>Tanggal</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah</th>
+                                <th>Nomor </th>
+                                <th>Jenis Asset</th>
+                                <th>Nama Asset</th>
+                                <th>Harga Asset</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
@@ -68,10 +68,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Nomor Transaksi</th>
-                                <th>Tanggal</th>
-                                <th>Nama Barang</th>
-                                <th>Jumlah</th>
+                                <th>Nomor </th>
+                                <th>Jenis Asset</th>
+                                <th>Nama Asset</th>
+                                <th>Harga Asset</th>
                                 <th>Detail</th>
                             </tr>
                         </tfoot>

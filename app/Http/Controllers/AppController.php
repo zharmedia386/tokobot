@@ -106,4 +106,29 @@ class AppController extends Controller
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
+
+    // ASSET
+    public function asset()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/asset/asset');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_asset_tetap()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/asset/form_asset_tetap');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_asset_lancar()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/asset/form_asset_lancar');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
 }

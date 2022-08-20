@@ -53,4 +53,7 @@ Route::get('/app/reports/posisi-keuangan', 'App\Http\Controllers\AppController@p
 Route::get('/app/reports/arus-kas-bulan', 'App\Http\Controllers\AppController@arus_kas_bulan')->name('arus_kas_bulan');
 Route::get('/app/reports/laba-rugi', 'App\Http\Controllers\AppController@laba_rugi')->name('laba_rugi');
 
-
+// ASSET
+Route::get('/app/asset', 'App\Http\Controllers\AppController@asset')->name('asset');
+Route::get('/app/asset/tambah_asset_tetap', 'App\Http\Controllers\AppController@tambah_asset_tetap')->name('tambah_asset_tetap');
+Route::get('/app/asset/tambah_asset_lancar', 'App\Http\Controllers\AppController@tambah_asset_lancar')->name('tambah_asset_lancar');

@@ -151,4 +151,13 @@ class ReportController extends Controller
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
+
+    // ASSET TETAP
+    public function asset_tetap()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/asset_tetap/asset_tetap');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
 }

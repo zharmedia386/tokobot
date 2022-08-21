@@ -51,18 +51,10 @@ class ReportController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
-    public function tambah_asset_tetap()
+    public function tambah_asset()
     {
         if (session()->has('hasLogin')) {
-            return view('app/asset/form_asset_tetap');
-        } 
-        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
-    }
-
-    public function tambah_asset_lancar()
-    {
-        if (session()->has('hasLogin')) {
-            return view('app/asset/form_asset_lancar');
+            return view('app/asset/form_asset');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

@@ -70,8 +70,7 @@ Route::get('/app/reports/laba-rugi', 'App\Http\Controllers\ReportController@laba
 
 // ASSET
 Route::get('/app/asset', 'App\Http\Controllers\ReportController@asset')->name('asset');
-Route::get('/app/asset/tambah_asset_tetap', 'App\Http\Controllers\ReportController@tambah_asset_tetap')->name('tambah_asset_tetap');
-Route::get('/app/asset/tambah_asset_lancar', 'App\Http\Controllers\ReportController@tambah_asset_lancar')->name('tambah_asset_lancar');
+Route::get('/app/asset/tambah_asset_tetap', 'App\Http\Controllers\ReportController@tambah_asset')->name('tambah_asset');
 
 // KEWAJIBAN
 Route::get('/app/kewajiban', 'App\Http\Controllers\ReportController@kewajiban')->name('kewajiban');

@@ -81,7 +81,9 @@ Route::get('/app/reports/laba-rugi', 'App\Http\Controllers\ReportController@laba
 
 // ASSET
 Route::get('/app/asset', 'App\Http\Controllers\ReportController@asset')->name('asset');
-Route::get('/app/asset/tambah_asset_tetap', 'App\Http\Controllers\ReportController@tambah_asset')->name('tambah_asset');
+Route::get('/app/asset/asset_form', 'App\Http\Controllers\ReportController@asset_form')->name('asset_form');
+Route::post('/app/asset/asset_form', 'App\Http\Controllers\ReportController@asset_form_post')->name('asset_form_post');
+Route::get('/app/asset/asset_detail/{user_id}', 'App\Http\Controllers\ReportController@asset_detail')->name('asset_detail');
 
 // KEWAJIBAN
 Route::get('/app/kewajiban', 'App\Http\Controllers\ReportController@kewajiban')->name('kewajiban');
@@ -98,3 +100,9 @@ Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tam
 // BUKU KAS
 Route::get('/app/buku_kas', 'App\Http\Controllers\ReportController@buku_kas')->name('buku_kas');
 Route::get('/app/tambah_kas', 'App\Http\Controllers\ReportController@tambah_kas')->name('tambah_kas');
+
+// ASSET TETAP
+Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_tetap')->name('asset_tetap');
+
+// STOK BARANG
+Route::get('/app/stok_baarang', 'App\Http\Controllers\ReportController@stok_barang')->name('stok_barang');

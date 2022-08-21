@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Pembelian')
+@section('title', 'Buku Utang')
 @section('content')
 
 <div class="row">
@@ -8,19 +8,19 @@
             <div class="card-body">
                 <ul class="nav nav-tabs" id="myTab-1" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="tunai-tab" data-bs-toggle="tab" href="#tunai" role="tab" aria-controls="tunai" aria-selected="true">Tunai</a>
+                        <a class="nav-link active" id="utang-tab" data-bs-toggle="tab" href="#utang" role="tab" aria-controls="utang" aria-selected="true">Utang</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="kredit-tab" data-bs-toggle="tab" href="#kredit" role="tab" aria-controls="kredit" aria-selected="false">Kredit</a>
+                        <a class="nav-link" id="piutang-tab" data-bs-toggle="tab" href="#piutang" role="tab" aria-controls="piutang" aria-selected="false">Piutang</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent-2">
-                    <!-- TUNAI TABLE -->
-                    <div class="tab-pane fade show active" id="tunai" role="tabpanel" aria-labelledby="tunai-tab">
-                        <!-- HEADER TUNAI -->
+                    <!-- UTANG TABLE -->
+                    <div class="tab-pane fade show active" id="utang" role="tabpanel" aria-labelledby="utang-tab">
+                        <!-- HEADER UTANG -->
                         <div class="card-header d-flex justify-content-between pb-0 border-0">
                             <div class="header-title">
-                                <h4 class="card-title">Pembelian Tunai</h4>
+                                <h4 class="card-title">Utang</h4>
                             </div> 
                             <div class="dropdown-container d-flex justify-content-start">
                                 <div class="dropdown">
@@ -36,60 +36,58 @@
                                         Cetak
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item active" href="{{ route('purchase_form_tunai') }}">PDF</a></li>
+                                        <li><a class="dropdown-item active" href="{{ route('buku_utang_form_utang') }}">PDF</a></li>
                                         <li><a class="dropdown-item" href="javascript:export_excel_purchase_tunai()">Excel</a></li>
                                     </ul>
                                 </div>
                                 &nbsp;&nbsp;
-                                <a class="btn btn-outline-primary rounded" href="{{ route('purchase_form_tunai') }}">
-                                    + Tambah Pembelian
+                                <a class="btn btn-outline-primary rounded" href="{{ route('buku_utang_form_utang') }}">
+                                    + Tambah Data
                                 </a> 
                             </div>
                         </div>
-                        <!-- END HEADER TUNAI -->
+                        <!-- END HEADER UTANG -->
                         <br>
                         <div class="table-responsive">
-                            <table id="datatable purchase_form_tunai" class="table table-striped" data-toggle="data-table">
+                            <table id="datatable buku_utang_form_utang" class="table table-striped" data-toggle="data-table">
                                 <thead>
                                     <tr>
-                                        <th>No.Transaksi</th>
+                                        <th>Nomor Utang</th>
                                         <th>Tanggal</th>
-                                        <th>Nama Barang</th>
-                                        <th>Jumlah Barang</th>
-                                        <th>Harga Satuan</th>
+                                        <th>Nama</th>
+                                        <th>Jumlah Utang</th>
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($purchase_form_tunai as $data)
+                                    @foreach($buku_utang_form_utang as $data)
                                         @if($user_id == $data->user_id)
                                             <tr>
-                                                <td>{{ $data->nomor_transaksi }}</td>
-                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
-                                                <td>{{ $data->produk_yang_dibeli }}</td>
-                                                <td>{{ $data->jumlah_barang }}</td>
-                                                <td>{{ $data->total_pembelian }}</td>
-                                                <td><a href="{{ route('purchase_tunai_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
+                                                <td>{{ $data->nomor_utang }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
+                                                <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->jumlah_utang }}</td>
+                                                <td><a href="{{ route('buku_utang_utang_detail', $data->nomor_utang) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
                                         @endif
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4">Total Pembelian: Rp1000000000000000000000000</th>
+                                        <th colspan="4">Total Utang: Rp1000000000000000000000000</th>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
                     </div>
-                    <!-- END TUNAI TABLE -->
+                    <!-- END UTANG TABLE -->
                     
-                    <!-- KREDIT TABLE -->
-                    <div class="tab-pane fade" id="kredit" role="tabpanel" aria-labelledby="kredit-tab">
-                        <!-- HEADER KREDIT -->
+                    <!-- PIUTANG TABLE -->
+                    <div class="tab-pane fade" id="piutang" role="tabpanel" aria-labelledby="piutang-tab">
+                        <!-- HEADER PIUTANG -->
                         <div class="card-header d-flex justify-content-between pb-0 border-0">
                             <div class="header-title">
-                                <h4 class="card-title">Pembelian Kredit</h4>
+                                <h4 class="card-title">Piutang</h4>
                             </div> 
                             <div class="dropdown-container d-flex justify-content-start">
                                 <div class="dropdown">
@@ -105,47 +103,45 @@
                                         Cetak
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item active" href="{{ route('purchase_form_tunai') }}">PDF</a></li>
+                                        <li><a class="dropdown-item active" href="{{ route('buku_utang_form_utang') }}">PDF</a></li>
                                         <li><a class="dropdown-item" href="javascript:export_excel_purchase_tunai()">Excel</a></li>
                                     </ul>
                                 </div>
                                 &nbsp;&nbsp;
-                                <a class="btn btn-outline-primary rounded" href="{{ route('purchase_form_kredit') }}">
-                                    + Tambah Pembelian
+                                <a class="btn btn-outline-primary rounded" href="{{ route('buku_utang_form_piutang') }}">
+                                    + Tambah Data
                                 </a> 
                             </div>
                         </div>
                         <br>
-                        <!-- END HEADER KREDIT -->
+                        <!-- END HEADER PIUTANG -->
                         <div class="table-responsive">
                             <table id="datatable" class="table table-striped" data-toggle="data-table">
                                 <thead>
                                     <tr>
-                                        <th>No.Transaksi</th>
+                                        <th>Nomor Piutang</th>
                                         <th>Tanggal</th>
-                                        <th>Nama Barang</th>
-                                        <th>Jumlah Barang</th>
-                                        <th>Harga Satuan</th>
+                                        <th>Nama</th>
+                                        <th>Jumlah Piutang</th>
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($purchase_form_kredit as $data)
+                                    @foreach($buku_utang_form_piutang as $data)
                                         @if($user_id == $data->user_id)
                                             <tr>
-                                                <td>{{ $data->nomor_transaksi }}</td>
-                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
-                                                <td>{{ $data->produk_yang_dibeli }}</td>
-                                                <td>{{ $data->jumlah_barang }}</td>
-                                                <td>{{ $data->total_pembelian }}</td>
-                                                <td><a href="{{ route('purchase_kredit_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
+                                                <td>{{ $data->nomor_piutang }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
+                                                <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->jumlah_piutang }}</td>
+                                                <td><a href="{{ route('buku_utang_piutang_detail', $data->nomor_piutang) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
                                         @endif
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4">Total Pembelian: Rp1000000000000000000000000</th>
+                                        <th colspan="4">Total Piutang: Rp1000000000000000000000000</th>
                                     </tr>
                                 </tfoot>
                             </table>

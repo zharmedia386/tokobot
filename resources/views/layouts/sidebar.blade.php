@@ -634,7 +634,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> P </i>
-                                <span class="item-name">Purchase</span>
+                                <span class="item-name">Pembelian</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -647,7 +647,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> S </i>
-                                <span class="item-name">Sales</span>
+                                <span class="item-name">Penjualan</span>
                             </a>
                         </li>
                         <li class="nav-item">

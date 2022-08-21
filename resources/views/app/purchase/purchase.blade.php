@@ -52,24 +52,26 @@
                             <table id="datatable purchase_form_tunai" class="table table-striped" data-toggle="data-table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nomor Transaksi</th>
+                                        <th>No.Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Nama Barang</th>
-                                        <th>Jumlah</th>
+                                        <th>Jumlah Barang</th>
+                                        <th>Harga Satuan</th>
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($purchase_form_tunai as $data)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{ $data->nomor_transaksi }}</td>
-                                        <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
-                                        <td>{{ $data->produk_yang_dibeli }}</td>
-                                        <td>{{ $data->total_pembelian }}</td>
-                                        <td><a href="{{ route('purchase_tunai_detail', $data->purchase_tunai_id) }}" class="btn btn-warning">Detail</a></td>
-                                    </tr>
+                                        @if($user_id == $data->user_id)
+                                            <tr>
+                                                <td>{{ $data->nomor_transaksi }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
+                                                <td>{{ $data->produk_yang_dibeli }}</td>
+                                                <td>{{ $data->jumlah_barang }}</td>
+                                                <td>{{ $data->total_pembelian }}</td>
+                                                <td><a href="{{ route('purchase_tunai_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                                 <tfoot>
@@ -119,24 +121,26 @@
                             <table id="datatable" class="table table-striped" data-toggle="data-table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nomor Transaksi</th>
+                                        <th>No.Transaksi</th>
                                         <th>Tanggal</th>
                                         <th>Nama Barang</th>
-                                        <th>Jumlah</th>
+                                        <th>Jumlah Barang</th>
+                                        <th>Harga Satuan</th>
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($purchase_form_kredit as $data)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td>{{ $data->nomor_transaksi }}</td>
-                                        <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
-                                        <td>{{ $data->produk_yang_dibeli }}</td>
-                                        <td>{{ $data->total_pembelian }}</td>
-                                        <td><a href="{{ route('purchase_kredit_detail', $data->purchase_kredit_id) }}" class="btn btn-warning">Detail</a></td>
-                                    </tr>
+                                        @if($user_id == $data->user_id)
+                                            <tr>
+                                                <td>{{ $data->nomor_transaksi }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
+                                                <td>{{ $data->produk_yang_dibeli }}</td>
+                                                <td>{{ $data->jumlah_barang }}</td>
+                                                <td>{{ $data->total_pembelian }}</td>
+                                                <td><a href="{{ route('purchase_kredit_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                                 <tfoot>

@@ -39,6 +39,10 @@
                 <input type="text" class="form-control" name="pajak" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->pajak }}" />
             </div>
             <div class="form-group">
+                <label class="form-label" for="exampleInputText1">Jumlah Barang</label>
+                <input type="text" class="form-control" name="pajak" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->jumlah_barang }}" />
+            </div>
+            <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Total Pembelian</label>
                 <input type="text" class="form-control" name="totalPembelian" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->total_pembelian }}" />
             </div>

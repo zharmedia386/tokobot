@@ -13,7 +13,7 @@
             @csrf
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nomor Transaksi</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="nomorTransaksi" placeholder="Masukkan Nomor Transaksi.." />
+                <input type="text" class="form-control" id="exampleInputText1" name="nomorTransaksi" disabled value="{{ $nomor_transaksi }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Tanggal Transaksi</label>
@@ -38,6 +38,10 @@
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Pajak</label>
                 <input type="text" class="form-control" name="pajak" id="exampleInputText1" placeholder="Masukkan Pajak.." />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="exampleInputText1">Jumlah barang</label>
+                <input type="text" class="form-control" name="jumlahBarang" id="exampleInputText1" placeholder="Masukkan Jumlah Barang.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Total Pembelian</label>

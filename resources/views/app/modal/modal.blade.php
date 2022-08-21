@@ -45,18 +45,16 @@
                         <thead>
                             <tr>
                                 <th>Nomor </th>
-                                <th>Jenis Asset</th>
-                                <th>Nama Asset</th>
-                                <th>Harga Asset</th>
+                                <th>Nama Modal</th>
+                                <th>Harga Modal</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Rhona Davidson</td>
-                                <td>Integration Specialist</td>
-                                <td>Tokyo</td>
-                                <td>55</td>
+                                <td>2201</td>
+                                <td>Modal usaha</td>
+                                <td></td>
                                 <!--<td><button type="button" class="btn btn-outline-warning mt-2">Detail</button> </td>
                                 <td><button type="button" class="btn btn-warning">Detail</button> </td>-->
                                 <td><button type="button" class="btn btn-outline-warning rounded-pill mt-2">Detail</button></td>
@@ -65,9 +63,8 @@
                         <tfoot>
                             <tr>
                                 <th>Nomor </th>
-                                <th>Jenis Asset</th>
-                                <th>Nama Asset</th>
-                                <th>Harga Asset</th>
+                                <th>Nama Modal</th>
+                                <th>Harga Modal</th>
                                 <th>Detail</th>
                             </tr>
                         </tfoot>

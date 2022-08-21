@@ -94,3 +94,6 @@ Route::get('/app/tambah_modal', 'App\Http\Controllers\ReportController@tambah_mo
 // BEBAN USAHA
 Route::get('/app/beban_usaha', 'App\Http\Controllers\ReportController@beban_usaha')->name('beban_usaha');
 Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tambah_beban_usaha')->name('tambah_beban_usaha');
+
+// ASSET TETAP
+Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_tetap')->name('asset_tetap');

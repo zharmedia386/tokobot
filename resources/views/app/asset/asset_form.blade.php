@@ -12,7 +12,7 @@
         <form action="{{ route('asset_form_post') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Nomor Asset</label>
+                <label class="form-label" for="exampleInputText1">No. Asset</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="nomorAsset" disabled value="{{ $nomor_asset }}" />
             </div>
             <div class="form-group">

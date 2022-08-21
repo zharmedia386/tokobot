@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Purchase_Form_Tunai;
 use App\Models\Purchase_Form_Kredit;
 use App\Models\Asset;
+use App\Models\Kewajiban;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -97,23 +98,48 @@ class ReportController extends Controller
     public function kewajiban()
     {
         if (session()->has('hasLogin')) {
-            return view('app/kewajiban/kewajiban');
+            $kewajiban = DB::table('kewajiban')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/kewajiban/kewajiban', compact('kewajiban', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
-    public function tambah_kewajiban()
+    public function kewajiban_form()
     {
         if (session()->has('hasLogin')) {
-            return view('app/kewajiban/form_kewajiban');
+            $nomor_kewajiban = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
+
+            return view('app/kewajiban/kewajiban_form', compact('nomor_kewajiban'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
-    public function jangka_pendek()
+    public function kewajiban_form_post(Request $request)
+    {
+        // $test = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
+        // dd($test);
+
+        // Kewajiban Form Tunai
+        $kewajiban = new Kewajiban();
+        $kewajiban->user_id = session()->get('user_id');
+        $kewajiban->nomor_kewajiban = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
+        $kewajiban->nama_kewajiban = $request->namaKewajiban;
+        $kewajiban->jenis_kewajiban = $request->jenisKewajiban;
+        $kewajiban->nominal = $request->nominal;
+
+        $kewajiban->save();
+
+        return redirect()->route('kewajiban')->with('successAddKewajiban', 'Pemasukan Kewajiban Sukses!');
+    }
+
+    public function kewajiban_detail($nomor_kewajiban)
     {
         if (session()->has('hasLogin')) {
-            return view('app/kewajiban/form_jangka_pendek');
+            $kewajiban = DB::select('select * from kewajiban where kewajiban.nomor_kewajiban = ' . $nomor_kewajiban);
+            
+            return view('app/kewajiban/kewajiban_detail', compact('kewajiban'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

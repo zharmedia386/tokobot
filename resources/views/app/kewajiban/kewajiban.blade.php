@@ -10,7 +10,7 @@
                     <h4 class="card-title">Kewajiban(Utang)</h4>
                 </div> 
                 <div class="button">
-                    <a class="btn btn-outline-primary rounded" href="{{ route('tambah_kewajiban') }}">
+                    <a class="btn btn-outline-primary rounded" href="{{ route('kewajiban_form') }}">
                         + Tambah Kewajiban
                     </a>
                 </div>
@@ -21,7 +21,7 @@
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
                         <thead>
                             <tr>
-                                <th>Nomor </th>
+                                <th>No. Kewajiban </th>
                                 <th>Jenis Kewajiban</th>
                                 <th>Nama Kewajiban</th>
                                 <th>Nominal</th>
@@ -29,24 +29,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2101</td>
-                                <td>Jangka Pendek</td>
-                                <td>Utang Bulanan</td>
-                                <td>Rp 2.000.000</td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>
-                            </tr>
-                            <tr>
-                                <td>2201</td>
-                                <td>Jangka Panjang</td>
-                                <td>Utang Bank</td>
-                                <td>Rp 55.000.000</td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>
-                            </tr>
+                            @foreach($kewajiban as $data)
+                                @if($user_id == $data->user_id)
+                                    <tr>
+                                        <td>{{ $data->nomor_kewajiban }}</td>
+                                        <td>{{ $data->jenis_kewajiban }}</td>
+                                        <td>{{ $data->nama_kewajiban}}</td>
+                                        <td>{{ $data->nominal }}</td>
+                                        <td><a href="{{ route('kewajiban_detail', $data->nomor_kewajiban) }}" class="btn btn-warning">Detail</a></td>
+                                    </tr>
+                                @endif
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">Total Utang: Rp 57.000.000</th>
+                                <th colspan="4">Total Kewajiban: Rp 57.000.000</th>
                             </tr>
                         </tfoot>
                     </table>

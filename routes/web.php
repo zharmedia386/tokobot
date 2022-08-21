@@ -87,7 +87,9 @@ Route::get('/app/asset/asset_detail/{user_id}', 'App\Http\Controllers\ReportCont
 
 // KEWAJIBAN
 Route::get('/app/kewajiban', 'App\Http\Controllers\ReportController@kewajiban')->name('kewajiban');
-Route::get('/app/kewajiban/tambah_kewajiban', 'App\Http\Controllers\ReportController@tambah_kewajiban')->name('tambah_kewajiban');
+Route::get('/app/kewajiban/kewajiban_form', 'App\Http\Controllers\ReportController@kewajiban_form')->name('kewajiban_form');
+Route::post('/app/kewajiban/kewajiban_form', 'App\Http\Controllers\ReportController@kewajiban_form_post')->name('kewajiban_form_post');
+Route::get('/app/kewajiban/kewajiban_detail/{user_id}', 'App\Http\Controllers\ReportController@kewajiban_detail')->name('kewajiban_detail');
 
 // MODAL
 Route::get('/app/modal', 'App\Http\Controllers\ReportController@modal')->name('modal');

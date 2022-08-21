@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Users;
-use App\Models\Orderlist;
-use App\Models\Customer;
 use App\Models\Purchase_Form_Tunai;
 use App\Models\Purchase_Form_Kredit;
 use Illuminate\Http\Request;

@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Users;
-use App\Models\Customer;
-use App\Models\Driver;
-use App\Models\Manager;
-use App\Models\Waiter;
 use App\Models\Pelaku_UMKM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

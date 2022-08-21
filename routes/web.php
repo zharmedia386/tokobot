@@ -63,6 +63,17 @@ Route::get('/app/sales/form_kredit', 'App\Http\Controllers\PurchaseSalesControll
 Route::post('/app/sales/form_kredit', 'App\Http\Controllers\PurchaseSalesController@sales_form_kredit_post')->name('sales_form_kredit_post');
 Route::get('/app/sales/sales_kredit_detail/{user_id}', 'App\Http\Controllers\PurchaseSalesController@sales_kredit_detail')->name('sales_kredit_detail');
 
+//// BUKU UTANG
+Route::get('/app/buku_utang', 'App\Http\Controllers\BukuUtangController@buku_utang')->name('buku_utang');
+Route::get('/app/buku_utang/form_utang', 'App\Http\Controllers\BukuUtangController@buku_utang_form_utang')->name('buku_utang_form_utang');
+Route::post('/app/buku_utang/form_utang', 'App\Http\Controllers\BukuUtangController@buku_utang_form_utang_post')->name('buku_utang_form_utang_post');
+Route::get('/app/buku_utang/buku_utang_utang_detail/{user_id}', 'App\Http\Controllers\BukuUtangController@buku_utang_utang_detail')->name('buku_utang_utang_detail');
+
+Route::get('/app/buku_utang/form_piutang', 'App\Http\Controllers\BukuUtangController@buku_utang_form_piutang')->name('buku_utang_form_piutang');
+Route::post('/app/buku_utang/form_piutang', 'App\Http\Controllers\BukuUtangController@buku_utang_form_piutang_post')->name('buku_utang_form_piutang_post');
+Route::get('/app/buku_utang/buku_utang_piutang_detail/{user_id}', 'App\Http\Controllers\BukuUtangController@buku_utang_piutang_detail')->name('buku_utang_piutang_detail');
+
+
 // REPORT
 Route::get('/app/reports/posisi-keuangan', 'App\Http\Controllers\ReportController@posisi_keuangan')->name('posisi_keuangan');
 Route::get('/app/reports/arus-kas-bulan', 'App\Http\Controllers\ReportController@arus_kas_bulan')->name('arus_kas_bulan');

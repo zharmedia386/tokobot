@@ -90,3 +90,7 @@ Route::get('/app/kewajiban/tambah_kewajiban', 'App\Http\Controllers\ReportContro
 // MODAL
 Route::get('/app/modal', 'App\Http\Controllers\ReportController@modal')->name('modal');
 Route::get('/app/tambah_modal', 'App\Http\Controllers\ReportController@tambah_modal')->name('tambah_modal');
+
+// BEBAN USAHA
+Route::get('/app/beban_usaha', 'App\Http\Controllers\ReportController@beban_usaha')->name('beban_usaha');
+Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tambah_beban_usaha')->name('tambah_beban_usaha');

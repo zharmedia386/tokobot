@@ -99,5 +99,12 @@ Route::get('/app/tambah_modal', 'App\Http\Controllers\ReportController@tambah_mo
 Route::get('/app/beban_usaha', 'App\Http\Controllers\ReportController@beban_usaha')->name('beban_usaha');
 Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tambah_beban_usaha')->name('tambah_beban_usaha');
 
+// BUKU KAS
+Route::get('/app/buku_kas', 'App\Http\Controllers\ReportController@buku_kas')->name('buku_kas');
+Route::get('/app/tambah_kas', 'App\Http\Controllers\ReportController@tambah_kas')->name('tambah_kas');
+
 // ASSET TETAP
 Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_tetap')->name('asset_tetap');
+
+// STOK BARANG
+Route::get('/app/stok_baarang', 'App\Http\Controllers\ReportController@stok_barang')->name('stok_barang');

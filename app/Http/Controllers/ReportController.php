@@ -178,11 +178,37 @@ class ReportController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
+    // BUKU KAS
+    public function buku_kas()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/buku_kas/buku_kas');
+        }
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }    
+
+    public function tambah_kas()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/buku_kas/form_buku_kas');
+        }
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
     // ASSET TETAP
     public function asset_tetap()
     {
         if (session()->has('hasLogin')) {
             return view('app/asset_tetap/asset_tetap');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    // STOK BARANG
+    public function stok_barang()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/stok_barang/stok_barang');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

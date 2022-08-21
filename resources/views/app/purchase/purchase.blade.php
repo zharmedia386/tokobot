@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Purchase')
+@section('title', 'Pembelian')
 @section('content')
 
 <div class="row">
@@ -42,7 +42,7 @@
                                 </div>
                                 &nbsp;&nbsp;
                                 <a class="btn btn-outline-primary rounded" href="{{ route('purchase_form_tunai') }}">
-                                    + Invoice Pembelian
+                                    + Tambah Pembelian
                                 </a> 
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                                 </div>
                                 &nbsp;&nbsp;
                                 <a class="btn btn-outline-primary rounded" href="{{ route('purchase_form_kredit') }}">
-                                    + Invoice Pembelian
+                                    + Tambah Pembelian
                                 </a> 
                             </div>
                         </div>

@@ -44,33 +44,33 @@ Route::get('/app/privacy-setting', 'App\Http\Controllers\AppController@privacy_s
 
 // PENJUALAN
 //// PURCHASE
-Route::get('/app/purchase', 'App\Http\Controllers\AppController@purchase')->name('purchase');
-Route::get('/app/purchase/form_tunai', 'App\Http\Controllers\AppController@purchase_form_tunai')->name('purchase_form_tunai');
-Route::post('/app/purchase/form_tunai', 'App\Http\Controllers\AppController@purchase_form_tunai_post')->name('purchase_form_tunai_post');
-Route::get('/app/purchase/purchase_tunai_detail/{user_id}', 'App\Http\Controllers\AppController@purchase_tunai_detail')->name('purchase_tunai_detail');
+Route::get('/app/purchase', 'App\Http\Controllers\PurchaseSalesController@purchase')->name('purchase');
+Route::get('/app/purchase/form_tunai', 'App\Http\Controllers\PurchaseSalesController@purchase_form_tunai')->name('purchase_form_tunai');
+Route::post('/app/purchase/form_tunai', 'App\Http\Controllers\PurchaseSalesController@purchase_form_tunai_post')->name('purchase_form_tunai_post');
+Route::get('/app/purchase/purchase_tunai_detail/{user_id}', 'App\Http\Controllers\PurchaseSalesController@purchase_tunai_detail')->name('purchase_tunai_detail');
 
-Route::get('/app/purchase/form_kredit', 'App\Http\Controllers\AppController@purchase_form_kredit')->name('purchase_form_kredit');
-Route::post('/app/purchase/form_kredit', 'App\Http\Controllers\AppController@purchase_form_kredit_post')->name('purchase_form_kredit_post');
-Route::get('/app/purchase/purchase_kredit_detail/{user_id}', 'App\Http\Controllers\AppController@purchase_kredit_detail')->name('purchase_kredit_detail');
+Route::get('/app/purchase/form_kredit', 'App\Http\Controllers\PurchaseSalesController@purchase_form_kredit')->name('purchase_form_kredit');
+Route::post('/app/purchase/form_kredit', 'App\Http\Controllers\PurchaseSalesController@purchase_form_kredit_post')->name('purchase_form_kredit_post');
+Route::get('/app/purchase/purchase_kredit_detail/{user_id}', 'App\Http\Controllers\PurchaseSalesController@purchase_kredit_detail')->name('purchase_kredit_detail');
 
 //// SALES
-Route::get('/app/sales', 'App\Http\Controllers\AppController@sales')->name('sales');
+Route::get('/app/sales', 'App\Http\Controllers\PurchaseSalesController@sales')->name('sales');
 
 // REPORT
-Route::get('/app/reports/posisi-keuangan', 'App\Http\Controllers\AppController@posisi_keuangan')->name('posisi_keuangan');
-Route::get('/app/reports/arus-kas-bulan', 'App\Http\Controllers\AppController@arus_kas_bulan')->name('arus_kas_bulan');
-Route::get('/app/reports/laba-rugi', 'App\Http\Controllers\AppController@laba_rugi')->name('laba_rugi');
+Route::get('/app/reports/posisi-keuangan', 'App\Http\Controllers\ReportController@posisi_keuangan')->name('posisi_keuangan');
+Route::get('/app/reports/arus-kas-bulan', 'App\Http\Controllers\ReportController@arus_kas_bulan')->name('arus_kas_bulan');
+Route::get('/app/reports/laba-rugi', 'App\Http\Controllers\ReportController@laba_rugi')->name('laba_rugi');
 
 // ASSET
-Route::get('/app/asset', 'App\Http\Controllers\AppController@asset')->name('asset');
-Route::get('/app/asset/tambah_asset_tetap', 'App\Http\Controllers\AppController@tambah_asset_tetap')->name('tambah_asset_tetap');
-Route::get('/app/asset/tambah_asset_lancar', 'App\Http\Controllers\AppController@tambah_asset_lancar')->name('tambah_asset_lancar');
+Route::get('/app/asset', 'App\Http\Controllers\ReportController@asset')->name('asset');
+Route::get('/app/asset/tambah_asset_tetap', 'App\Http\Controllers\ReportController@tambah_asset_tetap')->name('tambah_asset_tetap');
+Route::get('/app/asset/tambah_asset_lancar', 'App\Http\Controllers\ReportController@tambah_asset_lancar')->name('tambah_asset_lancar');
 
 // KEWAJIBAN
-Route::get('/app/kewajiban', 'App\Http\Controllers\AppController@kewajiban')->name('kewajiban');
-Route::get('/app/kewajiban/jangka_panjang', 'App\Http\Controllers\AppController@jangka_panjang')->name('jangka_panjang');
-Route::get('/app/kewajiban/jangka_pendek', 'App\Http\Controllers\AppController@jangka_pendek')->name('jangka_pendek');
+Route::get('/app/kewajiban', 'App\Http\Controllers\ReportController@kewajiban')->name('kewajiban');
+Route::get('/app/kewajiban/jangka_panjang', 'App\Http\Controllers\ReportController@jangka_panjang')->name('jangka_panjang');
+Route::get('/app/kewajiban/jangka_pendek', 'App\Http\Controllers\ReportController@jangka_pendek')->name('jangka_pendek');
 
 // MODAL
-Route::get('/app/modal', 'App\Http\Controllers\AppController@modal')->name('modal');
-Route::get('/app/tambah_modal', 'App\Http\Controllers\AppController@tambah_modal')->name('tambah_modal');
+Route::get('/app/modal', 'App\Http\Controllers\ReportController@modal')->name('modal');
+Route::get('/app/tambah_modal', 'App\Http\Controllers\ReportController@tambah_modal')->name('tambah_modal');

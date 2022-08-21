@@ -68,10 +68,10 @@ class ReportController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
-    public function jangka_panjang()
+    public function tambah_kewajiban()
     {
         if (session()->has('hasLogin')) {
-            return view('app/kewajiban/form_jangka_panjang');
+            return view('app/kewajiban/form_kewajiban');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

@@ -74,8 +74,7 @@ Route::get('/app/asset/tambah_asset_tetap', 'App\Http\Controllers\ReportControll
 
 // KEWAJIBAN
 Route::get('/app/kewajiban', 'App\Http\Controllers\ReportController@kewajiban')->name('kewajiban');
-Route::get('/app/kewajiban/jangka_panjang', 'App\Http\Controllers\ReportController@jangka_panjang')->name('jangka_panjang');
-Route::get('/app/kewajiban/jangka_pendek', 'App\Http\Controllers\ReportController@jangka_pendek')->name('jangka_pendek');
+Route::get('/app/kewajiban/tambah_kewajiban', 'App\Http\Controllers\ReportController@tambah_kewajiban')->name('tambah_kewajiban');
 
 // MODAL
 Route::get('/app/modal', 'App\Http\Controllers\ReportController@modal')->name('modal');

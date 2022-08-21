@@ -68,10 +68,10 @@ class ReportController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
-    public function jangka_panjang()
+    public function tambah_kewajiban()
     {
         if (session()->has('hasLogin')) {
-            return view('app/kewajiban/form_jangka_panjang');
+            return view('app/kewajiban/form_kewajiban');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -97,6 +97,23 @@ class ReportController extends Controller
     {
         if (session()->has('hasLogin')) {
             return view('app/modal/tambah_modal');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    // BEBAN USAHA
+    public function beban_usaha()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/beban_usaha/beban_usaha');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_beban_usaha()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/beban_usaha/form_beban_usaha');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

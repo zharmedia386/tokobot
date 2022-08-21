@@ -7,6 +7,7 @@ use App\Models\Orderlist;
 use App\Models\Customer;
 use App\Models\Purchase_Form_Tunai;
 use App\Models\Purchase_Form_Kredit;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,15 +47,48 @@ class ReportController extends Controller
     public function asset()
     {
         if (session()->has('hasLogin')) {
-            return view('app/asset/asset');
+            $asset = DB::table('asset')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/asset/asset', compact('asset', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
-    public function tambah_asset()
+    public function asset_form()
     {
         if (session()->has('hasLogin')) {
-            return view('app/asset/form_asset');
+            $nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+            return view('app/asset/asset_form', compact('nomor_asset'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function asset_form_post(Request $request)
+    {
+        // $test = DB::selectOne("select getNewId('as') as value from dual")->value;
+        // dd($test);
+
+        // Purchase Form Tunai
+        $asset = new Asset();
+        $asset->user_id = session()->get('user_id');
+        $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+        $asset->nama_asset = $request->namaAsset;
+        $asset->jenis_asset = $request->jenisAsset;
+        $asset->harga_asset = $request->hargaAsset;
+        $asset->umur_ekonomis = $request->umurEkonomis;
+        $asset->masa_penggunaan = $request->masaPenggunaan;
+
+        $asset->save();
+
+        return redirect()->route('asset')->with('successAddAsset', 'Pemasukan Asset Sukses!');
+    }
+
+    public function asset_detail($nomor_asset)
+    {
+        if (session()->has('hasLogin')) {
+            $asset = DB::select('select * from asset where asset.nomor_asset = ' . $nomor_asset);
+            return view('app/asset/asset_detail', compact('asset'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

@@ -55,6 +55,13 @@ Route::get('/app/purchase/purchase_kredit_detail/{user_id}', 'App\Http\Controlle
 
 //// SALES
 Route::get('/app/sales', 'App\Http\Controllers\PurchaseSalesController@sales')->name('sales');
+Route::get('/app/sales/form_tunai', 'App\Http\Controllers\PurchaseSalesController@sales_form_tunai')->name('sales_form_tunai');
+Route::post('/app/sales/form_tunai', 'App\Http\Controllers\PurchaseSalesController@sales_form_tunai_post')->name('sales_form_tunai_post');
+Route::get('/app/sales/sales_tunai_detail/{user_id}', 'App\Http\Controllers\PurchaseSalesController@sales_tunai_detail')->name('sales_tunai_detail');
+
+Route::get('/app/sales/form_kredit', 'App\Http\Controllers\PurchaseSalesController@sales_form_kredit')->name('sales_form_kredit');
+Route::post('/app/sales/form_kredit', 'App\Http\Controllers\PurchaseSalesController@sales_form_kredit_post')->name('sales_form_kredit_post');
+Route::get('/app/sales/sales_kredit_detail/{user_id}', 'App\Http\Controllers\PurchaseSalesController@sales_kredit_detail')->name('sales_kredit_detail');
 
 // REPORT
 Route::get('/app/reports/posisi-keuangan', 'App\Http\Controllers\ReportController@posisi_keuangan')->name('posisi_keuangan');

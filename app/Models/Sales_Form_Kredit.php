@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Waiter extends Model
+class Sales_Form_Kredit extends Model
 {
+    use HasFactory;
     protected $guarded = [];
     public $timestamps = false;
-    use HasFactory;
-    protected $table = 'waiter';
+    protected $table = 'sales_form_kredit';
     protected $primaryKey = 'user_id';
 }

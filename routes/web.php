@@ -97,3 +97,6 @@ Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tam
 
 // ASSET TETAP
 Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_tetap')->name('asset_tetap');
+
+// STOK BARANG
+Route::get('/app/stok_baarang', 'App\Http\Controllers\ReportController@stok_barang')->name('stok_barang');

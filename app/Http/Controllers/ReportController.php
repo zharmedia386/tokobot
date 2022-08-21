@@ -126,4 +126,13 @@ class ReportController extends Controller
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
+
+    // STOK BARANG
+    public function stok_barang()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/stok_barang/stok_barang');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
 }

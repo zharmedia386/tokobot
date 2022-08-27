@@ -108,3 +108,11 @@ Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_teta
 
 // STOK BARANG
 Route::get('/app/stok_baarang', 'App\Http\Controllers\ReportController@stok_barang')->name('stok_barang');
+
+// KREDITUR
+Route::get('/app/kreditur', 'App\Http\Controllers\BukuUtangController@kreditur')->name('kreditur');
+Route::get('/app/tambah_kreditur', 'App\Http\Controllers\BukuUtangController@tambah_kreditur')->name('tambah_kreditur');
+
+// SUPPLIER
+Route::get('/app/supplier', 'App\Http\Controllers\BukuUtangController@supplier')->name('supplier');
+Route::get('/app/tambah_supplier', 'App\Http\Controllers\BukuUtangController@tambah_supplier')->name('tambah_supplier');

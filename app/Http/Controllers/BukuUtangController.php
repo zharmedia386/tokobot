@@ -97,4 +97,38 @@ class BukuUtangController extends Controller
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
+
+    // KREDITUR
+    public function kreditur()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/kreditur/kreditur');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_kreditur()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/kreditur/form_kreditur');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    // SUPPLIER
+    public function supplier()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/supplier/supplier');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_supplier()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/supplier/form_supplier');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
 }

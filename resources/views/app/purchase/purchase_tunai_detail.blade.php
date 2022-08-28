@@ -27,7 +27,7 @@
                 <input type="hidden" value="tunai" name="metodePembayaran" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Diskon Pembelian</label>
+                <label class="form-label" for="exampleInputText1">Diskon Pembelian (%)</label>
                 <input type="text" class="form-control" name="diskonPembelian" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->diskon_pembelian }}" />
             </div>
             <div class="form-group">
@@ -35,7 +35,7 @@
                 <input type="text" class="form-control" name="produkYangDibeli" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->produk_yang_dibeli }}" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Pajak</label>
+                <label class="form-label" for="exampleInputText1">Pajak (%)</label>
                 <input type="text" class="form-control" name="pajak" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->pajak }}" />
             </div>
             <div class="form-group">
@@ -43,8 +43,8 @@
                 <input type="text" class="form-control" name="pajak" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->jumlah_barang }}" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Total Pembelian</label>
-                <input type="text" class="form-control" name="totalPembelian" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->total_pembelian }}" />
+                <label class="form-label" for="exampleInputText1">Harga Satuan</label>
+                <input type="text" class="form-control" name="hargaSatuan" id="exampleInputText1" disabled value="{{ $purchase_form_tunai[0]->harga_satuan }}" />
             </div>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
         </form>

@@ -9,6 +9,7 @@ use App\Models\Sales_Form_Tunai;
 use App\Models\Sales_Form_Kredit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PurchaseSalesController extends Controller
 {
@@ -42,6 +43,10 @@ class PurchaseSalesController extends Controller
         // $test = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
         // dd($test);
 
+        $rp = "Rp. 1.500.000";
+        $rp = replace('/[Rp. ]/','',$rp);
+        dd($rp);
+
         // Purchase Form Tunai
         $purchase_form_tunai = new Purchase_Form_Tunai();
         $purchase_form_tunai->user_id = session()->get('user_id');
@@ -52,7 +57,14 @@ class PurchaseSalesController extends Controller
         $purchase_form_tunai->produk_yang_dibeli = $request->produkYangDibeli;
         $purchase_form_tunai->pajak = $request->pajak;
         $purchase_form_tunai->jumlah_barang = $request->jumlahBarang;
-        $purchase_form_tunai->total_pembelian = $request->totalPembelian;
+        $purchase_form_tunai->harga_satuan = $request->hargaSatuan;
+        dd($request->hargaSatuan);
+
+        // HARGA TOTAL
+        $persentaseDiskon = $request->diskonPembelian / 100 * ($request->jumlahBarang * $request->hargaSatuan);
+        $persentasePajak = $request->pajak * $persentaseDiskon / 100;
+        
+        $purchase_form_tunai->total_pembelian = (($request->jumlahBarang * $request->hargaSatuan) - $persentaseDiskon) + $persentasePajak;
 
         $purchase_form_tunai->save();
 
@@ -80,7 +92,14 @@ class PurchaseSalesController extends Controller
         $purchase_form_kredit->tanggal_transaksi = $request->tanggalTransaksi;
         $purchase_form_kredit->metode_pembayaran = $request->metodePembayaran;
         $purchase_form_kredit->umur_piutang = $request->umurPiutang;
-        $purchase_form_kredit->batas_pembayaran_utang = $request->batasPembayaranUtang;
+            
+            // PENAMBAHAN TANGGAL DARI UMUR PIUTANG 
+        $days_add = (int)$request->umurPiutang;
+        $tanggalTransaksi = Carbon::createFromFormat('Y-m-d', $request->tanggalTransaksi);
+        $batasPembayaranUtang = $tanggalTransaksi->addDays($days_add);
+
+        $purchase_form_kredit->batas_pembayaran_utang = $batasPembayaranUtang;
+
         $purchase_form_kredit->denda_keterlambatan = $request->dendaKeterlambatan;
         $purchase_form_kredit->diskon_pembelian = $request->diskonPembelian;
         $purchase_form_kredit->produk_yang_dibeli = $request->produkYangDibeli;
@@ -149,7 +168,13 @@ class PurchaseSalesController extends Controller
         $sales_form_tunai->produk_yang_terjual = $request->produkYangTerjual;
         $sales_form_tunai->pajak = $request->pajak;
         $sales_form_tunai->jumlah_barang = $request->jumlahBarang;
-        $sales_form_tunai->total_penjualan = $request->totalPenjualan;
+        $sales_form_tunai->harga_satuan = $request->hargaSatuan;
+
+        // HARGA TOTAL
+        $persentaseDiskon = $request->diskonPenjualan / 100 * ($request->jumlahBarang * $request->hargaSatuan);
+        $persentasePajak = $request->pajak * $persentaseDiskon / 100;
+        
+        $sales_form_tunai->total_penjualan = (($request->jumlahBarang * $request->hargaSatuan) - $persentaseDiskon) + $persentasePajak;
 
         $sales_form_tunai->save();
 

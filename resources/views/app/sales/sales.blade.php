@@ -57,10 +57,14 @@
                                         <th>Nama Barang</th>
                                         <th>Jumlah Barang</th>
                                         <th>Harga Satuan</th>
+                                        <th>Total Penjualan</th>
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
+                                    @php
+                                        $totalPenjualan = 0;
+                                    @endphp
                                     @foreach($sales_form_tunai as $data)
                                         @if($user_id == $data->user_id)
                                             <tr>
@@ -68,15 +72,19 @@
                                                 <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
                                                 <td>{{ $data->produk_yang_terjual }}</td>
                                                 <td>{{ $data->jumlah_barang }}</td>
-                                                <td>{{ $data->total_penjualan }}</td>
+                                                <td class="text-end">@currency($data->harga_satuan)</td>
+                                                <td class="text-end">@currency($data->total_penjualan)</td>
                                                 <td><a href="{{ route('sales_tunai_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
+                                            @php
+                                                $totalPenjualan += $data->total_penjualan;
+                                            @endphp
                                         @endif
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4">Total Penjualan: Rp1000000000000000000000000</th>
+                                        <th colspan="4">Total Penjualan: @currency($totalPenjualan)</th>
                                     </tr>
                                 </tfoot>
                             </table>

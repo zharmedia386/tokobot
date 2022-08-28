@@ -21,17 +21,21 @@
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
                         <thead>
                             <tr>
+                                <th>Kreditur ID</th>
                                 <th>Nama Kreditur</th>
                                 <th>Alamat</th>
-                                <th>Detail</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Amir</td>
-                                <td>Jl. Ciwaruga</td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>
-                            </tr>
+                            @foreach($kreditur as $data)
+                                @if($user_id == $data->user_id)
+                                <tr>
+                                    <td>{{ $data->kreditur_id }}</td>
+                                    <td>{{ $data->nama_kreditur }}</td>
+                                    <td>{{ $data->alamat }}</td>
+                                </tr>
+                                @endif
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

@@ -9,18 +9,22 @@
         </div>
     </div>
     <div class="card-body">
-        <form>
+        <form action="{{ route('tambah_supplier_post') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label class="form-label" for="exampleInputText1">Supplier ID</label>
+                <input type="text" class="form-control" name="supplierID" id="exampleInputText1" disabled value="{{ $supplier_id }}" />
+            </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nama Supplier</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Masukkan nama supplier" />
+                <input type="text" class="form-control" name="namaSupplier" id="exampleInputText1" placeholder="Masukkan nama supplier" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Alamat</label>
-                <input type="text" class="form-control" id="exampleInputText1" placeholder="Masukkan alamat supplier" />
+                <input type="text" class="form-control" name="alamat" id="exampleInputText1" placeholder="Masukkan alamat supplier" />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Cancel</a>
-            
         </form>
     </div>
 </div>

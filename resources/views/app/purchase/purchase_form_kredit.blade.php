@@ -28,6 +28,16 @@
                 <input type="hidden" value="tunai" name="metodePembayaran" />
             </div>
             <div class="form-group">
+                <label class="form-label">Nama Supplier</label>
+                <select class="form-select mb-3 shadow-none" name="namaSupplier">
+                    @foreach($supplier as $data)
+                        @if($user_id == $data->user_id)
+                            <option name="namaSupplier" value="{{ $data->nama_supplier }}" selected=""> {{ $data->nama_supplier }} </option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label class="form-label">Umur Utang</label>
                 <select class="form-select mb-3 shadow-none" name="umurUtang">
                     <option name="umurUtang" value="15" selected="">Pilih Umur Utang</option>
@@ -38,15 +48,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputdate">Batas Pembayaran Utang</label>
-                <input type="date" class="form-control" id="exampleInputdate" name="batasPembayaranUtang"/>
-            </div>
-            <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Denda Keterlambatan</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="dendaKeterlambatan" placeholder="Masukkan Denda Keterlambatan.." />
+                <input type="text" class="form-control" id="rupiah" name="dendaKeterlambatan" placeholder="Masukkan Denda Keterlambatan.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Diskon Pembelian</label>
+                <label class="form-label" for="exampleInputText1">Diskon Pembelian (%)</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="diskonPembelian" placeholder="Masukkan Diskon Pembelian.." />
             </div>
             <div class="form-group">
@@ -54,7 +60,7 @@
                 <input type="text" class="form-control" id="exampleInputText1" name="produkYangDibeli" placeholder="Masukkan Produk yang dibeli.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Pajak</label>
+                <label class="form-label" for="exampleInputText1">Pajak (%)</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="pajak" placeholder="Masukkan Pajak.." />
             </div>
             <div class="form-group">
@@ -62,8 +68,8 @@
                 <input type="text" class="form-control" id="exampleInputText1" name="jumlahBarang" placeholder="Masukkan Jumlah Barang.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Total Pembelian</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="totalPembelian" placeholder="Masukkan Total Pembelian.." />
+                <label class="form-label" for="exampleInputText1">Harga Satuan</label>
+                <input type="text" class="form-control" id="rupiah_2" name="hargaSatuan" placeholder="Masukkan Harga Satuan.." />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
@@ -71,5 +77,8 @@
     </div>
 </div>
 
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 @endsection

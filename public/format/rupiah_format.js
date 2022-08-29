@@ -1,9 +1,20 @@
+// FORMAT RUPIAH 1
 var rupiah = document.getElementById('rupiah');
 rupiah.addEventListener('keyup', function(e){
     // tambahkan 'Rp.' pada saat form di ketik
     // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
     rupiah.value = formatRupiah(this.value, 'Rp. ');
 });
+
+// FORMAT RUPIAH 2
+var rupiah_2 = document.getElementById('rupiah_2');
+rupiah_2.addEventListener('keyup', function(e){
+    // tambahkan 'Rp.' pada saat form di ketik
+    // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+    rupiah_2.value = formatRupiah(this.value, 'Rp. ');
+});
+
+
 
 /* Fungsi formatRupiah */
 function formatRupiah(angka, prefix){

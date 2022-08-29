@@ -9,6 +9,7 @@ use App\Models\Sales_Form_Tunai;
 use App\Models\Sales_Form_Kredit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class PurchaseSalesController extends Controller
@@ -43,10 +44,6 @@ class PurchaseSalesController extends Controller
         // $test = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
         // dd($test);
 
-        $rp = "Rp. 1.500.000";
-        $rp = replace('/[Rp. ]/','',$rp);
-        dd($rp);
-
         // Purchase Form Tunai
         $purchase_form_tunai = new Purchase_Form_Tunai();
         $purchase_form_tunai->user_id = session()->get('user_id');
@@ -57,14 +54,18 @@ class PurchaseSalesController extends Controller
         $purchase_form_tunai->produk_yang_dibeli = $request->produkYangDibeli;
         $purchase_form_tunai->pajak = $request->pajak;
         $purchase_form_tunai->jumlah_barang = $request->jumlahBarang;
+
+            // HARGA SATUAN
         $purchase_form_tunai->harga_satuan = $request->hargaSatuan;
-        dd($request->hargaSatuan);
+        $purchase_form_tunai->harga_satuan = Str::replace('.','',$purchase_form_tunai->harga_satuan);
+        $purchase_form_tunai->harga_satuan = Str::replace('Rp ','',$purchase_form_tunai->harga_satuan);
+        $purchase_form_tunai->harga_satuan = (int)($purchase_form_tunai->harga_satuan);
 
         // HARGA TOTAL
-        $persentaseDiskon = $request->diskonPembelian / 100 * ($request->jumlahBarang * $request->hargaSatuan);
+        $persentaseDiskon = $request->diskonPembelian / 100 * ($request->jumlahBarang * $purchase_form_tunai->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
         
-        $purchase_form_tunai->total_pembelian = (($request->jumlahBarang * $request->hargaSatuan) - $persentaseDiskon) + $persentasePajak;
+        $purchase_form_tunai->total_pembelian = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $purchase_form_tunai->save();
 
@@ -100,12 +101,29 @@ class PurchaseSalesController extends Controller
 
         $purchase_form_kredit->batas_pembayaran_utang = $batasPembayaranUtang;
 
-        $purchase_form_kredit->denda_keterlambatan = $request->dendaKeterlambatan;
         $purchase_form_kredit->diskon_pembelian = $request->diskonPembelian;
         $purchase_form_kredit->produk_yang_dibeli = $request->produkYangDibeli;
         $purchase_form_kredit->pajak = $request->pajak;
         $purchase_form_kredit->jumlah_barang = $request->jumlahBarang;
-        $purchase_form_kredit->total_pembelian = $request->totalPembelian;
+        $purchase_form_kredit->nama_supplier = $request->namaSupplier;
+
+            // DENDA KETERLAMBATAN
+        $purchase_form_kredit->denda_keterlambatan = $request->dendaKeterlambatan;
+        $purchase_form_kredit->denda_keterlambatan = Str::replace('.','',$purchase_form_kredit->denda_keterlambatan);
+        $purchase_form_kredit->denda_keterlambatan = Str::replace('Rp ','',$purchase_form_kredit->denda_keterlambatan);
+        $purchase_form_kredit->denda_keterlambatan = (int)($purchase_form_kredit->denda_keterlambatan);
+
+            // HARGA SATUAN
+        $purchase_form_kredit->harga_satuan = $request->hargaSatuan;
+        $purchase_form_kredit->harga_satuan = Str::replace('.','',$purchase_form_kredit->harga_satuan);
+        $purchase_form_kredit->harga_satuan = Str::replace('Rp ','',$purchase_form_kredit->harga_satuan);
+        $purchase_form_kredit->harga_satuan = (int)($purchase_form_kredit->harga_satuan);
+
+        // HARGA TOTAL
+        $persentaseDiskon = $request->diskonPembelian / 100 * ($request->jumlahBarang * $purchase_form_kredit->harga_satuan);
+        $persentasePajak = $request->pajak * $persentaseDiskon / 100;
+        
+        $purchase_form_kredit->total_pembelian = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $purchase_form_kredit->save();
 
@@ -116,7 +134,10 @@ class PurchaseSalesController extends Controller
     {
         if (session()->has('hasLogin')) {
             $nomor_transaksi = DB::selectOne("select getNewId('purchase_form_kredit') as value from dual")->value;
-            return view('app/purchase/purchase_form_kredit', compact('nomor_transaksi'));
+            $supplier = DB::table('supplier')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/purchase/purchase_form_kredit', compact('nomor_transaksi', 'supplier', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -125,6 +146,7 @@ class PurchaseSalesController extends Controller
     {
         if (session()->has('hasLogin')) {
             $purchase_form_kredit = DB::select('select * from purchase_form_kredit where purchase_form_kredit.nomor_transaksi = ' . $nomor_transaksi);
+
             return view('app/purchase/purchase_kredit_detail', compact('purchase_form_kredit'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');

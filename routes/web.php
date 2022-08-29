@@ -94,10 +94,15 @@ Route::get('/app/kewajiban/kewajiban_detail/{user_id}', 'App\Http\Controllers\Re
 // MODAL
 Route::get('/app/modal', 'App\Http\Controllers\ReportController@modal')->name('modal');
 Route::get('/app/tambah_modal', 'App\Http\Controllers\ReportController@tambah_modal')->name('tambah_modal');
+Route::post('/app/modal/modal_form', 'App\Http\Controllers\ReportController@modal_form_post')->name('modal_form_post');
+Route::get('/app/modal/modal_detail/{modal_id}', 'App\Http\Controllers\ReportController@modal_detail')->name('modal_detail');
+
 
 // BEBAN USAHA
 Route::get('/app/beban_usaha', 'App\Http\Controllers\ReportController@beban_usaha')->name('beban_usaha');
 Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tambah_beban_usaha')->name('tambah_beban_usaha');
+Route::post('/app/beban_usaha/beban_usaha_form', 'App\Http\Controllers\ReportController@beban_usaha_form_post')->name('beban_usaha_form_post');
+Route::get('/app/beban_usaha/beban_usaha_detail/{beban_usaha_id}', 'App\Http\Controllers\ReportController@beban_usaha_detail')->name('beban_usaha_detail');
 
 // BUKU KAS
 Route::get('/app/buku_kas', 'App\Http\Controllers\BukuKasController@buku_kas')->name('buku_kas');

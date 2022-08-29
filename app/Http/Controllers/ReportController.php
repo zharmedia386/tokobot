@@ -9,6 +9,8 @@ use App\Models\Purchase_Form_Tunai;
 use App\Models\Purchase_Form_Kredit;
 use App\Models\Asset;
 use App\Models\Kewajiban;
+use App\Models\Modal;
+use App\Models\Beban_Usaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -155,7 +157,10 @@ class ReportController extends Controller
     public function modal()
     {
         if (session()->has('hasLogin')) {
-            return view('app/modal/modal');
+            $modal = DB::table('modal')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/modal/modal', compact('user_id', 'modal'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -163,7 +168,32 @@ class ReportController extends Controller
     public function tambah_modal()
     {
         if (session()->has('hasLogin')) {
-            return view('app/modal/tambah_modal');
+            $modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
+
+            return view('app/modal/tambah_modal', compact('modal_id'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function modal_form_post(Request $request)
+    {
+        $modal = new Modal();
+        $modal->user_id = session()->get('user_id');
+        $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
+        $modal->nama_modal = $request->namaModal;
+        $modal->harga_modal = $request->hargaModal;
+
+        $modal->save();
+
+        return redirect()->route('modal')->with('successAddModal', 'Pemasukan Modal Sukses!');
+    }
+
+    public function modal_detail($modal_id)
+    {
+        if (session()->has('hasLogin')) {
+            $modal = DB::select('select * from modal where modal.modal_id = ' . $modal_id);
+
+            return view('app/modal/modal_detail', compact('modal'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -172,7 +202,10 @@ class ReportController extends Controller
     public function beban_usaha()
     {
         if (session()->has('hasLogin')) {
-            return view('app/beban_usaha/beban_usaha');
+            $beban_usaha = DB::table('beban_usaha')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/beban_usaha/beban_usaha', compact('user_id', 'beban_usaha'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -180,7 +213,32 @@ class ReportController extends Controller
     public function tambah_beban_usaha()
     {
         if (session()->has('hasLogin')) {
-            return view('app/beban_usaha/form_beban_usaha');
+            $beban_usaha_id = DB::selectOne("select getNewId('beban_usaha') as value from dual")->value;
+
+            return view('app/beban_usaha/form_beban_usaha', compact('beban_usaha_id'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function beban_usaha_form_post(Request $request)
+    {
+        $beban_usaha = new Beban_Usaha();
+        $beban_usaha->user_id = session()->get('user_id');
+        $beban_usaha->beban_usaha_id = DB::selectOne("select getNewId('beban_usaha') as value from dual")->value;
+        $beban_usaha->nama_beban_usaha = $request->namaBebanUsaha;
+        $beban_usaha->harga_beban_usaha = $request->hargaBebanUsaha;
+
+        $beban_usaha->save();
+
+        return redirect()->route('beban_usaha')->with('successAddBebanUsaha', 'Pemasukan Beban Usaha Sukses!');
+    }
+
+    public function beban_usaha_detail($beban_usaha_id)
+    {
+        if (session()->has('hasLogin')) {
+            $beban_usaha = DB::select('select * from beban_usaha where beban_usaha.beban_usaha_id = ' . $beban_usaha_id);
+            
+            return view('app/beban_usaha/beban_usaha_detail', compact('beban_usaha'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

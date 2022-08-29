@@ -136,7 +136,12 @@ class ReportController extends Controller
         $kewajiban->nomor_kewajiban = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
         $kewajiban->nama_kewajiban = $request->namaKewajiban;
         $kewajiban->jenis_kewajiban = $request->jenisKewajiban;
+
+        // HARGA KEWAJIBAN
         $kewajiban->nominal = $request->nominal;
+        $kewajiban->nominal = Str::replace('.','',$kewajiban->nominal);
+        $kewajiban->nominal = Str::replace('Rp ','',$kewajiban->nominal);
+        $kewajiban->nominal = (int)($kewajiban->nominal);
 
         $kewajiban->save();
 

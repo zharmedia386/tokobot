@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Jumlah Piutang</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="jumlahPiutang" placeholder="Masukkan Jumlah Piutang.." />
+                <input type="text" class="form-control" id="rupiah" name="jumlahPiutang" placeholder="Masukkan Jumlah Piutang.." />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
@@ -33,5 +33,8 @@
     </div>
 </div>
 
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 @endsection

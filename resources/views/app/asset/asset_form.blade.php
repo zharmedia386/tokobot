@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Asset)</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="hargaAsset" placeholder="Masukkan nominal harga asset anda" />
+                <input type="text" class="form-control" id="rupiah" name="hargaAsset" placeholder="Masukkan nominal harga asset anda" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Umur Ekonomis</label>
@@ -45,5 +45,8 @@
     </div>
 </div>
 
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 @endsection

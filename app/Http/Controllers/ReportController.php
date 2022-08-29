@@ -11,6 +11,7 @@ use App\Models\Asset;
 use App\Models\Kewajiban;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ReportController extends Controller
 {
@@ -76,7 +77,13 @@ class ReportController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = $request->namaAsset;
         $asset->jenis_asset = $request->jenisAsset;
+
+        // HARGA ASSET
         $asset->harga_asset = $request->hargaAsset;
+        $asset->harga_asset = Str::replace('.','',$asset->harga_asset);
+        $asset->harga_asset = Str::replace('Rp ','',$asset->harga_asset);
+        $asset->harga_asset = (int)($asset->harga_asset);
+
         $asset->umur_ekonomis = $request->umurEkonomis;
         $asset->masa_penggunaan = $request->masaPenggunaan;
 

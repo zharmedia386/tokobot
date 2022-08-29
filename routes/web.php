@@ -100,8 +100,12 @@ Route::get('/app/beban_usaha', 'App\Http\Controllers\ReportController@beban_usah
 Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tambah_beban_usaha')->name('tambah_beban_usaha');
 
 // BUKU KAS
-Route::get('/app/buku_kas', 'App\Http\Controllers\ReportController@buku_kas')->name('buku_kas');
-Route::get('/app/tambah_kas', 'App\Http\Controllers\ReportController@tambah_kas')->name('tambah_kas');
+Route::get('/app/buku_kas', 'App\Http\Controllers\BukuKasController@buku_kas')->name('buku_kas');
+Route::get('/app/tambah_kas_pemasukkan', 'App\Http\Controllers\BukuKasController@tambah_kas_pemasukkan')->name('tambah_kas_pemasukkan');
+Route::post('/app/tambah_kas_pemasukkan', 'App\Http\Controllers\BukuKasController@tambah_kas_pemasukkan_post')->name('tambah_kas_pemasukkan_post');
+Route::get('/app/tambah_kas_pengeluaran', 'App\Http\Controllers\BukuKasController@tambah_kas_pengeluaran')->name('tambah_kas_pengeluaran');
+Route::post('/app/tambah_kas_pengeluaran', 'App\Http\Controllers\BukuKasController@tambah_kas_pengeluaran_post')->name('tambah_kas_pengeluaran_post');
+Route::get('/app/buku_kas_detail/{kas_id}', 'App\Http\Controllers\BukuKasController@buku_kas_detail')->name('buku_kas_detail');
 
 // ASSET TETAP
 Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_tetap')->name('asset_tetap');

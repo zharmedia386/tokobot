@@ -19,7 +19,7 @@
                 <br>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>Nomor Asset</th>
                                 <th>Jenis Asset</th>
@@ -28,22 +28,28 @@
                                 <th>Detail</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
+                            @php
+                                $totalAsset = 0;
+                            @endphp
                             @foreach($asset as $data)
                                 @if($user_id == $data->user_id)
                                     <tr>
                                         <td>{{ $data->nomor_asset }}</td>
                                         <td>{{ $data->jenis_asset }}</td>
                                         <td>{{ $data->nama_asset }}</td>
-                                        <td>{{ $data->harga_asset }}</td>
+                                        <td class="text-end">@currency($data->harga_asset)</td>
                                         <td><a href="{{ route('asset_detail', $data->nomor_asset) }}" class="btn btn-warning">Detail</a></td>
                                     </tr>
+                                    @php
+                                        $totalAsset += $data->harga_asset;
+                                    @endphp
                                 @endif
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">Total Asset: Rp1000000000000000000000000</th>
+                                <th colspan="4">Total Asset: @currency($totalAsset)</th>
                             </tr>
                         </tfoot>
                     </table>

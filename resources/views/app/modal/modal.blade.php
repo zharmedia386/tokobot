@@ -18,7 +18,7 @@
                 <br>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>Nomor </th>
                                 <th>Nama Modal</th>

@@ -21,7 +21,7 @@
             <div class="form-group">
                 <label class="form-label">Metode Pembayaran</label>
                 <select class="form-select mb-3 shadow-none" value="tunai" name="metodePembayaran" disabled="disabled">
-                    <option value="tunai" selected="" name="metodePembayaran">Tunai</option>
+                    <option value="tunai" selected="" name="metodePembayaran">{{ $purchase_form_tunai[0]->metode_pembayaran }}</option>
                     <option value="kredit" name="metodePembayaran">Kredit</option>
                 </select>
                 <input type="hidden" value="tunai" name="metodePembayaran" />

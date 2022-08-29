@@ -48,12 +48,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputdate">Batas Pembayaran Utang</label>
-                <input type="date" class="form-control" id="exampleInputdate" name="batasPembayaranUtang"/>
-            </div>
-            <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Denda Keterlambatan</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="dendaKeterlambatan" placeholder="Masukkan Denda Keterlambatan.." />
+                <input type="text" class="form-control" id="rupiah" name="dendaKeterlambatan" placeholder="Masukkan Denda Keterlambatan.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Diskon Penjualan (%)</label>
@@ -73,7 +69,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Harga Satuan</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="hargaSatuan" placeholder="Masukkan Harga Satuan.." />
+                <input type="text" class="form-control" id="rupiah_2" name="hargaSatuan" placeholder="Masukkan Harga Satuan.." />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
@@ -81,5 +77,8 @@
     </div>
 </div>
 
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 @endsection

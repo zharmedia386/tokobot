@@ -14,7 +14,13 @@ rupiah_2.addEventListener('keyup', function(e){
     rupiah_2.value = formatRupiah(this.value, 'Rp. ');
 });
 
-
+// FORMAT RUPIAH 3
+var rupiah_3 = document.getElementById('rupiah_3');
+rupiah_3.addEventListener('keyup', function(e){
+    // tambahkan 'Rp.' pada saat form di ketik
+    // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+    rupiah_3.value = formatRupiah(this.value, 'Rp. ');
+});
 
 /* Fungsi formatRupiah */
 function formatRupiah(angka, prefix){

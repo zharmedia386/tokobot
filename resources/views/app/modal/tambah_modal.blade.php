@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Modal)</label>
-                <input type="text" class="form-control" nama="hargaModal" id="exampleInputText1" placeholder="Masukkan nominal harga modal anda" />
+                <input type="text" class="form-control" name="hargaModal" id="rupiah" placeholder="Masukkan nominal harga modal anda" />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Cancel</a>
@@ -29,6 +29,10 @@
         </form>
     </div>
 </div>
+
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 
 @endsection

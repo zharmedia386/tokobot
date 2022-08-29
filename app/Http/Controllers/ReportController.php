@@ -181,7 +181,12 @@ class ReportController extends Controller
         $modal->user_id = session()->get('user_id');
         $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
         $modal->nama_modal = $request->namaModal;
+
+        // HARGA MODAL
         $modal->harga_modal = $request->hargaModal;
+        $modal->harga_modal = Str::replace('.','',$modal->harga_modal);
+        $modal->harga_modal = Str::replace('Rp ','',$modal->harga_modal);
+        $modal->harga_modal = (int)($modal->harga_modal);
 
         $modal->save();
 
@@ -226,7 +231,12 @@ class ReportController extends Controller
         $beban_usaha->user_id = session()->get('user_id');
         $beban_usaha->beban_usaha_id = DB::selectOne("select getNewId('beban_usaha') as value from dual")->value;
         $beban_usaha->nama_beban_usaha = $request->namaBebanUsaha;
+
+        // HARGA BEBAN USAHA
         $beban_usaha->harga_beban_usaha = $request->hargaBebanUsaha;
+        $beban_usaha->harga_beban_usaha = Str::replace('.','',$beban_usaha->harga_beban_usaha);
+        $beban_usaha->harga_beban_usaha = Str::replace('Rp ','',$beban_usaha->harga_beban_usaha);
+        $beban_usaha->harga_beban_usaha = (int)($beban_usaha->harga_beban_usaha);
 
         $beban_usaha->save();
 

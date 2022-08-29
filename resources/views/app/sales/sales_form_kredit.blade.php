@@ -28,6 +28,16 @@
                 <input type="hidden" value="tunai" name="metodePembayaran" />
             </div>
             <div class="form-group">
+                <label class="form-label">Nama Kreditur</label>
+                <select class="form-select mb-3 shadow-none" name="namaKreditur">
+                    @foreach($kreditur as $data)
+                        @if($user_id == $data->user_id)
+                            <option name="namaKreditur" value="{{ $data->nama_kreditur }}" selected=""> {{ $data->nama_kreditur }} </option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label class="form-label">Umur Piutang</label>
                 <select class="form-select mb-3 shadow-none" name="umurPiutang">
                     <option name="umurPiutang" value="15" selected="">Pilih Umur Piutang</option>

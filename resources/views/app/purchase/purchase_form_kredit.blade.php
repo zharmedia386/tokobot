@@ -28,13 +28,13 @@
                 <input type="hidden" value="tunai" name="metodePembayaran" />
             </div>
             <div class="form-group">
-                <label class="form-label">Umur Piutang</label>
-                <select class="form-select mb-3 shadow-none" name="umurPiutang">
-                    <option name="umurPiutang" value="15" selected="">Pilih Umur Piutang</option>
-                    <option name="umurPiutang" value="15">15 hari</option>
-                    <option name="umurPiutang" value="30">30 hari</option>
-                    <option name="umurPiutang" value="60">60 hari</option>
-                    <option name="umurPiutang" value="90">90 hari</option>
+                <label class="form-label">Umur Utang</label>
+                <select class="form-select mb-3 shadow-none" name="umurUtang">
+                    <option name="umurUtang" value="15" selected="">Pilih Umur Utang</option>
+                    <option name="umurUtang" value="15">15 hari</option>
+                    <option name="umurUtang" value="30">30 hari</option>
+                    <option name="umurUtang" value="60">60 hari</option>
+                    <option name="umurUtang" value="90">90 hari</option>
                 </select>
             </div>
             <div class="form-group">

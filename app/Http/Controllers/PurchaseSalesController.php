@@ -83,7 +83,7 @@ class PurchaseSalesController extends Controller
     public function purchase_form_kredit_post(Request $request)
     {
         // dd($request->metodePembayaran);
-        // dd($request->umurPiutang);
+        // dd($request->umurUtang);
 
         // Purchase Form Kredit
         $purchase_form_kredit = new Purchase_Form_Kredit();
@@ -91,10 +91,10 @@ class PurchaseSalesController extends Controller
         $purchase_form_kredit->nomor_transaksi = DB::selectOne("select getNewId('purchase_form_kredit') as value from dual")->value;
         $purchase_form_kredit->tanggal_transaksi = $request->tanggalTransaksi;
         $purchase_form_kredit->metode_pembayaran = $request->metodePembayaran;
-        $purchase_form_kredit->umur_piutang = $request->umurPiutang;
+        $purchase_form_kredit->umur_utang = $request->umurUtang;
             
-            // PENAMBAHAN TANGGAL DARI UMUR PIUTANG 
-        $days_add = (int)$request->umurPiutang;
+            // PENAMBAHAN TANGGAL DARI UMUR UTANG 
+        $days_add = (int)$request->umurUtang;
         $tanggalTransaksi = Carbon::createFromFormat('Y-m-d', $request->tanggalTransaksi);
         $batasPembayaranUtang = $tanggalTransaksi->addDays($days_add);
 
@@ -193,7 +193,7 @@ class PurchaseSalesController extends Controller
     public function sales_form_kredit_post(Request $request)
     {
         // dd($request->metodePembayaran);
-        // dd($request->umurPiutang);
+        // dd($request->umurUtang);
 
         // Sales Form Kredit
         $sales_form_kredit = new Sales_Form_Kredit();
@@ -201,11 +201,12 @@ class PurchaseSalesController extends Controller
         $sales_form_kredit->nomor_transaksi = DB::selectOne("select getNewId('sales_form_kredit') as value from dual")->value;
         $sales_form_kredit->tanggal_transaksi = $request->tanggalTransaksi;
         $sales_form_kredit->metode_pembayaran = $request->metodePembayaran;
-        $sales_form_kredit->umur_piutang = $request->umurPiutang;
+        $sales_form_kredit->umur_utang = $request->umurUtang;
         $sales_form_kredit->batas_pembayaran_utang = $request->batasPembayaranUtang;
         $sales_form_kredit->denda_keterlambatan = $request->dendaKeterlambatan;
         $sales_form_kredit->diskon_penjualan = $request->diskonPenjualan;
         $sales_form_kredit->produk_yang_terjual = $request->produkYangTerjual;
+        $sales_form_kredit->nama_kreditur = $request->namaKreditur;
         $sales_form_kredit->pajak = $request->pajak;
         $sales_form_kredit->jumlah_barang = $request->jumlahBarang;
         $sales_form_kredit->total_penjualan = $request->totalPenjualan;
@@ -219,7 +220,9 @@ class PurchaseSalesController extends Controller
     {
         if (session()->has('hasLogin')) {
             $nomor_transaksi = DB::selectOne("select getNewId('sales_form_kredit') as value from dual")->value;
-            return view('app/sales/sales_form_kredit', compact('nomor_transaksi'));
+            $kreditur = DB::table('kreditur')->get();
+            $user_id = session()->get('user_id');
+            return view('app/sales/sales_form_kredit', compact('nomor_transaksi', 'kreditur', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

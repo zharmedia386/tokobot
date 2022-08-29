@@ -19,40 +19,39 @@
                         </div>
                         <div class="d-flex align-items-center mb-3 mb-sm-0">
                             <div>
-                                <h6 class="me-2 text-primary">Devon Lane</h6>
+                                <h6 class="me-2 text-primary">{{ session()->get('username') }}</h6>
                                 <span>
-                                    <svg width="19" height="19" class="me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M21 10.8421C21 16.9172 12 23 12 23C12 23 3 16.9172 3 10.8421C3 4.76697 7.02944 1 12 1C16.9706 1 21 4.76697 21 10.8421Z" stroke="#07143B" stroke-width="1.5" />
-                                        <circle cx="12" cy="9" r="3" stroke="#07143B" stroke-width="1.5" />
+                                    <svg width="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M9.59151 15.2068C13.2805 15.2068 16.4335 15.7658 16.4335 17.9988C16.4335 20.2318 13.3015 20.8068 9.59151 20.8068C5.90151 20.8068 2.74951 20.2528 2.74951 18.0188C2.74951 15.7848 5.88051 15.2068 9.59151 15.2068Z"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M9.59157 12.0198C7.16957 12.0198 5.20557 10.0568 5.20557 7.63476C5.20557 5.21276 7.16957 3.24976 9.59157 3.24976C12.0126 3.24976 13.9766 5.21276 13.9766 7.63476C13.9856 10.0478 12.0356 12.0108 9.62257 12.0198H9.59157Z"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                        <path d="M16.4829 10.8815C18.0839 10.6565 19.3169 9.28253 19.3199 7.61953C19.3199 5.98053 18.1249 4.62053 16.5579 4.36353" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M18.5952 14.7322C20.1462 14.9632 21.2292 15.5072 21.2292 16.6272C21.2292 17.3982 20.7192 17.8982 19.8952 18.2112" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
-                                    <small class="mb-0 text-dark">Lisbon, Portugal</small>
+                                    <small class="mb-0 text-dark">{{ session()->get('email') }}</small>
                                 </span>
-                            </div>
-                            <div class="ms-4">
-                                <p class="mb-0 text-dark">UI/UX Designer</p>
-                                <p class="me-2 mb-0 text-dark">Hello@gmail.com</p>
-                                <p class="mb-0 text-dark">Email</p>
                             </div>
                         </div>
                     </div>
-                    <ul class="d-flex mb-0 text-center">
-                        <li class="badge bg-primary py-2 me-2">
-                            <p class="mb-3 mt-2">142</p>
-                            <small class="mb-1 fw-normal">Reviews</small>
-                        </li>
-                        <li class="badge bg-primary py-2 me-2">
-                            <p class="mb-3 mt-2">201</p>
-                            <small class="mb-1 fw-normal">Photos</small>
-                        </li>
-                        <li class="badge bg-primary py-2 me-2">
-                            <p class="mb-3 mt-2">3.1k</p>
-                            <small class="mb-1 fw-normal">Followers</small>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <div class="iq-header-img">
-                <img src="../../assets/images/User-profile/01.png" alt="header" class="img-fluid w-100 rounded" style="object-fit: contain;" />
+                <img src="../../assets/images/User-profile/01_2.png" alt="header" class="img-fluid w-100 rounded" style="object-fit: contain;" />
             </div>
         </div>
     </div>

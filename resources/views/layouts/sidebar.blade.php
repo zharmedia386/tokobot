@@ -699,7 +699,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> b </i>
-                                <span class="item-name">Buku Utang</span>
+                                <span class="item-name">Buku Utang dan Piutang</span>
                             </a>
                         </li>
                         <li class="nav-item">

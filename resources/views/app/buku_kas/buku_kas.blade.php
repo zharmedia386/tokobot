@@ -23,34 +23,44 @@
                         <thead>
                             <tr>
                                 <th>Tanggal </th>
-                                <th>Keterangan</th>
                                 <th>Pemasukkan</th>
                                 <th>Pengeluaran</th>
-                                <th>Total</th>
+                                <th>Harga Pemasukkan</th>
+                                <th>Harga Pengeluaran</th>
+                                <th>Total Harga</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>01/01/2022</td>
-                                <td>Penjualan, Biaya Operasional</td>
-                                <td>Rp 50.000.000</td>
-                                <td>Rp 10.000.000</td>
-                                <td>Rp 40.000.000</td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>
-                            </tr>
-                            <tr>
-                                <td>01/02/2022</td>
-                                <td>Terima Pinjaman, Biaya Operasional</td>
-                                <td>Rp 20.000.000</td>
-                                <td>Rp 10.000.000</td>
-                                <td>Rp 10.000.000</td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>
-                            </tr>
+                        <tbody class="text-center">
+                            @php
+                                $totalPemasukkan = 0;
+                                $totalPengeluaran = 0;
+                                $hargaTotal = 0;
+                            @endphp
+                            @foreach($buku_kas as $data)
+                                @if($user_id == $data->user_id)
+                                    <tr>
+                                        <td>{{ $data->tanggal }}</td>
+                                        <td>{{ $data->pemasukkan }}</td>
+                                        <td>{{ $data->pengeluaran }}</td>
+                                        <td  class="text-end">@currency($data->harga_pemasukkan)</td>
+                                        <td  class="text-end">@currency($data->harga_pengeluaran)</td>
+                                        <td  class="text-end">@currency($data->total_harga)</td>
+                                        <td><a href="{{ route('buku_kas_detail', $data->kas_id) }}" class="btn btn-warning">Detail</a></td>
+                                    </tr>
+                                    @php
+                                        $totalPemasukkan += $data->harga_pemasukkan;
+                                        $totalPengeluaran += $data->harga_pengeluaran;  
+                                        $hargaTotal += $data->harga_total;  
+                                    @endphp
+                                @endif
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">Total kas: Rp 60.000.000</th>
+                                <th colspan="4">Total Pemasukkan: @currency($totalPemasukkan)</th>
+                                <th colspan="4">Total Pengeluaran: @currency($totalPengeluaran)</th>
+                                <th colspan="4">Total Kas: @currency($hargaTotal)</th>
                             </tr>
                         </tfoot>
                     </table>

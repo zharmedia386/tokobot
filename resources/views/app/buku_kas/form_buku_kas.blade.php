@@ -16,16 +16,16 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Kategori Pemasukkan</label>
-                <select class="form-select mb-3 shadow-none" name="umurPiutang">
-                    <option name="umurPiutang" value="15" selected="">Pilih Kategori Pemasukkan</option>
-                    <option name="umurPiutang" value="Penjualan">Penjualan</option>
-                    <option name="umurPiutang" value="Penambahan modal">Penambahan modal </option>
-                    <option name="umurPiutang" value="60">Pendapatan di luar usaha</option>
-                    <option name="umurPiutang" value="90">Pendapatan lain-lain</option>
-                    <option name="umurPiutang" value="90">Pendapatan jasa/komisi</option>
-                    <option name="umurPiutang" value="90">Terima pinjaman</option>
-                    <option name="umurPiutang" value="90">Penagihan utang</option>
-                    <option name="umurPiutang" value="90">Pendapatan investasi</option>
+                <select class="form-select mb-3 shadow-none" name="pemasukkan">
+                    <option name="pemasukkan" value="15" selected="">Pilih Kategori Pemasukkan</option>
+                    <option name="Pemasukkan" value="Penjualan">Penjualan</option>
+                    <option name="Pemasukkan" value="Penambahan modal">Penambahan modal </option>
+                    <option name="Pemasukkan" value="60">Pendapatan di luar usaha</option>
+                    <option name="Pemasukkan" value="90">Pendapatan lain-lain</option>
+                    <option name="Pemasukkan" value="90">Pendapatan jasa/komisi</option>
+                    <option name="Pemasukkan" value="90">Terima pinjaman</option>
+                    <option name="Pemasukkan" value="90">Penagihan utang</option>
+                    <option name="Pemasukkan" value="90">Pendapatan investasi</option>
                 </select>
             </div>
             <div class="form-group">
@@ -34,16 +34,16 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Kategori Pengeluaran</label>
-                <select class="form-select mb-3 shadow-none" name="umurPiutang">
-                    <option name="umurPiutang" value="15" selected="">Pilih Kategori Pengeluaran</option>
-                    <option name="umurPiutang" value="Penjualan">Pengeluaran di luar usaha</option>
-                    <option name="umurPiutang" value="Penambahan modal">Pembelian bahan baku</option>
-                    <option name="umurPiutang" value="60">Biaya operasional</option>
-                    <option name="umurPiutang" value="90">Gaji/bonus karyawan</option>
-                    <option name="umurPiutang" value="90">Pemberian utang</option>
-                    <option name="umurPiutang" value="90">Pembayaran utang</option>
-                    <option name="umurPiutang" value="90">Pengeluaran lain-lain</option>
-                    <option name="umurPiutang" value="90">Penarikan Sebagian asset/modal untuk keperluan pribadi</option>
+                <select class="form-select mb-3 shadow-none" name="Pemasukkan">
+                    <option name="Pemasukkan" value="15" selected="">Pilih Kategori Pengeluaran</option>
+                    <option name="Pemasukkan" value="Penjualan">Pengeluaran di luar usaha</option>
+                    <option name="Pemasukkan" value="Penambahan modal">Pembelian bahan baku</option>
+                    <option name="Pemasukkan" value="60">Biaya operasional</option>
+                    <option name="Pemasukkan" value="90">Gaji/bonus karyawan</option>
+                    <option name="Pemasukkan" value="90">Pemberian utang</option>
+                    <option name="Pemasukkan" value="90">Pembayaran utang</option>
+                    <option name="Pemasukkan" value="90">Pengeluaran lain-lain</option>
+                    <option name="Pemasukkan" value="90">Penarikan Sebagian asset/modal untuk keperluan pribadi</option>
                 </select>
             </div>
             <div class="form-group">

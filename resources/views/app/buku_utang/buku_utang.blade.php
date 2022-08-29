@@ -20,7 +20,7 @@
                         <!-- HEADER UTANG -->
                         <div class="card-header d-flex justify-content-between pb-0 border-0">
                             <div class="header-title">
-                                <h4 class="card-title">Utang</h4>
+                                <h4 class="card-title">Buku Utang</h4>
                             </div> 
                             <div class="dropdown-container d-flex justify-content-start">
                                 <div class="dropdown">
@@ -87,7 +87,7 @@
                         <!-- HEADER PIUTANG -->
                         <div class="card-header d-flex justify-content-between pb-0 border-0">
                             <div class="header-title">
-                                <h4 class="card-title">Piutang</h4>
+                                <h4 class="card-title">Buku Piutang</h4>
                             </div> 
                             <div class="dropdown-container d-flex justify-content-start">
                                 <div class="dropdown">

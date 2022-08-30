@@ -37,7 +37,7 @@
                                 <th>Harga Perolehan</th>
                                 <th>Umur Ekonomis</th>
                                 <th>Masa Penggunaan</th>
-                                <th>Detail</th>
+                                <!--th>Detail</th-->
                             </tr>
                         </thead>
                         <tbody>
@@ -49,7 +49,7 @@
                                 <td>5 Tahun</td>
                                 <!--<td><button type="button" class="btn btn-outline-warning mt-2">Detail</button> </td>
                                 <td><button type="button" class="btn btn-warning">Detail</button> </td>-->
-                                <td><button type="button" class="btn btn-outline-warning rounded-pill mt-2">Detail</button></td>
+                                <!--td><button type="button" class="btn btn-outline-warning rounded-pill mt-2">Detail</button></td-->
                             </tr>
                         </tbody>
                         <tfoot>
@@ -59,7 +59,7 @@
                                 <th>Harga Perolehan</th>
                                 <th>Umur Ekonomis</th>
                                 <th>Masa Penggunaan</th>
-                                <th>Detail</th>
+                                <!--th>Detail</th-->
                             </tr>
                         </tfoot>
                     </table>

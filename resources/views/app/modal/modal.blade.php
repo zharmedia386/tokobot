@@ -18,25 +18,35 @@
                 <br>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
-                                <th>Nomor </th>
+                                <th>Modal ID </th>
                                 <th>Nama Modal</th>
                                 <th>Harga Modal</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>301</td>
-                                <td>Modal usaha</td>
-                                <td>Rp 50.000.000</td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>
-                            </tr>
+                        <tbody class="text-center">
+                            @php
+                                $totalModal = 0;
+                            @endphp
+                            @foreach($modal as $data)
+                                @if($user_id == $data->user_id)
+                                    <tr>
+                                        <td>{{ $data->modal_id }}</td>
+                                        <td>{{ $data->nama_modal }}</td>
+                                        <td>@currency($data->harga_modal)</td>
+                                        <td><a href="{{ route('modal_detail', $data->modal_id) }}" class="btn btn-warning">Detail</a></td>
+                                    </tr>
+                                    @php
+                                        $totalModal += $data->harga_modal;
+                                    @endphp
+                                @endif
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">Total Asset: Rp 50.000.000</th>
+                                <th colspan="4">Total Asset: @currency($totalModal)</th>
                             </tr>
                         </tfoot>
                     </table>

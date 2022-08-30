@@ -27,13 +27,13 @@
                 <input type="hidden" value="kredit" name="metodePembayaran" />
             </div>
             <div class="form-group">
-                <label class="form-label">Umur Piutang</label>
-                <select class="form-select mb-3 shadow-none" name="umurPiutang" disabled >
-                    <option name="umurPiutang" value="15" selected="">Pilih Umur Piutang</option>
-                    <option name="umurPiutang" value="15">15 hari</option>
-                    <option name="umurPiutang" value="30">30 hari</option>
-                    <option name="umurPiutang" value="60">60 hari</option>
-                    <option name="umurPiutang" value="90">90 hari</option>
+                <label class="form-label">Umur Utang</label>
+                <select class="form-select mb-3 shadow-none" name="umurUtang" disabled >
+                    <option name="umurUtang" value="15" selected="">{{ $purchase_form_kredit[0]->umur_utang }}</option>
+                    <option name="umurUtang" value="15">15 hari</option>
+                    <option name="umurUtang" value="30">30 hari</option>
+                    <option name="umurUtang" value="60">60 hari</option>
+                    <option name="umurUtang" value="90">90 hari</option>
                 </select>
             </div>
             <div class="form-group">
@@ -45,7 +45,7 @@
                 <input type="text" class="form-control" id="exampleInputText1" name="dendaKeterlambatan" disabled value="{{ $purchase_form_kredit[0]->denda_keterlambatan }}" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Diskon Pembelian</label>
+                <label class="form-label" for="exampleInputText1">Diskon Pembelian (%)</label>
                 <input type="text" class="form-control" name="diskonPembelian" id="exampleInputText1" disabled value="{{ $purchase_form_kredit[0]->diskon_pembelian }}" />
             </div>
             <div class="form-group">
@@ -53,7 +53,7 @@
                 <input type="text" class="form-control" name="produkYangDibeli" id="exampleInputText1" disabled value="{{ $purchase_form_kredit[0]->produk_yang_dibeli }}" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Pajak</label>
+                <label class="form-label" for="exampleInputText1">Pajak (%)</label>
                 <input type="text" class="form-control" name="pajak" id="exampleInputText1" disabled value="{{ $purchase_form_kredit[0]->pajak }}" />
             </div>
             <div class="form-group">
@@ -61,8 +61,8 @@
                 <input type="text" class="form-control" name="jumlahBarang" id="exampleInputText1" disabled value="{{ $purchase_form_kredit[0]->jumlah_barang }}" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Total Pembelian</label>
-                <input type="text" class="form-control" name="totalPembelian" id="exampleInputText1" disabled value="{{ $purchase_form_kredit[0]->total_pembelian }}" />
+                <label class="form-label" for="exampleInputText1">Harga Satuan</label>
+                <input type="text" class="form-control" name="hargaSatuan" id="exampleInputText1" disabled value="{{ $purchase_form_kredit[0]->harga_satuan }}" />
             </div>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
         </form>

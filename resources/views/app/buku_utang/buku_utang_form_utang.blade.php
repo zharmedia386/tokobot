@@ -13,7 +13,7 @@
             @csrf
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nomor Utang</label>
-                <input type="text" class="form-control" name="nomorUtang" id="exampleInputText1" disabled value="{{ $nomor_utang }}" />
+                <input type="text" class="form-control" name="nomorUtang" id="rupiah" disabled value="{{ $nomor_utang }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Tanggal</label>
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Jumlah Utang</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="jumlahUtang" placeholder="Masukkan Jumlah Utang.." />
+                <input type="text" class="form-control" id="rupiah_2" name="jumlahUtang" placeholder="Masukkan Jumlah Utang.." />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
@@ -33,5 +33,8 @@
     </div>
 </div>
 
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 @endsection

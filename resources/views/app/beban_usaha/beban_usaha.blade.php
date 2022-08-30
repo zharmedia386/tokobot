@@ -18,7 +18,7 @@
                 <br>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>Nomor </th>
                                 <th>Nama Beban Usaha</th>
@@ -26,17 +26,27 @@
                                 <th>Detail</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>301</td>
-                                <td>Biaya gaji</td>
-                                <td>Rp 10.000.000</td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>
-                            </tr>
+                        <tbody class="text-center">
+                            @php
+                                $totalBebanUsaha = 0;
+                            @endphp
+                            @foreach($beban_usaha as $data)
+                                @if($user_id == $data->user_id)
+                                    <tr>
+                                        <td>{{ $data->beban_usaha_id }}</td>
+                                        <td>{{ $data->nama_beban_usaha }}</td>
+                                        <td>@currency($data->harga_beban_usaha)</td>
+                                        <td><a href="{{ route('beban_usaha_detail', $data->beban_usaha_id) }}" class="btn btn-warning">Detail</a></td>
+                                    </tr>
+                                    @php
+                                        $totalBebanUsaha += $data->harga_beban_usaha;
+                                    @endphp
+                                @endif
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">Total Beban Usaha: Rp 10.000.000</th>
+                                <th colspan="4">Total Beban Usaha: @currency($totalBebanUsaha)</th>
                             </tr>
                         </tfoot>
                     </table>

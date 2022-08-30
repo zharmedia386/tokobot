@@ -8,6 +8,7 @@ use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Sales_Form_Tunai;
 use App\Models\Sales_Form_Kredit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class BukuUtangController extends Controller
@@ -46,7 +47,12 @@ class BukuUtangController extends Controller
         $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
         $buku_utang_form_utang->tanggal = $request->tanggal;
         $buku_utang_form_utang->nama = $request->nama;
+
+        // HARGA SATUAN
         $buku_utang_form_utang->jumlah_utang = $request->jumlahUtang;
+        $buku_utang_form_utang->jumlah_utang = Str::replace('.','',$buku_utang_form_utang->jumlah_utang);
+        $buku_utang_form_utang->jumlah_utang = Str::replace('Rp ','',$buku_utang_form_utang->jumlah_utang);
+        $buku_utang_form_utang->jumlah_utang = (int)($buku_utang_form_utang->jumlah_utang);
 
         $buku_utang_form_utang->save();
 
@@ -73,7 +79,12 @@ class BukuUtangController extends Controller
         $buku_utang_form_piutang->nomor_piutang = DB::selectOne("select getNewId('buku_utang_form_piutang') as value from dual")->value;
         $buku_utang_form_piutang->tanggal = $request->tanggal;
         $buku_utang_form_piutang->nama = $request->nama;
+
+        // HARGA SATUAN
         $buku_utang_form_piutang->jumlah_piutang = $request->jumlahPiutang;
+        $buku_utang_form_piutang->jumlah_piutang = Str::replace('.','',$buku_utang_form_piutang->jumlah_piutang);
+        $buku_utang_form_piutang->jumlah_piutang = Str::replace('Rp ','',$buku_utang_form_piutang->jumlah_piutang);
+        $buku_utang_form_piutang->jumlah_piutang = (int)($buku_utang_form_piutang->jumlah_piutang);
 
         $buku_utang_form_piutang->save();
 

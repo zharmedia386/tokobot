@@ -20,7 +20,7 @@
                         <!-- HEADER UTANG -->
                         <div class="card-header d-flex justify-content-between pb-0 border-0">
                             <div class="header-title">
-                                <h4 class="card-title">Utang</h4>
+                                <h4 class="card-title">Buku Utang</h4>
                             </div> 
                             <div class="dropdown-container d-flex justify-content-start">
                                 <div class="dropdown">
@@ -50,7 +50,7 @@
                         <br>
                         <div class="table-responsive">
                             <table id="datatable buku_utang_form_utang" class="table table-striped" data-toggle="data-table">
-                                <thead>
+                                <thead class="text-center">
                                     <tr>
                                         <th>Nomor Utang</th>
                                         <th>Tanggal</th>
@@ -59,22 +59,28 @@
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
+                                    @php
+                                        $totalUtang = 0;
+                                    @endphp
                                     @foreach($buku_utang_form_utang as $data)
                                         @if($user_id == $data->user_id)
                                             <tr>
                                                 <td>{{ $data->nomor_utang }}</td>
                                                 <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
                                                 <td>{{ $data->nama }}</td>
-                                                <td>{{ $data->jumlah_utang }}</td>
+                                                <td class="text-end">@currency($data->jumlah_utang)</td>
                                                 <td><a href="{{ route('buku_utang_utang_detail', $data->nomor_utang) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
+                                            @php
+                                                $totalUtang += $data->jumlah_utang;
+                                            @endphp
                                         @endif
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4">Total Utang: Rp1000000000000000000000000</th>
+                                        <th colspan="4">Total Utang: @currency($totalUtang)</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -87,7 +93,7 @@
                         <!-- HEADER PIUTANG -->
                         <div class="card-header d-flex justify-content-between pb-0 border-0">
                             <div class="header-title">
-                                <h4 class="card-title">Piutang</h4>
+                                <h4 class="card-title">Buku Piutang</h4>
                             </div> 
                             <div class="dropdown-container d-flex justify-content-start">
                                 <div class="dropdown">
@@ -117,7 +123,7 @@
                         <!-- END HEADER PIUTANG -->
                         <div class="table-responsive">
                             <table id="datatable" class="table table-striped" data-toggle="data-table">
-                                <thead>
+                                <thead class="text-center">
                                     <tr>
                                         <th>Nomor Piutang</th>
                                         <th>Tanggal</th>
@@ -126,22 +132,28 @@
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
+                                    @php
+                                        $totalPiutang = 0;
+                                    @endphp
                                     @foreach($buku_utang_form_piutang as $data)
                                         @if($user_id == $data->user_id)
                                             <tr>
                                                 <td>{{ $data->nomor_piutang }}</td>
                                                 <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
                                                 <td>{{ $data->nama }}</td>
-                                                <td>{{ $data->jumlah_piutang }}</td>
+                                                <td class="text-end">@currency($data->jumlah_piutang)</td>
                                                 <td><a href="{{ route('buku_utang_piutang_detail', $data->nomor_piutang) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
+                                            @php
+                                                $totalPiutang += $data->jumlah_piutang;
+                                            @endphp
                                         @endif
                                     @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="4">Total Piutang: Rp1000000000000000000000000</th>
+                                        <th colspan="4">Total Piutang: @currency($totalPiutang)</th>
                                     </tr>
                                 </tfoot>
                             </table>

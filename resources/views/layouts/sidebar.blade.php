@@ -699,7 +699,33 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> b </i>
-                                <span class="item-name">Buku Utang</span>
+                                <span class="item-name">Buku Utang <br>dan Piutang</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="{{ route('kreditur') }}">
+                                <i class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                        <g>
+                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                        </g>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> K </i>
+                                <span class="item-name">Kreditur</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="{{ route('supplier') }}">
+                                <i class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                                        <g>
+                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                                        </g>
+                                    </svg>
+                                </i>
+                                <i class="sidenav-mini-icon"> S </i>
+                                <span class="item-name">Supplier</span>
                             </a>
                         </li>
                         <li class="nav-item">

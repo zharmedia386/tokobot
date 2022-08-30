@@ -94,14 +94,23 @@ Route::get('/app/kewajiban/kewajiban_detail/{user_id}', 'App\Http\Controllers\Re
 // MODAL
 Route::get('/app/modal', 'App\Http\Controllers\ReportController@modal')->name('modal');
 Route::get('/app/tambah_modal', 'App\Http\Controllers\ReportController@tambah_modal')->name('tambah_modal');
+Route::post('/app/modal/modal_form', 'App\Http\Controllers\ReportController@modal_form_post')->name('modal_form_post');
+Route::get('/app/modal/modal_detail/{modal_id}', 'App\Http\Controllers\ReportController@modal_detail')->name('modal_detail');
+
 
 // BEBAN USAHA
 Route::get('/app/beban_usaha', 'App\Http\Controllers\ReportController@beban_usaha')->name('beban_usaha');
 Route::get('/app/tambah_beban_usaha', 'App\Http\Controllers\ReportController@tambah_beban_usaha')->name('tambah_beban_usaha');
+Route::post('/app/beban_usaha/beban_usaha_form', 'App\Http\Controllers\ReportController@beban_usaha_form_post')->name('beban_usaha_form_post');
+Route::get('/app/beban_usaha/beban_usaha_detail/{beban_usaha_id}', 'App\Http\Controllers\ReportController@beban_usaha_detail')->name('beban_usaha_detail');
 
 // BUKU KAS
-Route::get('/app/buku_kas', 'App\Http\Controllers\ReportController@buku_kas')->name('buku_kas');
-Route::get('/app/tambah_kas', 'App\Http\Controllers\ReportController@tambah_kas')->name('tambah_kas');
+Route::get('/app/buku_kas', 'App\Http\Controllers\BukuKasController@buku_kas')->name('buku_kas');
+Route::get('/app/tambah_kas_pemasukkan', 'App\Http\Controllers\BukuKasController@tambah_kas_pemasukkan')->name('tambah_kas_pemasukkan');
+Route::post('/app/tambah_kas_pemasukkan', 'App\Http\Controllers\BukuKasController@tambah_kas_pemasukkan_post')->name('tambah_kas_pemasukkan_post');
+Route::get('/app/tambah_kas_pengeluaran', 'App\Http\Controllers\BukuKasController@tambah_kas_pengeluaran')->name('tambah_kas_pengeluaran');
+Route::post('/app/tambah_kas_pengeluaran', 'App\Http\Controllers\BukuKasController@tambah_kas_pengeluaran_post')->name('tambah_kas_pengeluaran_post');
+Route::get('/app/buku_kas_detail/{kas_id}', 'App\Http\Controllers\BukuKasController@buku_kas_detail')->name('buku_kas_detail');
 
 // ASSET TETAP
 Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_tetap')->name('asset_tetap');
@@ -112,3 +121,12 @@ Route::get('/app/stok_barang/stok_barang_form', 'App\Http\Controllers\ReportCont
 Route::post('/app/stok_barang/stok_barang_form_post', 'App\Http\Controllers\ReportController@stok_barang_form_post')->name('stok_barang_form_post');
 Route::get('/app/stok_barang/stok_barang_detail/{user_id}', 'App\Http\Controllers\ReportController@stok_barang_detail')->name('stok_barang_detail');
 
+// KREDITUR
+Route::get('/app/kreditur', 'App\Http\Controllers\KrediturSupplierController@kreditur')->name('kreditur');
+Route::get('/app/tambah_kreditur', 'App\Http\Controllers\KrediturSupplierController@tambah_kreditur')->name('tambah_kreditur');
+Route::post('/app/tambah_kreditur', 'App\Http\Controllers\KrediturSupplierController@tambah_kreditur_post')->name('tambah_kreditur_post');
+
+// SUPPLIER
+Route::get('/app/supplier', 'App\Http\Controllers\KrediturSupplierController@supplier')->name('supplier');
+Route::get('/app/tambah_supplier', 'App\Http\Controllers\KrediturSupplierController@tambah_supplier')->name('tambah_supplier');
+Route::post('/app/tambah_supplier', 'App\Http\Controllers\KrediturSupplierController@tambah_supplier_post')->name('tambah_supplier_post');

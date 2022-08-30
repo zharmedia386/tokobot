@@ -28,25 +28,31 @@
                 <input type="hidden" value="tunai" name="metodePembayaran" />
             </div>
             <div class="form-group">
-                <label class="form-label">Umur Piutang</label>
-                <select class="form-select mb-3 shadow-none" name="umurPiutang">
-                    <option name="umurPiutang" value="15" selected="">Pilih Umur Piutang</option>
-                    <option name="umurPiutang" value="15">15 hari</option>
-                    <option name="umurPiutang" value="30">30 hari</option>
-                    <option name="umurPiutang" value="60">60 hari</option>
-                    <option name="umurPiutang" value="90">90 hari</option>
+                <label class="form-label">Nama Kreditur</label>
+                <select class="form-select mb-3 shadow-none" name="namaKreditur">
+                    @foreach($kreditur as $data)
+                        @if($user_id == $data->user_id)
+                            <option name="namaKreditur" value="{{ $data->nama_kreditur }}" selected=""> {{ $data->nama_kreditur }} </option>
+                        @endif
+                    @endforeach
                 </select>
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputdate">Batas Pembayaran Utang</label>
-                <input type="date" class="form-control" id="exampleInputdate" name="batasPembayaranUtang"/>
+                <label class="form-label">Umur Utang</label>
+                <select class="form-select mb-3 shadow-none" name="umurUtang">
+                    <option name="umurUtang" value="15" selected="">Pilih Umur Utang</option>
+                    <option name="umurUtang" value="15">15 hari</option>
+                    <option name="umurUtang" value="30">30 hari</option>
+                    <option name="umurUtang" value="60">60 hari</option>
+                    <option name="umurUtang" value="90">90 hari</option>
+                </select>
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Denda Keterlambatan</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="dendaKeterlambatan" placeholder="Masukkan Denda Keterlambatan.." />
+                <input type="text" class="form-control" id="rupiah" name="dendaKeterlambatan" placeholder="Masukkan Denda Keterlambatan.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Diskon Penjualan</label>
+                <label class="form-label" for="exampleInputText1">Diskon Penjualan (%)</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="diskonPenjualan" placeholder="Masukkan Diskon Penjualan.." />
             </div>
             <div class="form-group">
@@ -54,7 +60,7 @@
                 <input type="text" class="form-control" id="exampleInputText1" name="produkYangTerjual" placeholder="Masukkan Produk yang terjual.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Pajak</label>
+                <label class="form-label" for="exampleInputText1">Pajak (%)</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="pajak" placeholder="Masukkan Pajak.." />
             </div>
             <div class="form-group">
@@ -62,8 +68,8 @@
                 <input type="text" class="form-control" id="exampleInputText1" name="jumlahBarang" placeholder="Masukkan Jumlah Barang.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Total Penjualan</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="totalPenjualan" placeholder="Masukkan Total Penjualan.." />
+                <label class="form-label" for="exampleInputText1">Harga Satuan</label>
+                <input type="text" class="form-control" id="rupiah_2" name="hargaSatuan" placeholder="Masukkan Harga Satuan.." />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
@@ -71,5 +77,8 @@
     </div>
 </div>
 
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 @endsection

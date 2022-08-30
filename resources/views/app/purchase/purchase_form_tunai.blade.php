@@ -28,7 +28,7 @@
                 <input type="hidden" value="tunai" name="metodePembayaran" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Diskon Pembelian</label>
+                <label class="form-label" for="exampleInputText1">Diskon Pembelian (%)</label>
                 <input type="text" class="form-control" name="diskonPembelian" id="exampleInputText1" placeholder="Masukkan Diskon Pembelian.." />
             </div>
             <div class="form-group">
@@ -36,7 +36,7 @@
                 <input type="text" class="form-control" name="produkYangDibeli" id="exampleInputText1" placeholder="Masukkan Produk yang dibeli.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Pajak</label>
+                <label class="form-label" for="exampleInputText1">Pajak (%)</label>
                 <input type="text" class="form-control" name="pajak" id="exampleInputText1" placeholder="Masukkan Pajak.." />
             </div>
             <div class="form-group">
@@ -44,8 +44,8 @@
                 <input type="text" class="form-control" name="jumlahBarang" id="exampleInputText1" placeholder="Masukkan Jumlah Barang.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Total Pembelian</label>
-                <input type="text" class="form-control" name="totalPembelian" id="exampleInputText1" placeholder="Masukkan Total Pembelian.." />
+                <label class="form-label" for="exampleInputText1">Harga satuan</label>
+                <input type="text" class="form-control" name="hargaSatuan" id="rupiah" placeholder="Masukkan Harga Satuan.." />
             </div>
             <button type="submit" class="btn btn-primary rounded">Submit</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
@@ -53,5 +53,8 @@
     </div>
 </div>
 
+@push('child-js')
+    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+@endpush
 
 @endsection

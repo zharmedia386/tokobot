@@ -31,7 +31,10 @@ class BukuUtangController extends Controller
     {
         if (session()->has('hasLogin')) {
             $nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
-            return view('app/buku_utang/buku_utang_form_utang', compact('nomor_utang'));
+            $supplier = DB::table('supplier')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/buku_utang/buku_utang_form_utang', compact('nomor_utang', 'user_id', 'supplier'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -47,6 +50,7 @@ class BukuUtangController extends Controller
         $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
         $buku_utang_form_utang->tanggal = $request->tanggal;
         $buku_utang_form_utang->nama = $request->nama;
+        $buku_utang_form_utang->nama_supplier = $request->namaSupplier;
 
         // HARGA SATUAN
         $buku_utang_form_utang->jumlah_utang = $request->jumlahUtang;
@@ -79,6 +83,7 @@ class BukuUtangController extends Controller
         $buku_utang_form_piutang->nomor_piutang = DB::selectOne("select getNewId('buku_utang_form_piutang') as value from dual")->value;
         $buku_utang_form_piutang->tanggal = $request->tanggal;
         $buku_utang_form_piutang->nama = $request->nama;
+        $buku_utang_form_piutang->nama_kreditur = $request->namaKreditur;
 
         // HARGA SATUAN
         $buku_utang_form_piutang->jumlah_piutang = $request->jumlahPiutang;
@@ -95,7 +100,10 @@ class BukuUtangController extends Controller
     {
         if (session()->has('hasLogin')) {
             $nomor_piutang = DB::selectOne("select getNewId('buku_utang_form_piutang') as value from dual")->value;
-            return view('app/buku_utang/buku_utang_form_piutang', compact('nomor_piutang'));
+            $kreditur = DB::table('kreditur')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/buku_utang/buku_utang_form_piutang', compact('nomor_piutang', 'user_id', 'kreditur'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

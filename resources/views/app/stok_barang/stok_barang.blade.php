@@ -8,6 +8,11 @@
             <div class="card-header d-flex justify-content-between pb-0 border-0">
                 <div class="header-title">
                     <h4 class="card-title">Stok Barang</h4>
+                </div>
+                <div class="button">
+                    <a class="btn btn-outline-primary rounded" href="{{ route('stok_barang_form') }}">
+                        + Tambah Stok Barang
+                    </a>
                 </div> 
             </div>
             <!--<div class="card-body">
@@ -35,29 +40,31 @@
                                 <th>Nomor </th>
                                 <th>Nama Barang</th>
                                 <th>Harga Per Unit</th>
-                                <th>Jumlah Total</th>
+                                <th>Jumlah Stok</th>
                                 <th>Total</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Ketas</td>
-                                <td>55</td>
-                                <td>6</td>
-                                <td>50</td>
-                                <!--<td><button type="button" class="btn btn-outline-warning mt-2">Detail</button> </td>
-                                <td><button type="button" class="btn btn-warning">Detail</button> </td>-->
-                                <td><button type="button" class="btn btn-outline-warning rounded-pill mt-2">Detail</button></td>
-                            </tr>
+                            @foreach($stok_barang as $data)
+                                @if($user_id == $data->user_id)
+                                    <tr>
+                                        <td>{{ $data->nomor_barang }}</td>
+                                        <td>{{ $data->nama_barang }}</td>
+                                        <td>{{ $data->harga_barang }}</td>
+                                        <td>{{ $data->stok_barang }}</td>
+                                        <td>50</td>
+                                        <td><a href="{{ route('stok_barang_detail', $data->nomor_barang) }}" class="btn btn-warning">Detail</a></td>
+                                    </tr>
+                                @endif
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>Nomor </th>
                                 <th>Nama Barang</th>
                                 <th>Harga Per Unit</th>
-                                <th>Jumlah Total</th>
+                                <th>Jumlah Stok</th>
                                 <th>Total</th>
                                 <th>Detail</th>
                             </tr>

@@ -116,7 +116,10 @@ Route::get('/app/buku_kas_detail/{kas_id}', 'App\Http\Controllers\BukuKasControl
 Route::get('/app/asset_tetap', 'App\Http\Controllers\ReportController@asset_tetap')->name('asset_tetap');
 
 // STOK BARANG
-Route::get('/app/stok_baarang', 'App\Http\Controllers\ReportController@stok_barang')->name('stok_barang');
+Route::get('/app/stok_barang', 'App\Http\Controllers\ReportController@stok_barang')->name('stok_barang');
+Route::get('/app/stok_barang/stok_barang_form', 'App\Http\Controllers\ReportController@stok_barang_form')->name('stok_barang_form');
+Route::post('/app/stok_barang/stok_barang_form_post', 'App\Http\Controllers\ReportController@stok_barang_form_post')->name('stok_barang_form_post');
+Route::get('/app/stok_barang/stok_barang_detail/{user_id}', 'App\Http\Controllers\ReportController@stok_barang_detail')->name('stok_barang_detail');
 
 // KREDITUR
 Route::get('/app/kreditur', 'App\Http\Controllers\KrediturSupplierController@kreditur')->name('kreditur');

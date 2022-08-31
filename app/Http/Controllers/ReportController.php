@@ -271,8 +271,37 @@ class ReportController extends Controller
     public function stok_barang()
     {
         if (session()->has('hasLogin')) {
-            return view('app/stok_barang/stok_barang');
+            $stok_barang = DB::table('stok_barang')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/stok_barang/stok_barang', compact('stok_barang', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function stok_barang_form()
+    {
+        if (session()->has('hasLogin')) {
+            $nomor_barang = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
+            return view('app/stok_barang/stok_barang_form', compact('nomor_barang'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function stok_barang_form_post(Request $request)
+    {
+        // $test = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
+        // dd($test);
+
+        $stok_barang = new stok_barang();
+        $stok_barang->user_id = session()->get('user_id');
+        $stok_barang->nomor_barang = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
+        $stok_barang->nama_barang = $request->namaBarang;
+        $stok_barang->harga_barang = $request->hargaBarang;
+        $stok_barang->stok_barang = $request->stokBarang;
+
+        $stok_barang->save();
+
+        return redirect()->route('stok_barang')->with('successAddstok_barang', 'Pemasukan Stok Barang Sukses!');
     }
 }

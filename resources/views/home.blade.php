@@ -196,7 +196,7 @@
                         <path d="M9.4659 11.102H9.42013" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </div>
-                <span>Posisi Keuangan</span>
+                <span>Posisi Keuangan (Neraca)</span>
             </a>
         </li>
         <li id="hoverable" class="col-lg-3 col-md-6 mb-2 text-start">
@@ -214,7 +214,7 @@
                         ></path>
                     </svg>
                 </div>
-                <span>Arus Kas Bulan</span>
+                <span>Arus Kas Bulan (Cash Flow)</span>
             </a>
         </li>
         <li id="hoverable" class="col-lg-3 col-md-6 mb-2 text-start">
@@ -341,7 +341,7 @@
                     ></path>
                 </svg>
                 </div>
-                <span>Buku Utang</span>
+                <span>Buku Utang dan Piutang</span>
             </a>
         </li>
     </ul> 

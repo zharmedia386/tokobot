@@ -54,7 +54,8 @@
                                     <tr>
                                         <th>Nomor Utang</th>
                                         <th>Tanggal</th>
-                                        <th>Nama</th>
+                                        <th>Nama Utang</th>
+                                        <th>Nama Supplier</th>
                                         <th>Jumlah Utang</th>
                                         <th>Detail</th>
                                     </tr>
@@ -69,6 +70,7 @@
                                                 <td>{{ $data->nomor_utang }}</td>
                                                 <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
                                                 <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->nama_supplier }}</td>
                                                 <td class="text-end">@currency($data->jumlah_utang)</td>
                                                 <td><a href="{{ route('buku_utang_utang_detail', $data->nomor_utang) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
@@ -127,7 +129,8 @@
                                     <tr>
                                         <th>Nomor Piutang</th>
                                         <th>Tanggal</th>
-                                        <th>Nama</th>
+                                        <th>Nama Piutang</th>
+                                        <th>Nama Kreditur</th>
                                         <th>Jumlah Piutang</th>
                                         <th>Detail</th>
                                     </tr>
@@ -142,6 +145,7 @@
                                                 <td>{{ $data->nomor_piutang }}</td>
                                                 <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
                                                 <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->nama_kreditur }}</td>
                                                 <td class="text-end">@currency($data->jumlah_piutang)</td>
                                                 <td><a href="{{ route('buku_utang_piutang_detail', $data->nomor_piutang) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>

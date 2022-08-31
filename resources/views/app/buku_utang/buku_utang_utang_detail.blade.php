@@ -19,7 +19,7 @@
                 <input type="date" class="form-control" name="tanggal" id="exampleInputdate" disabled value="{{ $buku_utang_form_utang[0]->tanggal }}"/>
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Nama</label>
+                <label class="form-label" for="exampleInputText1">Nama Utang</label>
                 <input type="text" class="form-control" name="nama" id="exampleInputText1" disabled value="{{ $buku_utang_form_utang[0]->nama }}" />
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Jumlah Utang</label>

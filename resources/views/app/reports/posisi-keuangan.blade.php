@@ -33,22 +33,14 @@
                                     <td>@currency(20000)</td>
                                 </tr>
                             </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Beban</p> --}}
-                    <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped" {{--role="grid" data-toggle="data-table"--}}>
-                            <thead>
+                            <tfoot>
                                 <tr>
                                     <th>Total Aset</th>
                                     <td>@currency(10000)</td>
                                 </tr>
-                            </thead>
                         </table>
                     </div>
-                </div> 
+                </div>
                 <!-- END ASET -->
 
                 <!-- START UTANG -->
@@ -73,24 +65,16 @@
                                     <td>@currency(20000)</td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                <th>Total Utang dan Modal</th>
+                                <td>@currency(10000)</td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
                 <!-- END UTANG -->
-                
-                <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Beban</p> --}}
-                    <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped" {{--role="grid" data-toggle="data-table"--}}>
-                            <thead>
-                                <tr>
-                                    <th>Total Utang dan Modal</th>
-                                    <td>@currency(10000)</td>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div> 
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@
                 <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Beban Usaha)</label>
                 <input type="text" class="form-control" name="hargaBebanUsaha" id="rupiah" disabled value="{{ $beban_usaha[0]->harga_beban_usaha }}" />
             </div>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Cancel</a>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
             
         </form>
     </div>

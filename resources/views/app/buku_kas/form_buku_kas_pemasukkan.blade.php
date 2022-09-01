@@ -37,8 +37,8 @@
                 <label class="form-label" for="exampleInputText1">Harga Pemasukkan</label>
                 <input type="text" class="form-control" name="hargaPemasukkan" id="rupiah" placeholder="Masukkan nominal pemasukkan anda" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
+            <button type="submit" class="btn btn-primary rounded">Tambah</button>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
         </form>
     </div>
 </div>

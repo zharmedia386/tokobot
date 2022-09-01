@@ -23,8 +23,8 @@
                 <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Beban Usaha)</label>
                 <input type="text" class="form-control" name="hargaBebanUsaha" id="rupiah" placeholder="Masukkan nominal harga beban usaha anda" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Cancel</a>
+            <button type="submit" class="btn btn-primary rounded">Tambah</button>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>
             
         </form>
     </div>

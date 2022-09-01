@@ -71,8 +71,8 @@
                 <label class="form-label" for="exampleInputText1">Harga Satuan</label>
                 <input type="text" class="form-control" id="rupiah_2" name="hargaSatuan" placeholder="Masukkan Harga Satuan.." />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
+            <button type="submit" class="btn btn-primary rounded">Tambah</button>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>
         </form>
     </div>
 </div>

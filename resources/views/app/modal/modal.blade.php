@@ -46,7 +46,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">Total Asset: @currency($totalModal)</th>
+                                <th colspan="4">Total Aset: @currency($totalModal)</th>
                             </tr>
                         </tfoot>
                     </table>

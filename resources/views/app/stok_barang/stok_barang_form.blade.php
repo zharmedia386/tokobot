@@ -27,8 +27,8 @@
                 <label class="form-label" for="exampleInputdate">Jumlah Stok</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="stokBarang" placeholder="Masukkan jumlah stok anda" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
+            <button type="submit" class="btn btn-primary rounded">Tambah</button>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>
         </form>
     </div>
 </div>

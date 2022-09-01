@@ -26,7 +26,7 @@
                 <input type="text" class="form-control" id="exampleInputText1" name="jumlahUtang" disabled value="{{ $buku_utang_form_utang[0]->jumlah_utang }}" />
             </div>
             </div>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
         </form>
     </div>
 </div>

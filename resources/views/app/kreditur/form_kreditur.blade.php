@@ -23,8 +23,8 @@
                 <label class="form-label" for="exampleInputText1">Alamat</label>
                 <input type="text" class="form-control" name="alamat" id="exampleInputText1" placeholder="Masukkan alamat kreditur" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Cancel</a>
+            <button type="submit" class="btn btn-primary rounded">Tambah</button>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>
             
         </form>
     </div>

@@ -7,11 +7,11 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between pb-0 border-0">
                 <div class="header-title">
-                    <h4 class="card-title">Asset</h4>
+                    <h4 class="card-title">Aset</h4>
                 </div> 
                 <div class="button">
                     <a class="btn btn-outline-primary rounded" href="{{ route('asset_form') }}">
-                        + Tambah Asset
+                        + Tambah Aset
                     </a>
                 </div>
             </div>
@@ -21,10 +21,10 @@
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
                         <thead class="text-center">
                             <tr>
-                                <th>Nomor Asset</th>
-                                <th>Jenis Asset</th>
-                                <th>Nama Asset</th>
-                                <th>Harga Asset</th>
+                                <th>Nomor Aset</th>
+                                <th>Jenis Aset</th>
+                                <th>Nama Aset</th>
+                                <th>Harga Aset</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
@@ -49,7 +49,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th colspan="4">Total Asset: @currency($totalAsset)</th>
+                                <th colspan="4">Total Aset: @currency($totalAsset)</th>
                             </tr>
                         </tfoot>
                     </table>

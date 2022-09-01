@@ -31,8 +31,8 @@
                 <label class="form-label" for="exampleInputdate">Nominal</label>
                 <input type="text" class="form-control" id="rupiah" name="nominal" placeholder="Masukkan nominal kewajiban(utang) anda" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Submit</button>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
+            <button type="submit" class="btn btn-primary rounded">Tambah</button>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>
         </form>
     </div>
 </div>

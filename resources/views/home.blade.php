@@ -114,7 +114,7 @@
                         ></path>
                     </svg>
                 </div>
-                <span>Asset</span>
+                <span>Aset</span>
             </a>
         </li>
         <li id="hoverable" class="col-lg-3 col-md-6 mb-2 text-start">

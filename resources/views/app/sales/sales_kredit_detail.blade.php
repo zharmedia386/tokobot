@@ -64,7 +64,7 @@
                 <label class="form-label" for="exampleInputText1">Harga Satuan</label>
                 <input type="text" class="form-control" name="hargaSatuan" id="exampleInputText1" disabled value="{{ $sales_form_kredit[0]->harga_satuan }}" />
             </div>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">cancel</a>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
         </form>
     </div>
 </div>

@@ -22,7 +22,7 @@
                 <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Modal)</label>
                 <input type="text" class="form-control" id="exampleInputText1" disabled value="{{ $modal[0]->harga_modal }}" />
             </div>
-            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Cancel</a>
+            <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
             
         </form>
     </div>

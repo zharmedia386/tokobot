@@ -738,7 +738,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> SBD </i>
-                                <span class="item-name">Stok Barang Dagang</span>
+                                <span class="item-name">Stok Barang <br>Dagang</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -791,19 +791,6 @@
                                 </i>
                                 <i class="sidenav-mini-icon"> AT </i>
                                 <span class="item-name">Aset Tetap</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('stok_barang') }}">
-                                <i class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                                        <g>
-                                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                </i>
-                                <i class="sidenav-mini-icon"> SB </i>
-                                <span class="item-name">Stok Barang</span>
                             </a>
                         </li>
                         <li class="nav-item">

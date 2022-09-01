@@ -13,9 +13,8 @@
                 </div>
                 <!-- START PENDAPATAN -->
                 <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Pendapatan</p> --}}
                     <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped" {{--role="grid" data-toggle="data-table"--}}>
+                        <table id="user-list-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th colspan="2">Pendapatan</th>
@@ -43,9 +42,8 @@
 
                 <!-- START BEBAN -->
                 <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Beban</p> --}}
                     <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped" {{--role="grid" data-toggle="data-table"--}}>
+                        <table id="user-list-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <th colspan="2">Beban</th>
@@ -63,26 +61,32 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspans="2">Saldo : @currency(20000)</th>
+                                    <th>Saldo : @currency(20000)</th>
                                 </tr>
                             </tfoot> 
                         </table>
                     </div>
                 </div>
                 <!-- END BEBAN -->
-                <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Beban</p> --}}
+                
+                 <!-- START LABA BERSIH -->
+                 <div class="card-body px-0">
                     <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped" {{--role="grid" data-toggle="data-table"--}}>
+                        <table id="user-list-table" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="row">Laba Bersih</th>
-                                    <th>@currency(10000)</th>
+                                    <th colspan="2">Laba Bersih</th>
                                 </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th colspans="2">Saldo : @currency(20000)</th>
+                                </tr>
+                            </tfoot> 
                         </table>
                     </div>
-                </div>        
+                </div>
+                <!-- END LABA BERSIH -->       
             </div>
         </div>
     </div>

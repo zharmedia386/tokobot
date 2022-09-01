@@ -13,9 +13,8 @@
                 </div>
                 <!-- START ASET -->
                 <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Aset</p> --}}
                     <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped" {{--data-toggle="data-table"--}}>
+                        <table id="user-list-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <tr>
@@ -45,9 +44,8 @@
 
                 <!-- START UTANG -->
                 <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Aset</p> --}}
                     <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped" {{--data-toggle="data-table"--}}>
+                        <table id="user-list-table" class="table table-striped">
                             <thead>
                                 <tr>
                                     <tr>
@@ -67,8 +65,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                <th>Total Utang dan Modal</th>
-                                <td>@currency(10000)</td>
+                                    <th>Total Utang dan Modal</th>
+                                    <td>@currency(10000)</td>
                                 </tr>
                             </tfoot>
                         </table>

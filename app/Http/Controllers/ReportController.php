@@ -313,4 +313,23 @@ class ReportController extends Controller
 
         return redirect()->route('stok_barang')->with('successAddstok_barang', 'Pemasukan Stok Barang Sukses!');
     }
+
+
+    // STOK VERSI 2
+    public function stok_barang_dagang()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/stok/stok');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_stok()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/stok/tambah_stok');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
 }

@@ -53,7 +53,10 @@ class PurchaseSalesController extends Controller
         $purchase_form_tunai->diskon_pembelian = $request->diskonPembelian;
         $purchase_form_tunai->produk_yang_dibeli = $request->produkYangDibeli;
         $purchase_form_tunai->pajak = $request->pajak;
-        $purchase_form_tunai->jumlah_barang = $request->jumlahBarang;
+
+            // JUMLAH BARANG
+        $satuanBarang = $request->satuanBarang;
+        $purchase_form_tunai->jumlah_barang = $satuanBarang * $request->jumlahBarang;
 
             // HARGA SATUAN
         $purchase_form_tunai->harga_satuan = $request->hargaSatuan;
@@ -102,8 +105,11 @@ class PurchaseSalesController extends Controller
         $purchase_form_kredit->diskon_pembelian = $request->diskonPembelian;
         $purchase_form_kredit->produk_yang_dibeli = $request->produkYangDibeli;
         $purchase_form_kredit->pajak = $request->pajak;
-        $purchase_form_kredit->jumlah_barang = $request->jumlahBarang;
         $purchase_form_kredit->nama_supplier = $request->namaSupplier;
+
+            // JUMLAH BARANG
+        $satuanBarang = $request->satuanBarang;
+        $purchase_form_kredit->jumlah_barang = $satuanBarang * $request->jumlahBarang;
 
             // DENDA KETERLAMBATAN
         $purchase_form_kredit->denda_keterlambatan = $request->dendaKeterlambatan;
@@ -186,9 +192,12 @@ class PurchaseSalesController extends Controller
         $sales_form_tunai->diskon_penjualan = $request->diskonPenjualan;
         $sales_form_tunai->produk_yang_terjual = $request->produkYangTerjual;
         $sales_form_tunai->pajak = $request->pajak;
-        $sales_form_tunai->jumlah_barang = $request->jumlahBarang;
+
+            // JUMLAH BARANG
+        $satuanBarang = $request->satuanBarang;
+        $sales_form_tunai->jumlah_barang = $satuanBarang * $request->jumlahBarang;
         
-        // HARGA SATUAN
+            // HARGA SATUAN
         $sales_form_tunai->harga_satuan = $request->hargaSatuan;
         $sales_form_tunai->harga_satuan = Str::replace('.','',$sales_form_tunai->harga_satuan);
         $sales_form_tunai->harga_satuan = Str::replace('Rp ','',$sales_form_tunai->harga_satuan);
@@ -248,7 +257,10 @@ class PurchaseSalesController extends Controller
         $sales_form_kredit->produk_yang_terjual = $request->produkYangTerjual;
         $sales_form_kredit->nama_kreditur = $request->namaKreditur;
         $sales_form_kredit->pajak = $request->pajak;
-        $sales_form_kredit->jumlah_barang = $request->jumlahBarang;
+
+            // JUMLAH BARANG
+        $satuanBarang = $request->satuanBarang;
+        $sales_form_kredit->jumlah_barang = $satuanBarang * $request->jumlahBarang;
 
         // HARGA TOTAL
         $persentaseDiskon = $request->diskonPenjualan / 100 * ($request->jumlahBarang * $sales_form_kredit->harga_satuan);

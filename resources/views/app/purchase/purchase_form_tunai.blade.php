@@ -44,6 +44,17 @@
                 <input type="text" class="form-control" name="jumlahBarang" id="exampleInputText1" placeholder="Masukkan Jumlah Barang.." />
             </div>
             <div class="form-group">
+                <label class="form-label">Satuan Barang</label>
+                <select class="form-select mb-3 shadow-none" name="satuanBarang">
+                    <option name="satuanBarang" value="1" selected="">Pilih Satuan Barang</option>
+                    <option name="satuanBarang" value="1">Pcs</option>
+                    <option name="satuanBarang" value="12">Lusin</option>
+                    <option name="satuanBarang" value="144">Gross</option>
+                    <option name="satuanBarang" value="20">Kodi</option>
+                    <option name="satuanBarang" value="500">RIm</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Harga satuan</label>
                 <input type="text" class="form-control" name="hargaSatuan" id="rupiah" placeholder="Masukkan Harga Satuan.." />
             </div>

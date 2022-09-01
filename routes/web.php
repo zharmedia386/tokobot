@@ -132,3 +132,7 @@ Route::post('/app/tambah_kreditur', 'App\Http\Controllers\KrediturSupplierContro
 Route::get('/app/supplier', 'App\Http\Controllers\KrediturSupplierController@supplier')->name('supplier');
 Route::get('/app/tambah_supplier', 'App\Http\Controllers\KrediturSupplierController@tambah_supplier')->name('tambah_supplier');
 Route::post('/app/tambah_supplier', 'App\Http\Controllers\KrediturSupplierController@tambah_supplier_post')->name('tambah_supplier_post');
+
+// STOK V2
+Route::get('/app/stok_barang_dagang', 'App\Http\Controllers\ReportController@stok_barang_dagang')->name('stok_barang_dagang');
+Route::get('/app/tambah_stok_barang_dagang', 'App\Http\Controllers\ReportController@tambah_stok')->name('tambah_stok');

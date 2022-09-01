@@ -76,7 +76,7 @@
                         <table id="user-list-table" class="table table-striped" {{--role="grid" data-toggle="data-table"--}}>
                             <thead>
                                 <tr>
-                                    <th>Laba Bersih</th>
+                                    <th scope="row">Laba Bersih</th>
                                     <th>@currency(10000)</th>
                                 </tr>
                             </thead>

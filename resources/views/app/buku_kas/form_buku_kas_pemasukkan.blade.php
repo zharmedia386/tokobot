@@ -23,7 +23,6 @@
                 <label class="form-label">Kategori Pemasukkan</label>
                 <select class="form-select mb-3 shadow-none" name="pemasukkan">
                     <option name="pemasukkan" value="Penjualan" selected="">Pilih Kategori Pemasukkan</option>
-                    <option name="pemasukkan" value="Penjualan">Penjualan</option>
                     <option name="pemasukkan" value="Penambahan modal">Penambahan modal </option>
                     <option name="pemasukkan" value="Pendapatan di luar usaha">Pendapatan di luar usaha</option>
                     <option name="pemasukkan" value="Pendapatan lain-lain">Pendapatan lain-lain</option>

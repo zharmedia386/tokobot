@@ -85,6 +85,8 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4">Total Penjualan: @currency($totalPenjualan)</th>
+                                        <tr>
+                                        <th colspans="4">Saldo : @currency($totalPenjualan)</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -164,6 +166,8 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4">Total Penjualan: @currency($totalPenjualanKredit)</th>
+                                        <tr>
+                                        <th colspans="4">Saldo : @currency($totalPenjualanKredit)</th>
                                     </tr>
                                 </tfoot>
                             </table>

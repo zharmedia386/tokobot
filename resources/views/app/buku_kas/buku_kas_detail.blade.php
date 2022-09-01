@@ -50,7 +50,6 @@
                 <label class="form-label" for="exampleInputdate">Harga Pengeluaran</label>
                 <input type="text" class="form-control" name="hargaPengeluaran"id="exampleInputText1" disabled value="{{ $buku_kas[0]->harga_pengeluaran }}" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Tambah</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
         </form>
     </div>

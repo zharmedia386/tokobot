@@ -50,6 +50,8 @@
                         <tfoot>
                             <tr>
                                 <th colspan="4">Total Aset: @currency($totalAsset)</th>
+                                <tr>
+                                <th colspans="4">Saldo : @currency($totalAsset)</th>
                             </tr>
                         </tfoot>
                     </table>

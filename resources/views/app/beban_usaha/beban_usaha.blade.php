@@ -47,6 +47,8 @@
                         <tfoot>
                             <tr>
                                 <th colspan="4">Total Beban Usaha: @currency($totalBebanUsaha)</th>
+                                <tr>
+                                <th colspans="4">Saldo : @currency($totalBebanUsaha)</th>
                             </tr>
                         </tfoot>
                     </table>

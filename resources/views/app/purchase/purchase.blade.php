@@ -85,6 +85,8 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4">Total Pembelian: @currency($totalPembelianTunai)</th>
+                                        <tr>
+                                        <th colspans="4">Saldo : @currency($totalPembelianTunai)</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -164,6 +166,8 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4">Total Pembelian: @currency($totalPembelianKredit)</th>
+                                        <tr>
+                                        <th colspans="4">Saldo : @currency($totalPembelianKredit)</th>
                                     </tr>
                                 </tfoot>
                             </table>

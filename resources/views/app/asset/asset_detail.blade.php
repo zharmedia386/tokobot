@@ -38,7 +38,6 @@
                 <label class="form-label" for="exampleInputdate">Masa Penggunaan</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="masaPenggunaan" disabled value="{{ $asset[0]->masa_penggunaan }}" />
             </div>
-            <button type="submit" class="btn btn-primary rounded">Tambah</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
         </form>
     </div>

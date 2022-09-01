@@ -660,7 +660,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> A </i>
-                                <span class="item-name">Asset</span>
+                                <span class="item-name">Aset</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -777,7 +777,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> AT </i>
-                                <span class="item-name">Asset Tetap</span>
+                                <span class="item-name">Aset Tetap</span>
                             </a>
                         </li>
                         <li class="nav-item">

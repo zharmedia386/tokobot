@@ -24,7 +24,6 @@
                 <select class="form-select mb-3 shadow-none" name="pengeluaran">
                     <option name="pengeluaran" value="Pengeluaran di luar usaha" selected="">Pilih Kategori Pengeluaran</option>
                     <option name="pengeluaran" value="Pengeluaran di luar usaha">Pengeluaran di luar usaha</option>
-                    <option name="pengeluaran" value="Pembelian bahan baku">Pembelian bahan baku</option>
                     <option name="pengeluaran" value="Biaya operasional">Biaya operasional</option>
                     <option name="pengeluaran" value="Gaji/bonus karyawan">Gaji/bonus karyawan</option>
                     <option name="pengeluaran" value="Pemberian utang">Pemberian utang</option>

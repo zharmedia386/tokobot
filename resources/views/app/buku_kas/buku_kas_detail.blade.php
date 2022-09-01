@@ -18,7 +18,6 @@
                 <label class="form-label">Kategori Pemasukkan</label>
                 <select class="form-select mb-3 shadow-none" name="pemasukkan" disabled>
                     <option name="pemasukkan" value="Penjualan" selected="">{{ $buku_kas[0]->nama_pemasukkan }}</option>
-                    <option name="pemasukkan" value="Penjualan">Penjualan</option>
                     <option name="pemasukkan" value="Penambahan modal">Penambahan modal </option>
                     <option name="pemasukkan" value="Pendapatan di luar usaha">Pendapatan di luar usaha</option>
                     <option name="pemasukkan" value="Pendapatan lain-lain">Pendapatan lain-lain</option>
@@ -37,7 +36,6 @@
                 <select class="form-select mb-3 shadow-none" name="pengeluaran" disabled>
                     <option name="pengeluaran" value="Pengeluaran di luar usaha" selected="">{{ $buku_kas[0]->nama_pengeluaran }}</option>
                     <option name="pengeluaran" value="Pengeluaran di luar usaha">Pengeluaran di luar usaha</option>
-                    <option name="pengeluaran" value="Pembelian bahan baku">Pembelian bahan baku</option>
                     <option name="pengeluaran" value="Biaya operasional">Biaya operasional</option>
                     <option name="pengeluaran" value="Gaji/bonus karyawan">Gaji/bonus karyawan</option>
                     <option name="pengeluaran" value="Pemberian utang">Pemberian utang</option>

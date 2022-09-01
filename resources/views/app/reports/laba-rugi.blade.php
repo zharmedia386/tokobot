@@ -24,16 +24,16 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">Pendapatan 1</th>
-                                    <td>10000</td>
+                                    <td>@currency(10000)</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Pendapatan 2</td>
-                                    <td>20000</td>
+                                    <td>@currency(20000)</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="2">Total Pendapatan: 30000</th>
+                                    <th colspans="2">Saldo : @currency(30000)</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -54,16 +54,16 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">Beban 1</th>
-                                    <td>5000</td>
+                                    <td>@currency(5000)</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Beban 2</td>
-                                    <td>15000</td>
+                                    <td>@currency(15000)</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="2">Total Beban: 20000</th>
+                                    <th colspans="2">Saldo : @currency(20000)</th>
                                 </tr>
                             </tfoot> 
                         </table>
@@ -77,7 +77,7 @@
                             <thead>
                                 <tr>
                                     <th>Laba Bersih</th>
-                                    <th>10000</th>
+                                    <th>@currency(10000)</th>
                                 </tr>
                             </thead>
                         </table>

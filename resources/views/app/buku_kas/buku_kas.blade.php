@@ -72,6 +72,8 @@
                                 <th colspan="4">
                                     Total Pemasukkan: @currency($totalPemasukkan) <br>
                                     Total Pengeluaran: @currency($totalPengeluaran) <br>
+                                    <tr>
+                                    <th colspans="4">Saldo : @currency($totalPemasukkan-$totalPengeluaran)</th>
                                 </th>
                             </tr>
                         </tfoot>

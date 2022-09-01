@@ -47,6 +47,8 @@
                         <tfoot>
                             <tr>
                                 <th colspan="4">Total Modal: @currency($totalModal)</th>
+                                <tr>
+                                <th colspans="4">Saldo : @currency($totalModal)</th>
                             </tr>
                         </tfoot>
                     </table>

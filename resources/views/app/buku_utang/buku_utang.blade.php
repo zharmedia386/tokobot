@@ -83,6 +83,8 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4">Total Utang: @currency($totalUtang)</th>
+                                        <tr>
+                                        <th colspans="4">Saldo : @currency($totalUtang)</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -158,6 +160,8 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4">Total Piutang: @currency($totalPiutang)</th>
+                                        <tr>
+                                        <th colspans="4">Saldo : @currency($totalPiutang)</th>
                                     </tr>
                                 </tfoot>
                             </table>

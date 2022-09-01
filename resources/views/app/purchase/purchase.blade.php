@@ -127,7 +127,7 @@
                         <!-- END HEADER KREDIT -->
                         <div class="table-responsive">
                             <table id="datatable" class="table table-striped" data-toggle="data-table">
-                                <thead>
+                                <thead class="text-center">
                                     <tr>
                                         <th>No.Transaksi</th>
                                         <th>Tanggal</th>

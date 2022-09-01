@@ -25,7 +25,6 @@
             </div>
             <button type="submit" class="btn btn-primary rounded">Tambah</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>
-            
         </form>
     </div>
 </div>

@@ -127,7 +127,7 @@
                         <!-- END HEADER KREDIT -->
                         <div class="table-responsive">
                             <table id="datatable" class="table table-striped" data-toggle="data-table">
-                                <thead>
+                                <thead class="text-center">
                                     <tr>
                                         <th>No.Transaksi</th>
                                         <th>Tanggal</th>
@@ -139,7 +139,7 @@
                                         <th>Detail</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
                                     @php
                                         $totalPenjualanKredit = 0;
                                     @endphp
@@ -150,9 +150,9 @@
                                                 <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
                                                 <td>{{ $data->produk_yang_terjual }}</td>
                                                 <td>{{ $data->jumlah_barang }}</td>
-                                                <td>@currency($data->harga_satuan)</td>
-                                                <td>@currency($data->total_penjualan)</td>
-                                                <td>{{ $data->nama_kreditur }}</td>
+                                                <td class="text-end">@currency($data->harga_satuan)</td>
+                                                <td class="text-end">@currency($data->total_penjualan)</td>
+                                                <td class="text-end">{{ $data->nama_kreditur }}</td>
                                                 <td><a href="{{ route('sales_kredit_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
                                             @php

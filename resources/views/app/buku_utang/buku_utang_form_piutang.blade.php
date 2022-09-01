@@ -20,8 +20,18 @@
                 <input type="date" class="form-control" name="tanggal" id="exampleInputdate" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Nama</label>
+                <label class="form-label" for="exampleInputText1">Nama Piutang</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="nama" placeholder="Masukkan Nama.." />
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nama Kreditur</label>
+                <select class="form-select mb-3 shadow-none" name="namaKreditur">
+                    @foreach($kreditur as $data)
+                        @if($user_id == $data->user_id)
+                            <option name="namaKreditur" value="{{ $data->nama_kreditur }}" selected=""> {{ $data->nama_kreditur }} </option>
+                        @endif
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Jumlah Piutang</label>

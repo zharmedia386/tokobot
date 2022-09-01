@@ -208,6 +208,15 @@ class ReportController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
+    // PERUBAHAN MODAL
+    public function perubahan_modal()
+    {
+        if (session()->has('hasLogin')) {
+            return view('app/modal/perubahan_modal');
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
     // BEBAN USAHA
     public function beban_usaha()
     {

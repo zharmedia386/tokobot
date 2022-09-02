@@ -13,8 +13,9 @@
                 </div>
                 <!-- START ASET -->
                 <div class="card-body px-0">
+                    {{-- <p class="text-dark">◉ Aset</p> --}}
                     <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped">
+                        <table id="user-list-table" class="table table-striped" {{--data-toggle="data-table"--}}>
                             <thead>
                                 <tr>
                                     <tr>
@@ -23,19 +24,35 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- ASSET LANCAR -->
                                 <tr>
-                                    <th scope="row">Aset 1 (namanya apa)</th>
-                                    <td>@currency(10000)</td>
+                                    <th scope="row"><strong>Asset Lancar</strong></td>
                                 </tr>
+                                @foreach($asset_lancar as $data)
+                                    @if($user_id == $data->user_id)
+                                        <tr>
+                                            <th scope="row">{{ $data->nama_asset }}</th>
+                                            <td>@currency($data->harga_asset)</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                <!-- ASSET TETAP -->
                                 <tr>
-                                    <th scope="row">Aset 2 (namanya apa)</td>
-                                    <td>@currency(20000)</td>
+                                    <th scope="row"><strong>Asset Tetap</strong></td>
                                 </tr>
+                                @foreach($asset_tetap as $data)
+                                    @if($user_id == $data->user_id)
+                                        <tr>
+                                            <th scope="row">{{ $data->nama_asset }}</td>
+                                            <td>@currency($data->harga_asset)</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Total Aset</th>
-                                    <td>@currency(10000)</td>
+                                    <th><strong>Total Aset</strong></th>
+                                    <td><strong>@currency(10000)</strong></td>
                                 </tr>
                         </table>
                     </div>
@@ -44,8 +61,9 @@
 
                 <!-- START UTANG -->
                 <div class="card-body px-0">
+                    {{-- <p class="text-dark">◉ Aset</p> --}}
                     <div class="table-responsive">
-                        <table id="user-list-table" class="table table-striped">
+                        <table id="user-list-table" class="table table-striped" {{--data-toggle="data-table"--}}>
                             <thead>
                                 <tr>
                                     <tr>
@@ -65,8 +83,8 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Total Utang dan Modal</th>
-                                    <td>@currency(10000)</td>
+                                <th><strong>Total Utang dan Modal</strong></th>
+                                <td><strong>@currency(10000)</strong></td>
                                 </tr>
                             </tfoot>
                         </table>

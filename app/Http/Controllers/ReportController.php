@@ -24,13 +24,20 @@ class ReportController extends Controller
     public function posisi_keuangan()
     {
         if (session()->has('hasLogin')) {
+            // ASSET LANCAR DAN TETAP
             $cond1 = "Asset Lancar";
             $asset_lancar = DB::select('select * from asset where asset.jenis_asset = ?', [$cond1]);
             $cond2 = "Asset Tetap";
             $asset_tetap = DB::select('select * from asset where asset.jenis_asset = ?', [$cond2]);
             $user_id = session()->get('user_id');
 
-            return view('app/reports/posisi-keuangan', compact('asset_lancar','asset_tetap', 'user_id'));
+            // UTANG
+            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang');
+            
+            // MODAL
+            $modal = DB::select('select sum(harga_modal) as harga_modal from modal');
+
+            return view('app/reports/posisi-keuangan', compact('asset_lancar','asset_tetap', 'user_id', 'utang', 'modal'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

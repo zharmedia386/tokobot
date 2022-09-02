@@ -8,6 +8,9 @@ use App\Models\Purchase_Form_Kredit;
 use App\Models\Sales_Form_Tunai;
 use App\Models\Sales_Form_Kredit;
 use App\Models\Buku_Kas;
+use App\Models\Asset;
+use App\Models\Modal;
+use App\Models\Buku_Utang_Form_Utang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -73,11 +76,30 @@ class PurchaseSalesController extends Controller
         $purchase_form_tunai->save();
 
 
+        // MODAL
+        $modal = new Modal();
+        $modal->user_id = session()->get('user_id');
+        $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
+        $modal->nama_modal = "Persediaan barang dagang";
+        $modal->harga_modal = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $modal->save();
+
+
+        // ASSET LANCAR
+        $asset = new Asset();
+        $asset->user_id = session()->get('user_id');
+        $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+        $asset->nama_asset = "Persediaan barang dagang";
+        $asset->jenis_asset = "Asset Lancar";
+        $asset->harga_asset = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->save();
+
+
         // BUKU KAS
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
-        $buku_kas->nama_pengeluaran = "Pembelian bahan baku";
+        $buku_kas->nama_pengeluaran = "Persediaan barang dagang";
         $buku_kas->harga_pengeluaran = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
@@ -143,11 +165,22 @@ class PurchaseSalesController extends Controller
         $purchase_form_kredit->save();
 
 
+        // UTANG
+        $buku_utang_form_utang = new Buku_Utang_Form_Utang();
+        $buku_utang_form_utang->user_id = session()->get('user_id');
+        $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
+        $buku_utang_form_utang->nama = "Persediaan barang dagang";
+        $buku_utang_form_utang->nama_supplier = $request->namaSupplier;
+        $buku_utang_form_utang->tanggal = $request->tanggalTransaksi;;
+        $buku_utang_form_utang->jumlah_utang = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_utang_form_utang->save();
+
+
         // BUKU KAS
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
-        $buku_kas->nama_pengeluaran = "Pembelian bahan baku";
+        $buku_kas->nama_pengeluaran = "Persediaan barang dagang";
         $buku_kas->harga_pengeluaran = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
 

@@ -28,31 +28,54 @@
                                 <tr>
                                     <th scope="row"><strong>Asset Lancar</strong></td>
                                 </tr>
+                                @php
+                                    $assetLancar = 0;
+                                @endphp
                                 @foreach($asset_lancar as $data)
                                     @if($user_id == $data->user_id)
                                         <tr>
                                             <th scope="row">{{ $data->nama_asset }}</th>
                                             <td>@currency($data->harga_asset)</td>
                                         </tr>
+                                        @php
+                                            $assetLancar += $data->harga_asset;
+                                        @endphp
                                     @endif
                                 @endforeach
+                                <tr>
+                                    <th><strong>Total Aset Lancar</strong></th>
+                                    <td><strong>@currency($assetLancar)</strong></td>
+                                </tr>
                                 <!-- ASSET TETAP -->
                                 <tr>
                                     <th scope="row"><strong>Asset Tetap</strong></td>
                                 </tr>
+                                @php
+                                    $assetTetap = 0;
+                                @endphp
                                 @foreach($asset_tetap as $data)
                                     @if($user_id == $data->user_id)
                                         <tr>
                                             <th scope="row">{{ $data->nama_asset }}</td>
                                             <td>@currency($data->harga_asset)</td>
                                         </tr>
+                                        @php
+                                            $assetTetap += $data->harga_asset;
+                                        @endphp
                                     @endif
                                 @endforeach
+                                <tr>
+                                    <th><strong>Total Aset Tetap</strong></th>
+                                    <td><strong>@currency($assetTetap)</strong></td>
+                                </tr>
                             </tbody>
+                            @php
+                                $assetTotal = $assetTetap + $assetLancar;
+                            @endphp
                             <tfoot>
                                 <tr>
                                     <th><strong>Total Aset</strong></th>
-                                    <td><strong>@currency(10000)</strong></td>
+                                    <td><strong>@currency($assetTotal)</strong></td>
                                 </tr>
                         </table>
                     </div>
@@ -74,17 +97,17 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">Utang</th>
-                                    <td>@currency(10000)</td>
+                                    <td>@currency($utang[0]->jumlah_utang)</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Modal</td>
-                                    <td>@currency(20000)</td>
+                                    <td>@currency($modal[0]->harga_modal)</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                 <th><strong>Total Utang dan Modal</strong></th>
-                                <td><strong>@currency(10000)</strong></td>
+                                <td><strong>@currency($utang[0]->jumlah_utang + $modal[0]->harga_modal)</strong></td>
                                 </tr>
                             </tfoot>
                         </table>

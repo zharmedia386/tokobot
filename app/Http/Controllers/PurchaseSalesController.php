@@ -56,7 +56,7 @@ class PurchaseSalesController extends Controller
         $purchase_form_tunai->tanggal_transaksi = $request->tanggalTransaksi;
         $purchase_form_tunai->metode_pembayaran = $request->metodePembayaran;
         $purchase_form_tunai->diskon_pembelian = $request->diskonPembelian;
-        $purchase_form_tunai->produk_yang_dibeli = $request->produkYangDibeli;
+        $purchase_form_tunai->produk_yang_dibeli = Str::lower($request->produkYangDibeli);
         $purchase_form_tunai->pajak = $request->pajak;
 
             // JUMLAH BARANG
@@ -97,14 +97,28 @@ class PurchaseSalesController extends Controller
 
 
         // STOK BARANG
-        $stok_barang = new Stok_Barang();
-        $stok_barang->user_id = session()->get('user_id');
-        $stok_barang->kode_barang = generateRandomString(6);
-        $stok_barang->nama_barang = $request->produkYangDibeli;
-        $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
-        $stok_barang->harga_satuan = $purchase_form_tunai->harga_satuan;
-        $stok_barang->total_harga = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
-        $stok_barang->save();
+        $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangDibeli]);
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+            $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
+            $barang_yang_sama->total_harga += $barang_yang_sama->jumlah_stok * $barang_yang_sama->harga_satuan;
+            $barang_yang_sama->update();
+        } else { // Tambah Barang Baru
+            $stok_barang = new Stok_Barang();
+            $stok_barang->user_id = session()->get('user_id');
+            $stok_barang->stok_id = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
+            $stok_barang->kode_barang = generateRandomString(6);
+            $stok_barang->nama_barang = Str::lower($request->produkYangDibeli);
+            $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
+            $stok_barang->harga_satuan = $purchase_form_tunai->harga_satuan;
+            $stok_barang->total_harga = $stok_barang->jumlah_stok * $stok_barang->harga_satuan;
+            $stok_barang->save();
+        }
+
 
         // BUKU KAS
         $buku_kas = new Buku_Kas();
@@ -185,6 +199,18 @@ class PurchaseSalesController extends Controller
         $buku_utang_form_utang->tanggal = $request->tanggalTransaksi;;
         $buku_utang_form_utang->jumlah_utang = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_utang_form_utang->save();
+
+
+        // STOK BARANG
+        $stok_barang = new Stok_Barang();
+        $stok_barang->user_id = session()->get('user_id');
+        $stok_barang->stok_id = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
+        $stok_barang->kode_barang = generateRandomString(6);
+        $stok_barang->nama_barang = Str::lower($request->produkYangDibeli);
+        $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
+        $stok_barang->harga_satuan = $purchase_form_kredit->harga_satuan;
+        $stok_barang->total_harga = $stok_barang->jumlah_stok * $stok_barang->harga_satuan;
+        $stok_barang->save();
 
 
         // BUKU KAS

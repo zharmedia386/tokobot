@@ -18,17 +18,17 @@
                 <br>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th>Kode Barang</th>
                                 <th>Nama Barang</th>
                                 <th>Harga per Unit</th>
                                 <th>Jumlah Stok</th>
-                                <th>Total</th>
+                                <th>Total Harga</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             @php
                                 $totalHargaStok = 0;
                             @endphp
@@ -37,9 +37,9 @@
                                     <tr>
                                         <td>{{ $data->kode_barang }}</td>
                                         <td>{{ $data->nama_barang }}</td>
-                                        <td>{{ $data->harga_satuan }}</td>
+                                        <td class="text-end">@currency($data->harga_satuan)</td>
                                         <td>{{ $data->jumlah_stok }}</td>
-                                        <td>{{ $data->total_harga }}</td>
+                                        <td class="text-end">@currency($data->total_harga)</td>
                                         <td><a href="{{ route('stok_barang_detail', $data->stok_id) }}" class="btn btn-warning">Detail</a></td>
                                     </tr>
                                     @php

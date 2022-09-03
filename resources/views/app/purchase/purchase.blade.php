@@ -50,7 +50,7 @@
                         <br>
                         <div class="table-responsive">
                             <table id="datatable purchase_form_tunai" class="table table-striped" data-toggle="data-table">
-                                <thead>
+                                <thead class="text-center">
                                     <tr>
                                         <th>No.Transaksi</th>
                                         <th>Tanggal</th>

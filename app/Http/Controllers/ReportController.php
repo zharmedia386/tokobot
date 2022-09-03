@@ -11,6 +11,7 @@ use App\Models\Asset;
 use App\Models\Kewajiban;
 use App\Models\Modal;
 use App\Models\Beban_Usaha;
+use App\Models\Stok_Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -304,8 +305,9 @@ class ReportController extends Controller
     public function stok_barang_form()
     {
         if (session()->has('hasLogin')) {
-            $nomor_barang = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
-            return view('app/stok_barang/stok_barang_form', compact('nomor_barang'));
+            $stok_id = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
+
+            return view('app/stok_barang/stok_barang_form', compact('stok_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -315,34 +317,26 @@ class ReportController extends Controller
         // $test = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
         // dd($test);
 
-        $stok_barang = new stok_barang();
+        $stok_barang = new Stok_Barang();
         $stok_barang->user_id = session()->get('user_id');
-        $stok_barang->nomor_barang = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
+        $stok_barang->stok_id = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
+        $stok_barang->kode_barang = generateRandomString(6);
         $stok_barang->nama_barang = $request->namaBarang;
-        $stok_barang->harga_barang = $request->hargaBarang;
-        $stok_barang->stok_barang = $request->stokBarang;
+        $stok_barang->harga_satuan = $request->hargaSatuan;
+        $stok_barang->jumlah_stok = $request->jumlahStok;
+        $stok_barang->total_harga = $request->hargaSatuan * $request->jumlahStok;
 
         $stok_barang->save();
 
         return redirect()->route('stok_barang')->with('successAddstok_barang', 'Pemasukan Stok Barang Sukses!');
     }
 
-
-    // STOK VERSI 2
-    public function stok_barang_dagang()
-    {
+    public function stok_barang_detail($stok_id) {
         if (session()->has('hasLogin')) {
-            return view('app/stok/stok');
+            $stok_barang = DB::select('select * from stok_barang where stok_barang.stok_id = ' . $stok_id);
+            
+            return view('app/stok_barang/stok_barang_detail', compact('stok_barang'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
-
-    public function tambah_stok()
-    {
-        if (session()->has('hasLogin')) {
-            return view('app/stok/tambah_stok');
-        } 
-        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
-    }
-
 }

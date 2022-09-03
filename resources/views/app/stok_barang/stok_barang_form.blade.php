@@ -12,8 +12,8 @@
         <form action="{{ route('stok_barang_form_post') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Nomor Barang</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="nomorBarang" disabled value="{{ $nomor_barang }}" />
+                <label class="form-label" for="exampleInputText1">Stok Id</label>
+                <input type="text" class="form-control" id="exampleInputText1" name="stok_id" disabled value="{{ $stok_id }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nama Barang</label>
@@ -21,11 +21,11 @@
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Harga Barang Per Unit</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="hargaBarang" placeholder="Masukkan harga barang per unit anda" />
+                <input type="text" class="form-control" id="exampleInputText1" name="hargaSatuan" placeholder="Masukkan harga barang per unit anda" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Jumlah Stok</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="stokBarang" placeholder="Masukkan jumlah stok anda" />
+                <input type="text" class="form-control" id="exampleInputText1" name="jumlahStok" placeholder="Masukkan jumlah stok anda" />
             </div>
             <button type="submit" class="btn btn-primary rounded">Tambah</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>

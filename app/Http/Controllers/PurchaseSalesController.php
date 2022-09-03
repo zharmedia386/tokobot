@@ -11,6 +11,7 @@ use App\Models\Buku_Kas;
 use App\Models\Asset;
 use App\Models\Modal;
 use App\Models\Buku_Utang_Form_Utang;
+use App\Models\Stok_Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -94,6 +95,16 @@ class PurchaseSalesController extends Controller
         $asset->harga_asset = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $asset->save();
 
+
+        // STOK BARANG
+        $stok_barang = new Stok_Barang();
+        $stok_barang->user_id = session()->get('user_id');
+        $stok_barang->kode_barang = generateRandomString(6);
+        $stok_barang->nama_barang = $request->produkYangDibeli;
+        $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
+        $stok_barang->harga_satuan = $purchase_form_tunai->harga_satuan;
+        $stok_barang->total_harga = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $stok_barang->save();
 
         // BUKU KAS
         $buku_kas = new Buku_Kas();

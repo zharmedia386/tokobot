@@ -84,7 +84,6 @@
 
                 <!-- START UTANG -->
                 <div class="card-body px-0">
-                    {{-- <p class="text-dark">◉ Aset</p> --}}
                     <div class="table-responsive">
                         <table id="user-list-table" class="table table-striped" {{--data-toggle="data-table"--}}>
                             <thead>

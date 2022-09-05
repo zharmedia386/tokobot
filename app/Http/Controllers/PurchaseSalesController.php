@@ -202,6 +202,16 @@ class PurchaseSalesController extends Controller
         $buku_utang_form_utang->save();
 
 
+        // ASSET LANCAR
+        $asset = new Asset();
+        $asset->user_id = session()->get('user_id');
+        $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+        $asset->nama_asset = "Persediaan barang dagang";
+        $asset->jenis_asset = "Asset Lancar";
+        $asset->harga_asset = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->save();
+
+
         // STOK BARANG
         $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
         $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangDibeli]);

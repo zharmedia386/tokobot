@@ -30,11 +30,11 @@
                         </thead>
                         <tbody>
                                 <tr>
-                                    <td>Rp 10.000.000</td>
-                                    <td>Rp 5.000.000</td>
-                                    <td>Rp 15.000.000</td>
-                                    <td>Rp 3.000.000</td>
-                                    <td>Rp 12.000.000</td>
+                                    <td>@currency($modal_awal[0]->modal_awal)</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>@currency($prive_pemilik[0]->prive_pemilik)</td>
+                                    <td>-</td>
                                 </tr>
                         </tbody>
                         <tfoot>

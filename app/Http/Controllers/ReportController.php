@@ -65,6 +65,20 @@ class ReportController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
+    // PERUBAHAN MODAL
+    public function perubahan_modal()
+    {
+        if (session()->has('hasLogin')) {
+            $modal_awal = DB::select('select sum(harga_asset) as modal_awal from asset');
+            // dd($modal_awal);
+            $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas');
+            $user_id = session()->get('user_id');
+
+            return view('app/modal/perubahan_modal', compact('user_id', 'prive_pemilik', 'modal_awal'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
     // ASSET
     public function asset()
     {
@@ -104,8 +118,8 @@ class ReportController extends Controller
         $asset->harga_asset = Str::replace('Rp ','',$asset->harga_asset);
         $asset->harga_asset = (int)($asset->harga_asset);
 
-        $asset->umur_ekonomis = $request->umurEkonomis;
-        $asset->masa_penggunaan = $request->masaPenggunaan;
+        // $asset->umur_ekonomis = $request->umurEkonomis;
+        // $asset->masa_penggunaan = $request->masaPenggunaan;
 
         $asset->save();
 
@@ -222,15 +236,6 @@ class ReportController extends Controller
             $modal = DB::select('select * from modal where modal.modal_id = ' . $modal_id);
 
             return view('app/modal/modal_detail', compact('modal'));
-        } 
-        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
-    }
-
-    // PERUBAHAN MODAL
-    public function perubahan_modal()
-    {
-        if (session()->has('hasLogin')) {
-            return view('app/modal/perubahan_modal');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

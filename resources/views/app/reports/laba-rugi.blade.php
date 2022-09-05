@@ -12,6 +12,11 @@
                     </div>
                 </div>
                 <!-- START PENDAPATAN -->
+                @php
+                    $totalPendapatan = 0;
+                    $totalBeban = 0;
+                    $totalLabaBersih = 0;
+                @endphp
                 <div class="card-body px-0">
                     <div class="table-responsive">
                         <table id="user-list-table" class="table table-striped">
@@ -21,18 +26,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">Pendapatan 1</th>
-                                    <td>@currency(10000)</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Pendapatan 2</td>
-                                    <td>@currency(20000)</td>
-                                </tr>
+                                @foreach($buku_kas as $data)
+                                    @if($user_id == $data->user_id)
+                                    <tr>
+                                        <td>{{ $data->nama_pemasukkan }}</td>
+                                        <td>@currency($data->harga_pemasukkan )</td>
+                                    </tr>
+                                    @endif
+                                    @php
+                                        $totalPendapatan += $data->harga_pemasukkan;
+                                    @endphp
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspans="2">Saldo : @currency(30000)</th>
+                                    <th colspans="2">Total Pendapatan : @currency($totalPendapatan)</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -50,25 +58,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">Beban 1</th>
-                                    <td>@currency(5000)</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Beban 2</td>
-                                    <td>@currency(15000)</td>
-                                </tr>
+                                @foreach($buku_kas as $data)
+                                    @if($user_id == $data->user_id)
+                                    <tr>
+                                        <td>{{ $data->nama_pengeluaran }}</td>
+                                        <td>@currency($data->harga_pengeluaran )</td>
+                                    </tr>
+                                    @endif
+                                    @php
+                                        $totalBeban += $data->harga_pengeluaran;
+                                    @endphp
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Saldo : @currency(20000)</th>
+                                    <th>Total Beban : @currency($totalBeban)</th>
                                 </tr>
                             </tfoot> 
                         </table>
                     </div>
                 </div>
                 <!-- END BEBAN -->
-                
+                @php
+                    $totalLabaBersih = $totalPendapatan - $totalBeban;
+                @endphp
                  <!-- START LABA BERSIH -->
                  <div class="card-body px-0">
                     <div class="table-responsive">
@@ -80,7 +93,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th colspans="2">Saldo : @currency(20000)</th>
+                                    <th colspans="2">Total Laba Bersih : @currency($totalLabaBersih)</th>
                                 </tr>
                             </tfoot> 
                         </table>

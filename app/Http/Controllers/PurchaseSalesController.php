@@ -106,7 +106,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga += $barang_yang_sama->jumlah_stok * $barang_yang_sama->harga_satuan;
+            $barang_yang_sama->total_harga += (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             $stok_barang = new Stok_Barang();
@@ -116,7 +116,7 @@ class PurchaseSalesController extends Controller
             $stok_barang->nama_barang = Str::lower($request->produkYangDibeli);
             $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
             $stok_barang->harga_satuan = $purchase_form_tunai->harga_satuan;
-            $stok_barang->total_harga = $stok_barang->jumlah_stok * $stok_barang->harga_satuan;
+            $stok_barang->total_harga = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $stok_barang->save();
         }
 
@@ -211,7 +211,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga += $barang_yang_sama->jumlah_stok * $barang_yang_sama->harga_satuan;
+            $barang_yang_sama->total_harga += (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             $stok_barang = new Stok_Barang();
@@ -222,7 +222,7 @@ class PurchaseSalesController extends Controller
             $stok_barang->nama_barang = Str::lower($request->produkYangDibeli);
             $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
             $stok_barang->harga_satuan = $purchase_form_kredit->harga_satuan;
-            $stok_barang->total_harga = $stok_barang->jumlah_stok * $stok_barang->harga_satuan;
+            $stok_barang->total_harga = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $stok_barang->save();
         }
 
@@ -326,7 +326,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga -= $barang_yang_sama->jumlah_stok * $barang_yang_sama->harga_satuan;
+            $barang_yang_sama->total_harga -= (($request->jumlahBarang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             return redirect('/app/sales')->with('salesBelumDitambahkan', 'Barang Terjual yang diisikan belum ada di Stok Barang!');
@@ -424,7 +424,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga -= $barang_yang_sama->jumlah_stok * $barang_yang_sama->harga_satuan;
+            $barang_yang_sama->total_harga -= (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             return redirect('/app/sales')->with('salesBelumDitambahkan', 'Barang Terjual yang diisikan belum ada di Stok Barang!');

@@ -56,21 +56,11 @@ class ReportController extends Controller
     public function laba_rugi()
     {
         if (session()->has('hasLogin')) {
-            // PEMASUKKAN DAN PENGELUARAN
-            $cond1 = "Asset Lancar";
-            // dd(is_null($cond1))
-            $asset_lancar = DB::select('select * from asset where asset.jenis_asset = ?', [$cond1]);
-            $cond2 = "Asset Tetap";
-            $asset_tetap = DB::select('select * from asset where asset.jenis_asset = ?', [$cond2]);
+            // PEMASUKKAN DAN PENGELUARAN (BUKU KAS)
+            $buku_kas = DB::table('buku_kas')->get();
             $user_id = session()->get('user_id');
 
-            // UTANG
-            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang');
-            
-            // MODAL
-            $modal = DB::select('select sum(harga_modal) as harga_modal from modal');
-
-            return view('app/reports/laba-rugi');
+            return view('app/reports/laba-rugi', compact('buku_kas', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

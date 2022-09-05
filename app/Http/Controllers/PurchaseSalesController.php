@@ -11,6 +11,7 @@ use App\Models\Buku_Kas;
 use App\Models\Asset;
 use App\Models\Modal;
 use App\Models\Buku_Utang_Form_Utang;
+use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Stok_Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -190,7 +191,7 @@ class PurchaseSalesController extends Controller
         $purchase_form_kredit->save();
 
 
-        // UTANG
+        // BUKU UTANG
         $buku_utang_form_utang = new Buku_Utang_Form_Utang();
         $buku_utang_form_utang->user_id = session()->get('user_id');
         $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
@@ -214,6 +215,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             $stok_barang = new Stok_Barang();
+            // dd($stok_barang);
             $stok_barang->user_id = session()->get('user_id');
             $stok_barang->stok_id = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
             $stok_barang->kode_barang = generateRandomString(6);
@@ -315,6 +317,22 @@ class PurchaseSalesController extends Controller
         $sales_form_tunai->save();
 
 
+        // STOK BARANG
+        $lower_produkYangTerjual = Str::lower($request->produkYangTerjual);
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangTerjual]);
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+            $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
+            $barang_yang_sama->total_harga -= $barang_yang_sama->jumlah_stok * $barang_yang_sama->harga_satuan;
+            $barang_yang_sama->update();
+        } else { // Tambah Barang Baru
+            return redirect('/app/sales')->with('salesBelumDitambahkan', 'Barang Terjual yang diisikan belum ada di Stok Barang!');
+        }
+
+
         // BUKU KAS
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
@@ -324,6 +342,7 @@ class PurchaseSalesController extends Controller
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
         $buku_kas->save();
+
 
         return redirect()->route('sales')->with('successSalesFormTunai', 'Pemasukan Pembayaran Secara Tunai Sukses!');
     }
@@ -383,6 +402,33 @@ class PurchaseSalesController extends Controller
         $sales_form_kredit->total_penjualan = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $sales_form_kredit->save();
+
+
+        // BUKU PIUTANG
+        $buku_utang_form_piutang = new Buku_Utang_Form_Piutang();
+        $buku_utang_form_piutang->user_id = session()->get('user_id');
+        $buku_utang_form_piutang->nomor_piutang = DB::selectOne("select getNewId('buku_utang_form_piutang') as value from dual")->value;
+        $buku_utang_form_piutang->nama = "Penjualan Kredit";
+        $buku_utang_form_piutang->nama_kreditur = $request->namaKreditur;
+        $buku_utang_form_piutang->tanggal = $request->tanggalTransaksi;
+        $buku_utang_form_piutang->jumlah_piutang = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_utang_form_piutang->save();
+
+
+        // STOK BARANG
+        $lower_produkYangTerjual = Str::lower($request->produkYangTerjual);
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangTerjual]);
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+            $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
+            $barang_yang_sama->total_harga -= $barang_yang_sama->jumlah_stok * $barang_yang_sama->harga_satuan;
+            $barang_yang_sama->update();
+        } else { // Tambah Barang Baru
+            return redirect('/app/sales')->with('salesBelumDitambahkan', 'Barang Terjual yang diisikan belum ada di Stok Barang!');
+        }
 
 
         // BUKU KAS

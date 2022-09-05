@@ -19,6 +19,17 @@
                     <div class="tab-pane fade show active" id="tunai" role="tabpanel" aria-labelledby="tunai-tab">
                         <!-- HEADER TUNAI -->
                         <div class="card-header d-flex justify-content-between pb-0 border-0">
+
+                            <!-- ALERT LOGIN FIRST -->
+                            @if (session()->has('salesBelumDitambahkan'))
+                            <div id="alerts-disimissible-component">
+                                <div class="alert alert-left alert-info  alert-dismissible fade show fs-7" role="alert">
+                                    {{ session('salesBelumDitambahkan') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+                                </div>
+                            </div>
+                            @endif
+
                             <div class="header-title">
                                 <h4 class="card-title">Penjualan Tunai</h4>
                             </div> 
@@ -154,7 +165,7 @@
                                                 <td>{{ $data->jumlah_barang }}</td>
                                                 <td class="text-end">@currency($data->harga_satuan)</td>
                                                 <td class="text-end">@currency($data->total_penjualan)</td>
-                                                <td class="text-end">{{ $data->nama_kreditur }}</td>
+                                                <td>{{ $data->nama_kreditur }}</td>
                                                 <td><a href="{{ route('sales_kredit_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
                                             @php

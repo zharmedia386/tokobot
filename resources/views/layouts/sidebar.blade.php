@@ -731,7 +731,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> b </i>
-                                <span class="item-name">Beban Usaha</span>
+                                <span class="item-name">Beban Usaha (dihapus?)</span>
                             </a>
                         </li>
                     </ul>

@@ -301,7 +301,7 @@
                     ></path>
                 </svg>
                 </div>
-                <span>Beban Usaha</span>
+                <span>Beban Usaha (dihapus?)</span>
             </a>
         </li>
         <li class="col-lg-3 col-md-6 text-start mb-2" id="hoverable">

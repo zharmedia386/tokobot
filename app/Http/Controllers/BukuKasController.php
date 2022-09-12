@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use App\Models\Buku_Kas;
+use App\Models\Buku_Utang_Form_Utang;
+use App\Models\Modal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -76,6 +78,29 @@ class BukuKasController extends Controller
         $buku_kas->harga_pengeluaran = (int)($buku_kas->harga_pengeluaran);
 
         $buku_kas->save();
+
+        // JIKA PEMBERIAN UTANG (PIUTANG) DAN PEMBAYARAN UTANG DI BUKU KAS PENGELUARAN DIPILIH, MASUK KE BUKU UTANG (NERACA)
+        // if($request->pengeluaran == "Pemberian utang (Piutang)") {
+        //     $buku_utang_form_utang = new Buku_Utang_Form_Utang();
+        //     $buku_utang_form_utang->user_id = session()->get('user_id');
+        //     $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
+        //     $buku_utang_form_utang->nama = "Pemberian Utang (Piutang)";
+        //     $buku_utang_form_utang->nama_supplier = "-";
+        //     $buku_utang_form_utang->tanggal = $request->tanggal;
+        //     $buku_utang_form_utang->jumlah_utang = $buku_kas->harga_pengeluaran;
+
+        //     $buku_utang_form_utang->save();
+        // } else if($request->pengeluaran == "Pembayaran utang") {
+        //     $buku_utang_form_utang = new Buku_Utang_Form_Utang();
+        //     $buku_utang_form_utang->user_id = session()->get('user_id');
+        //     $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
+        //     $buku_utang_form_utang->nama = "Pembayaran utang";
+        //     $buku_utang_form_utang->nama_supplier = "-";
+        //     $buku_utang_form_utang->tanggal = $request->tanggal;
+        //     $buku_utang_form_utang->jumlah_utang = $buku_kas->harga_pengeluaran;
+
+        //     $buku_utang_form_utang->save();
+        // }
 
         return redirect()->route('buku_kas')->with('pengeluaranSuccess', 'Pengeluaran berhasil');
     }

@@ -79,12 +79,12 @@ class PurchaseSalesController extends Controller
 
 
         // MODAL
-        $modal = new Modal();
-        $modal->user_id = session()->get('user_id');
-        $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
-        $modal->nama_modal = "Persediaan barang dagang";
-        $modal->harga_modal = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
-        $modal->save();
+        // $modal = new Modal();
+        // $modal->user_id = session()->get('user_id');
+        // $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
+        // $modal->nama_modal = "Persediaan barang dagang";
+        // $modal->harga_modal = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        // $modal->save();
 
 
         // ASSET LANCAR
@@ -327,6 +327,16 @@ class PurchaseSalesController extends Controller
         $sales_form_tunai->save();
 
 
+        // ASSET LANCAR
+        $asset = new Asset();
+        $asset->user_id = session()->get('user_id');
+        $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+        $asset->nama_asset = "Persediaan barang dagang";
+        $asset->jenis_asset = "Asset Lancar";
+        $asset->harga_asset = (($request->jumlahBarang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->save();
+
+
         // STOK BARANG
         $lower_produkYangTerjual = Str::lower($request->produkYangTerjual);
         $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangTerjual]);
@@ -412,6 +422,16 @@ class PurchaseSalesController extends Controller
         $sales_form_kredit->total_penjualan = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $sales_form_kredit->save();
+
+
+        // ASSET LANCAR
+        $asset = new Asset();
+        $asset->user_id = session()->get('user_id');
+        $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+        $asset->nama_asset = "Persediaan barang dagang";
+        $asset->jenis_asset = "Asset Lancar";
+        $asset->harga_asset = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->save();
 
 
         // BUKU PIUTANG

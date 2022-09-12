@@ -7,6 +7,7 @@ use App\Models\Buku_Utang_Form_Utang;
 use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Sales_Form_Tunai;
 use App\Models\Sales_Form_Kredit;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +93,15 @@ class BukuUtangController extends Controller
         $buku_utang_form_piutang->jumlah_piutang = (int)($buku_utang_form_piutang->jumlah_piutang);
 
         $buku_utang_form_piutang->save();
+
+        // ASSET LANCAR
+        $asset = new Asset();
+        $asset->user_id = session()->get('user_id');
+        $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+        $asset->nama_asset = "Pemberian Utang (Piutang)";
+        $asset->jenis_asset = "Asset Lancar";
+        $asset->harga_asset = $buku_utang_form_piutang->jumlah_piutang;
+        $asset->save();
 
         return redirect()->route('buku_utang')->with('successBukuUtangFormPiutang', 'Pemasukan Piutang Sukses!');
     }

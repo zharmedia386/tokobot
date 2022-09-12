@@ -31,14 +31,14 @@
                 <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Aset)</label>
                 <input type="text" class="form-control" id="rupiah" name="hargaAsset" placeholder="Masukkan nominal harga aset anda" />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Umur Ekonomis</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="umurEkonomis" placeholder="Masukkan umur ekonomis aset anda" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Masa Penggunaan</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="masaPenggunaan" placeholder="Masukkan masa penggunaan aset anda" />
-            </div>
+            </div> -->
             <button type="submit" class="btn btn-primary rounded">Tambah</button>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Batal</a>
         </form>

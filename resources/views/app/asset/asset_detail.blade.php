@@ -30,14 +30,14 @@
                 <label class="form-label" for="exampleInputdate">Saldo Awal (Harga Aset)</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="hargaAsset" disabled value="{{ $asset[0]->harga_asset }}" />
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Umur Ekonomis</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="umurEkonomis" disabled value="{{ $asset[0]->umur_ekonomis }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputdate">Masa Penggunaan</label>
                 <input type="text" class="form-control" id="exampleInputText1" name="masaPenggunaan" disabled value="{{ $asset[0]->masa_penggunaan }}" />
-            </div>
+            </div> -->
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
         </form>
     </div>

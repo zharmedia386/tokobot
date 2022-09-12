@@ -41,9 +41,9 @@
                                     </ul>
                                 </div>
                                 &nbsp;&nbsp;
-                                <a class="btn btn-outline-primary rounded" href="{{ route('buku_utang_form_utang') }}">
-                                    + Tambah Data
-                                </a> 
+                                <!-- <a class="btn btn-outline-primary rounded" href="{{ route('buku_utang_form_utang') }}">
+                                    + Tambah Utang
+                                </a>  -->
                             </div>
                         </div>
                         <!-- END HEADER UTANG -->
@@ -118,9 +118,9 @@
                                     </ul>
                                 </div>
                                 &nbsp;&nbsp;
-                                <a class="btn btn-outline-primary rounded" href="{{ route('buku_utang_form_piutang') }}">
-                                    + Tambah Data
-                                </a> 
+                                <!-- <a class="btn btn-outline-primary rounded" href="{{ route('buku_utang_form_piutang') }}">
+                                    + Tambah Piutang
+                                </a>  -->
                             </div>
                         </div>
                         <br>

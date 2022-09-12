@@ -38,7 +38,12 @@ class ReportController extends Controller
             // MODAL
             $modal = DB::select('select sum(harga_modal) as harga_modal from modal');
 
-            return view('app/reports/posisi-keuangan', compact('asset_lancar','asset_tetap', 'user_id', 'utang', 'modal'));
+            // PRIVE MODAL
+            $cond3 = "Penarikan Sebagian asset/modal untuk keperluan pribadi";
+            $prive_modal = DB::select('select sum(harga_pengeluaran) as prive_modal from buku_kas where buku_kas.nama_pengeluaran = ?', [$cond3]);
+            // dd($prive_modal);
+
+            return view('app/reports/posisi-keuangan', compact('asset_lancar','asset_tetap', 'user_id', 'utang', 'modal', 'prive_modal'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

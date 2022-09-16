@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Kategori Pemasukkan</label>
-                <select class="form-select mb-3 shadow-none" name="pemasukkan">
+                <select class="form-select mb-3 shadow-none" name="pemasukkan" id="seeAnotherField">
                     <option name="pemasukkan" value="Penjualan" selected="">Pilih Kategori Pemasukkan</option>
                     <option name="pemasukkan" value="Pendapatan di luar usaha">Pendapatan di luar usaha</option>
                     <option name="pemasukkan" value="Pendapatan lain-lain">Pendapatan lain-lain</option>
@@ -29,6 +29,16 @@
                     <option name="pemasukkan" value="Terima pinjaman">Terima pinjaman</option>
                     <option name="pemasukkan" value="Penagihan utang">Penagihan utang</option>
                     <option name="pemasukkan" value="Pendapatan investasi">Pendapatan investasi</option>
+                </select>
+            </div>
+            <div class="form-group" id="otherFieldDiv">
+                <label class="form-label">Nama Kreditur</label>
+                <select class="form-select mb-3 shadow-none" name="namaKreditur" id="otherField">
+                    @foreach($kreditur as $data)
+                        @if($user_id == $data->user_id)
+                            <option name="namaKreditur" value="{{ $data->nama_kreditur }}" selected=""> {{ $data->nama_kreditur }} </option>
+                        @endif
+                    @endforeach
                 </select>
             </div>
             <div class="form-group">
@@ -42,7 +52,9 @@
 </div>
 
 @push('child-js')
-    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{ asset('format/rupiah_format.js') }}"></script>
+<script src="{{ asset('form/hide-show-field.js') }}"></script>
 @endpush
 
 @endsection

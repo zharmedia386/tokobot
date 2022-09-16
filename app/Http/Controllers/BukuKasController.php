@@ -28,8 +28,10 @@ class BukuKasController extends Controller
     {
         if (session()->has('hasLogin')) {
             $kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
+            $kreditur = DB::table('kreditur')->get();
+            $user_id = session()->get('user_id');
 
-            return view('app/buku_kas/form_buku_kas_pemasukkan', compact('kas_id'));
+            return view('app/buku_kas/form_buku_kas_pemasukkan', compact('kas_id', 'kreditur', 'user_id'));
         }
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

@@ -169,7 +169,7 @@
                         ></path>
                     </svg>
                 </div>
-                <span>Modal</span>
+                <span>Modal dan Perubahan Modal</span>
             </a>
         </li>
         <li id="hoverable1" class="col-lg-3 col-md-6 mb-2 text-start">
@@ -199,7 +199,7 @@
                 <span>Posisi Keuangan <br> (Neraca)</span>
             </a>
         </li>
-        <li id="hoverable" class="col-lg-3 col-md-6 mb-2 text-start">
+        <!-- <li id="hoverable" class="col-lg-3 col-md-6 mb-2 text-start">
             <a href="{{ route('arus_kas_bulan') }}">
                 <div class="iq-icon me-3">
                     <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,7 +216,7 @@
                 </div>
                 <span>Arus Kas Bulan <br> (Cash Flow)</span>
             </a>
-        </li>
+        </li> -->
         <li id="hoverable" class="col-lg-3 col-md-6 mb-2 text-start">
             <a href="{{ route('laba_rugi') }}">
                 <div class="iq-icon me-3">
@@ -235,7 +235,7 @@
                         ></path>
                     </svg>
                 </div>
-                <span>Laba Rugi</span>
+                <span>Laporan Laba Rugi</span>
             </a>
         </li>
         <p></p>
@@ -284,7 +284,7 @@
                 <span>Stok Barang</span>
             </a>
         </li>
-        <li class="col-lg-3 col-md-6 text-start mb-2" id="hoverable">
+        <!-- <li class="col-lg-3 col-md-6 text-start mb-2" id="hoverable">
             <a href="{{ route('beban_usaha') }}">
                 <div class="iq-icon me-3">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -303,7 +303,7 @@
                 </div>
                 <span>Beban Usaha (dihapus?)</span>
             </a>
-        </li>
+        </li> -->
         <li class="col-lg-3 col-md-6 text-start mb-2" id="hoverable">
             <a href="{{ route('buku_kas') }}">
                 <div class="iq-icon me-3">

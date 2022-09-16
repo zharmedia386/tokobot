@@ -721,7 +721,7 @@
                                 <span class="item-name">Supplier</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link " href="{{ route('beban_usaha') }}">
                                 <i class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
@@ -731,9 +731,9 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> b </i>
-                                <span class="item-name">Beban Usaha (dihapus?)</span>
+                                <span class="item-name">Beban Usaha</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <!-- REPORTS -->
@@ -760,7 +760,7 @@
                         </i>
                     </a>
                     <ul class="sub-nav collapse" id="utilities-error" data-bs-parent="#sidebar">
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link " href="{{ route('perubahan_modal') }}">
                                 <i class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
@@ -772,7 +772,7 @@
                                 <i class="sidenav-mini-icon"> M </i>
                                 <span class="item-name">Perubahan Modal</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link " href="{{ route('buku_utang') }}">
                                 <i class="icon">

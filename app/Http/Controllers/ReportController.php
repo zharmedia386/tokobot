@@ -199,10 +199,17 @@ class ReportController extends Controller
     public function modal()
     {
         if (session()->has('hasLogin')) {
+            // DATA MODAL
             $modal = DB::table('modal')->get();
             $user_id = session()->get('user_id');
 
-            return view('app/modal/modal', compact('user_id', 'modal'));
+
+            // PERUBAHAN MODAL
+            $modal_awal = DB::select('select sum(harga_asset) as modal_awal from asset');
+            // dd($modal_awal);
+            $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas');
+
+            return view('app/modal/modal', compact('user_id', 'modal', 'prive_pemilik', 'modal_awal'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

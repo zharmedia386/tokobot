@@ -679,7 +679,7 @@
                                     </svg>
                                 </i>
                                 <i class="sidenav-mini-icon"> M </i>
-                                <span class="item-name">Modal</span>
+                                <span class="item-name">Modal dan <br>Perubahan Modal</span>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -2,7 +2,7 @@
     <div class="sidebar-header d-flex align-items-center justify-content-start">
         <a href="{{ route('home') }}" class="navbar-brand">
             <!--Logo start-->
-            <div class="logo">
+            <!-- <div class="logo">
                 <svg width="40" height="43"  class="" viewBox="0 0 60 63" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="30" cy="33" r="30" fill="white"/>
                 <circle cx="30" cy="33" r="30" fill="#EA6A12" fill-opacity="0.32"/>
@@ -451,7 +451,7 @@
             </div>
             <div class="logo-hover">
                 <img src="{{ asset('assets/images/favicon.png') }}" class="img-fluid logo-img" alt="img4">
-            </div>
+            </div> -->
             
             <!--logo End-->
             

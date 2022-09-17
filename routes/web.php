@@ -97,6 +97,11 @@ Route::get('/app/tambah_modal', 'App\Http\Controllers\ReportController@tambah_mo
 Route::post('/app/modal/modal_form', 'App\Http\Controllers\ReportController@modal_form_post')->name('modal_form_post');
 Route::get('/app/modal/modal_detail/{modal_id}', 'App\Http\Controllers\ReportController@modal_detail')->name('modal_detail');
 
+// MODAL AWAL
+Route::get('/app/modal_awal', 'App\Http\Controllers\ReportController@modal_awal')->name('modal_awal');
+Route::get('/app/tambah_modal_awal', 'App\Http\Controllers\ReportController@tambah_modal_awal')->name('tambah_modal_awal');
+Route::post('/app/modal/modal_awal_form', 'App\Http\Controllers\ReportController@modal_awal_form_post')->name('modal_awal_form_post');
+
 // PERUBAHAN MODAL
 Route::get('/app/perubahan_modal', 'App\Http\Controllers\ReportController@perubahan_modal')->name('perubahan_modal');
 

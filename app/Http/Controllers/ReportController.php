@@ -10,6 +10,7 @@ use App\Models\Purchase_Form_Kredit;
 use App\Models\Asset;
 use App\Models\Kewajiban;
 use App\Models\Modal;
+use App\Models\Modal_Awal;
 use App\Models\Beban_Usaha;
 use App\Models\Stok_Barang;
 use Illuminate\Http\Request;
@@ -193,6 +194,47 @@ class ReportController extends Controller
             return view('app/kewajiban/kewajiban_detail', compact('kewajiban'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    // MODAL AWAL
+    public function modal_awal()
+    {
+        if (session()->has('hasLogin')) {
+            // DATA MODAL
+            $modal_awal = DB::table('modal_awal')->get();
+            $user_id = session()->get('user_id');
+
+            return view('app/modal/modal_awal', compact('user_id', 'modal_awal'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function tambah_modal_awal()
+    {
+        if (session()->has('hasLogin')) {
+            $modal_id = 1;
+
+            return view('app/modal/tambah_modal_awal', compact('modal_id'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function modal_awal_form_post(Request $request)
+    {
+        $modal = new Modal_Awal();
+        $modal->user_id = session()->get('user_id');
+        $modal->modal_id = 1;
+        $modal->nama_modal = $request->namaModal;
+
+        // HARGA MODAL
+        $modal->harga_modal = $request->hargaModal;
+        $modal->harga_modal = Str::replace('.','',$modal->harga_modal);
+        $modal->harga_modal = Str::replace('Rp ','',$modal->harga_modal);
+        $modal->harga_modal = (int)($modal->harga_modal);
+
+        $modal->save();
+
+        return redirect()->route('home')->with('successAddModal', 'Pemasukan Modal Sukses!');
     }
 
     // MODAL

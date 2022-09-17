@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Modal_Awal;
 
 class MainController extends Controller
 {
@@ -15,6 +16,14 @@ class MainController extends Controller
     public function home()
     {
         if (session()->has('hasLogin')) {
+            $modal_awal = DB::select('select * from modal_awal where modal_awal.modal_id = ' . 1);
+            $user_id = session()->get('user_id');
+
+            // dd(empty($modal_awal));
+
+            if(empty($modal_awal)) {
+                return redirect()->route('tambah_modal_awal')->with('successAddModal', 'Pemasukan Modal Sukses!');
+            }
             return view('home');
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');

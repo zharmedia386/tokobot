@@ -72,9 +72,9 @@ class PurchaseSalesController extends Controller
         $purchase_form_tunai->harga_satuan = (int)($purchase_form_tunai->harga_satuan);
 
         // HARGA TOTAL
-        $persentaseDiskon = $request->diskonPembelian / 100 * ($request->jumlahBarang * $purchase_form_tunai->harga_satuan);
+        $persentaseDiskon = $request->diskonPembelian / 100 * ($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
-        $purchase_form_tunai->total_pembelian = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $purchase_form_tunai->total_pembelian = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $purchase_form_tunai->save();
 
@@ -94,7 +94,7 @@ class PurchaseSalesController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->harga_asset = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $asset->save();
 
 
@@ -109,7 +109,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga += (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+            $barang_yang_sama->total_harga += (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             $stok_barang = new Stok_Barang();
@@ -119,7 +119,7 @@ class PurchaseSalesController extends Controller
             $stok_barang->nama_barang = Str::lower($request->produkYangDibeli);
             $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
             $stok_barang->harga_satuan = $purchase_form_tunai->harga_satuan;
-            $stok_barang->total_harga = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+            $stok_barang->total_harga = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $stok_barang->save();
         }
 
@@ -129,7 +129,7 @@ class PurchaseSalesController extends Controller
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
         $buku_kas->nama_pengeluaran = "Persediaan barang dagang";
-        $buku_kas->harga_pengeluaran = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_kas->harga_pengeluaran = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
         $buku_kas->save();
@@ -188,9 +188,9 @@ class PurchaseSalesController extends Controller
         $purchase_form_kredit->harga_satuan = (int)($purchase_form_kredit->harga_satuan);
 
         // HARGA TOTAL
-        $persentaseDiskon = $request->diskonPembelian / 100 * ($request->jumlahBarang * $purchase_form_kredit->harga_satuan);
+        $persentaseDiskon = $request->diskonPembelian / 100 * ($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
-        $purchase_form_kredit->total_pembelian = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $purchase_form_kredit->total_pembelian = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $purchase_form_kredit->save();
 
@@ -202,7 +202,7 @@ class PurchaseSalesController extends Controller
         $buku_utang_form_utang->nama = "Persediaan barang dagang";
         $buku_utang_form_utang->nama_supplier = $request->namaSupplier;
         $buku_utang_form_utang->tanggal = $request->tanggalTransaksi;;
-        $buku_utang_form_utang->jumlah_utang = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_utang_form_utang->jumlah_utang = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_utang_form_utang->save();
 
 
@@ -212,7 +212,7 @@ class PurchaseSalesController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->harga_asset = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $asset->save();
 
 
@@ -225,7 +225,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga += (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+            $barang_yang_sama->total_harga += (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             $stok_barang = new Stok_Barang();
@@ -236,7 +236,7 @@ class PurchaseSalesController extends Controller
             $stok_barang->nama_barang = Str::lower($request->produkYangDibeli);
             $stok_barang->jumlah_stok = $satuanBarang * $request->jumlahBarang;
             $stok_barang->harga_satuan = $purchase_form_kredit->harga_satuan;
-            $stok_barang->total_harga = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+            $stok_barang->total_harga = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $stok_barang->save();
         }
 
@@ -245,7 +245,7 @@ class PurchaseSalesController extends Controller
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
         $buku_kas->nama_pengeluaran = "Persediaan barang dagang";
-        $buku_kas->harga_pengeluaran = (($request->jumlahBarang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_kas->harga_pengeluaran = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
         $buku_kas->save();
@@ -325,9 +325,9 @@ class PurchaseSalesController extends Controller
         $sales_form_tunai->harga_satuan = (int)($sales_form_tunai->harga_satuan);
         
         // HARGA TOTAL
-        $persentaseDiskon = $request->diskonPenjualan / 100 * ($request->jumlahBarang * $sales_form_tunai->harga_satuan);
+        $persentaseDiskon = $request->diskonPenjualan / 100 * ($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
-        $sales_form_tunai->total_penjualan = (($request->jumlahBarang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $sales_form_tunai->total_penjualan = (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $sales_form_tunai->save();
 
@@ -338,7 +338,7 @@ class PurchaseSalesController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = (($request->jumlahBarang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->harga_asset = (($sales_form_tunai->jumlah_barang* $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $asset->save();
 
 
@@ -351,7 +351,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga -= (($request->jumlahBarang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+            $barang_yang_sama->total_harga -= (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             return redirect('/app/sales')->with('salesBelumDitambahkan', 'Barang Terjual yang diisikan belum ada di Stok Barang!');
@@ -363,7 +363,7 @@ class PurchaseSalesController extends Controller
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
         $buku_kas->nama_pemasukkan = "Penjualan";
-        $buku_kas->harga_pemasukkan = (($request->jumlahBarang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_kas->harga_pemasukkan = (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
         $buku_kas->save();
@@ -422,9 +422,9 @@ class PurchaseSalesController extends Controller
         $sales_form_kredit->jumlah_barang = $satuanBarang * $request->jumlahBarang;
 
         // HARGA TOTAL
-        $persentaseDiskon = $request->diskonPenjualan / 100 * ($request->jumlahBarang * $sales_form_kredit->harga_satuan);
+        $persentaseDiskon = $request->diskonPenjualan / 100 * ($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
-        $sales_form_kredit->total_penjualan = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $sales_form_kredit->total_penjualan = (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $sales_form_kredit->save();
 
@@ -435,7 +435,7 @@ class PurchaseSalesController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->harga_asset = (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $asset->save();
 
 
@@ -446,7 +446,7 @@ class PurchaseSalesController extends Controller
         $buku_utang_form_piutang->nama = "Penjualan Kredit";
         $buku_utang_form_piutang->nama_kreditur = $request->namaKreditur;
         $buku_utang_form_piutang->tanggal = $request->tanggalTransaksi;
-        $buku_utang_form_piutang->jumlah_piutang = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_utang_form_piutang->jumlah_piutang = (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_utang_form_piutang->save();
 
 
@@ -459,7 +459,7 @@ class PurchaseSalesController extends Controller
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
             // dd($barang_yang_sama);
             $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
-            $barang_yang_sama->total_harga -= (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+            $barang_yang_sama->total_harga -= (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             return redirect('/app/sales')->with('salesBelumDitambahkan', 'Barang Terjual yang diisikan belum ada di Stok Barang!');
@@ -471,7 +471,7 @@ class PurchaseSalesController extends Controller
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
         $buku_kas->nama_pemasukkan = "Penjualan";
-        $buku_kas->harga_pemasukkan = (($request->jumlahBarang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $buku_kas->harga_pemasukkan = (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
         $buku_kas->save();

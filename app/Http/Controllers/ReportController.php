@@ -30,9 +30,10 @@ class ReportController extends Controller
 
             // ASSET LANCAR DAN TETAP
             $cond1 = "Asset Lancar";
-            $asset_lancar = DB::select('select * from asset where asset.jenis_asset = ? and asset.user_id = ?', [$cond1, $user_id]);
+            $asset_lancar = DB::select('select asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id', [$cond1, $user_id]);
+            // dd($asset_lancar);
             $cond2 = "Asset Tetap";
-            $asset_tetap = DB::select('select * from asset where asset.jenis_asset = ? and asset.user_id = ?', [$cond2, $user_id]);
+            $asset_tetap = DB::select('select asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id', [$cond2, $user_id]);
 
             // UTANG
             $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ' . $user_id);

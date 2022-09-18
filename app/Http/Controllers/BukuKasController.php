@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use App\Models\Buku_Kas;
 use App\Models\Buku_Utang_Form_Utang;
+use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Modal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,7 @@ class BukuKasController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }    
 
+    // PEMASUKKAN
     public function tambah_kas_pemasukkan()
     {
         if (session()->has('hasLogin')) {
@@ -52,9 +54,13 @@ class BukuKasController extends Controller
 
         $buku_kas->save();
 
+        // PENAGIHAN UTANG (PIUTANG)
+        // BELUM BERES (LANJUTIN)
+
         return redirect()->route('buku_kas')->with('pemasukkanSuccess', 'Pemasukkan berhasil');
     }
 
+    // PENGELUARAN
     public function tambah_kas_pengeluaran()
     {
         if (session()->has('hasLogin')) {

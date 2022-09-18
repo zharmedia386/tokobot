@@ -47,6 +47,7 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_tunai_post(Request $request)
     {
+        $user_id = session()->get('user_id');
         // $test = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
         // dd($test);
 
@@ -99,7 +100,9 @@ class PurchaseSalesController extends Controller
 
         // STOK BARANG
         $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
-        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangDibeli]);
+        // $barang_yang_sama = Stok_Barang::select('*')->where('user_id' , '=', $user_id)->where('nama_barang' , '=', $lower_produkYangDibeli)->get();
+        // $barang_yang_sama = $barang_yang_sama[0];
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
         // dd($barang_yang_sama);
         
         if($barang_yang_sama) { // TAMBAH STOK
@@ -145,6 +148,7 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_kredit_post(Request $request)
     {
+        $user_id = session()->get('user_id');
         // dd($request->metodePembayaran);
         // dd($request->umurUtang);
 
@@ -214,7 +218,7 @@ class PurchaseSalesController extends Controller
 
         // STOK BARANG
         $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
-        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangDibeli]);
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
         // dd($barang_yang_sama);
         
         if($barang_yang_sama) { // TAMBAH STOK
@@ -296,6 +300,7 @@ class PurchaseSalesController extends Controller
 
     public function sales_form_tunai_post(Request $request)
     {
+        $user_id = session()->get('user_id');
         // $test = DB::selectOne("select getNewId('sales_form_tunai') as value from dual")->value;
         // dd($test);
 
@@ -339,7 +344,7 @@ class PurchaseSalesController extends Controller
 
         // STOK BARANG
         $lower_produkYangTerjual = Str::lower($request->produkYangTerjual);
-        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangTerjual]);
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangTerjual, $user_id]);
         // dd($barang_yang_sama);
         
         if($barang_yang_sama) { // TAMBAH STOK
@@ -447,7 +452,7 @@ class PurchaseSalesController extends Controller
 
         // STOK BARANG
         $lower_produkYangTerjual = Str::lower($request->produkYangTerjual);
-        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ?', [$lower_produkYangTerjual]);
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangTerjual, $user_id]);
         // dd($barang_yang_sama);
         
         if($barang_yang_sama) { // TAMBAH STOK

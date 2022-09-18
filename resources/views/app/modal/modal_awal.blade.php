@@ -10,9 +10,9 @@
                     <h4 class="card-title">Modal Awal</h4>
                 </div> 
                 <div class="button">
-                    <!-- <a class="btn btn-outline-primary rounded" href="{{ route('kewajiban_form') }}">
-                        + Tambah Kewajiban
-                    </a> -->
+                    <a class="btn btn-outline-primary rounded" href="{{ route('tambah_modal_awal') }}">
+                        + Tambah Modal Awal
+                    </a>
                 </div>
             </div>
             <div class="card-body">
@@ -34,10 +34,10 @@
                         @foreach($modal_awal as $data)
                             @if($user_id == $data->user_id)
                                 <tr>
-                                    <td>{{ $data->modal_id }}</td>
+                                    <td>{{ $data->modal_awal_id }}</td>
                                     <td>{{ $data->nama_modal }}</td>
                                     <td class="text-end">@currency($data->harga_modal)</td>
-                                    <td><a href="{{ route('modal_detail', $data->modal_id) }}" class="btn btn-warning">Detail</a></td>
+                                    <td><a href="{{ route('modal_detail', $data->modal_awal_id) }}" class="btn btn-warning">Detail</a></td>
                                 </tr>
                                 @php
                                     $totalModal += $data->harga_modal;
@@ -45,13 +45,13 @@
                             @endif
                         @endforeach
                         </tbody>
-                        <!-- <tfoot>
+                        <tfoot>
                             <tr>
                                 <th colspan="4">Total Modal: @currency($totalModal)</th>
                                 <tr>
                                 <th colspans="4">Saldo : @currency($totalModal)</th>
                             </tr>
-                        </tfoot> -->
+                        </tfoot>
                     </table>
                 </div>
             </div>

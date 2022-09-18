@@ -142,10 +142,10 @@
                                 <tbody class="text-end">
                                     <tr>
                                         <td >@currency($modal_awal[0]->modal_awal)</td>
-                                        <td>-</td>
-                                        <td>-</td>
+                                        <td>@currency($modal_tambahan[0]->modal_tambahan)</td>
+                                        <td>@currency($total_modal)</td>
                                         <td>@currency($prive_pemilik[0]->prive_pemilik)</td>
-                                        <td>-</td>
+                                        <td>@currency($modal_akhir)</td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

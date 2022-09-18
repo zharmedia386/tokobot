@@ -12,8 +12,8 @@
         <form action="{{ route('modal_awal_form_post') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Modal ID</label>
-                <input type="text" class="form-control" name="modalID" id="exampleInputText1" disabled value="{{ $modal_id }}" />
+                <label class="form-label" for="exampleInputText1">Modal Awal ID</label>
+                <input type="text" class="form-control" name="modalID" id="exampleInputText1" disabled value="{{ $modal_awal_id }}" />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nama Modal</label>

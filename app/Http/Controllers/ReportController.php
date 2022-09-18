@@ -26,22 +26,23 @@ class ReportController extends Controller
     public function posisi_keuangan()
     {
         if (session()->has('hasLogin')) {
-            // ASSET LANCAR DAN TETAP
-            $cond1 = "Asset Lancar";
-            $asset_lancar = DB::select('select * from asset where asset.jenis_asset = ?', [$cond1]);
-            $cond2 = "Asset Tetap";
-            $asset_tetap = DB::select('select * from asset where asset.jenis_asset = ?', [$cond2]);
             $user_id = session()->get('user_id');
 
+            // ASSET LANCAR DAN TETAP
+            $cond1 = "Asset Lancar";
+            $asset_lancar = DB::select('select * from asset where asset.jenis_asset = ? and asset.user_id = ?', [$cond1, $user_id]);
+            $cond2 = "Asset Tetap";
+            $asset_tetap = DB::select('select * from asset where asset.jenis_asset = ? and asset.user_id = ?', [$cond2, $user_id]);
+
             // UTANG
-            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang');
+            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ' . $user_id);
             
             // MODAL
-            $modal = DB::select('select sum(harga_modal) as harga_modal from modal');
+            $modal = DB::select('select sum(harga_modal) as harga_modal from modal where modal.user_id = ' . $user_id);
 
             // PRIVE MODAL
             $cond3 = "Penarikan Sebagian asset/modal untuk keperluan pribadi";
-            $prive_modal = DB::select('select sum(harga_pengeluaran) as prive_modal from buku_kas where buku_kas.nama_pengeluaran = ?', [$cond3]);
+            $prive_modal = DB::select('select sum(harga_pengeluaran) as prive_modal from buku_kas where buku_kas.nama_pengeluaran = ? and buku_kas.user_id = ?', [$cond3, $user_id]);
             // dd($prive_modal);
 
             return view('app/reports/posisi-keuangan', compact('asset_lancar','asset_tetap', 'user_id', 'utang', 'modal', 'prive_modal'));
@@ -75,10 +76,11 @@ class ReportController extends Controller
     public function perubahan_modal()
     {
         if (session()->has('hasLogin')) {
-            $modal_awal = DB::select('select sum(harga_asset) as modal_awal from asset');
-            // dd($modal_awal);
-            $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas');
             $user_id = session()->get('user_id');
+
+            $modal_awal = DB::select('select sum(harga_asset) as modal_awal from asset where asset.user_id = ' . $user_id);
+            // dd($modal_awal);
+            $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas where buku_kas.user_id = ' . $user_id);
 
             return view('app/modal/perubahan_modal', compact('user_id', 'prive_pemilik', 'modal_awal'));
         } 
@@ -212,29 +214,29 @@ class ReportController extends Controller
     public function tambah_modal_awal()
     {
         if (session()->has('hasLogin')) {
-            $modal_id = 1;
+            $modal_awal_id = DB::selectOne("select getNewId('modal_awal') as value from dual")->value;
 
-            return view('app/modal/tambah_modal_awal', compact('modal_id'));
+            return view('app/modal/tambah_modal_awal', compact('modal_awal_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
     public function modal_awal_form_post(Request $request)
     {
-        $modal = new Modal_Awal();
-        $modal->user_id = session()->get('user_id');
-        $modal->modal_id = 1;
-        $modal->nama_modal = $request->namaModal;
+        $modal_awal = new Modal_Awal();
+        $modal_awal->user_id = session()->get('user_id');
+        $modal_awal->modal_awal_id = DB::selectOne("select getNewId('modal_awal') as value from dual")->value;
+        $modal_awal->nama_modal = $request->namaModal;
 
         // HARGA MODAL
-        $modal->harga_modal = $request->hargaModal;
-        $modal->harga_modal = Str::replace('.','',$modal->harga_modal);
-        $modal->harga_modal = Str::replace('Rp ','',$modal->harga_modal);
-        $modal->harga_modal = (int)($modal->harga_modal);
+        $modal_awal->harga_modal = $request->hargaModal;
+        $modal_awal->harga_modal = Str::replace('.','',$modal_awal->harga_modal);
+        $modal_awal->harga_modal = Str::replace('Rp ','',$modal_awal->harga_modal);
+        $modal_awal->harga_modal = (int)($modal_awal->harga_modal);
 
-        $modal->save();
+        $modal_awal->save();
 
-        return redirect()->route('home')->with('successAddModal', 'Pemasukan Modal Sukses!');
+        return redirect()->route('modal_awal')->with('successAddModal', 'Pemasukan Modal Sukses!');
     }
 
     // MODAL
@@ -247,11 +249,14 @@ class ReportController extends Controller
 
 
             // PERUBAHAN MODAL
-            $modal_awal = DB::select('select sum(harga_asset) as modal_awal from asset');
+            $modal_awal = DB::select('select sum(harga_modal) as modal_awal from modal_awal where modal_awal.user_id = ' . $user_id);
+            $modal_tambahan = DB::select('select sum(harga_modal) as modal_tambahan from modal where modal.user_id = ' . $user_id);
+            $total_modal = $modal_awal[0]->modal_awal + $modal_tambahan[0]->modal_tambahan;
+            $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas where buku_kas.user_id = ' . $user_id);
+            $modal_akhir = $total_modal - $prive_pemilik[0]->prive_pemilik;
             // dd($modal_awal);
-            $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas');
 
-            return view('app/modal/modal', compact('user_id', 'modal', 'prive_pemilik', 'modal_awal'));
+            return view('app/modal/modal', compact('user_id', 'modal', 'prive_pemilik', 'modal_awal', 'modal_tambahan', 'total_modal', 'modal_akhir'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

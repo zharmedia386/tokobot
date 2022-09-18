@@ -154,7 +154,7 @@
                                                 <td>{{ $data->jumlah_barang }}</td>
                                                 <td class="text-end">@currency($data->harga_satuan)</td>
                                                 <td class="text-end">@currency($data->total_pembelian)</td>
-                                                <td class="text-end">{{ $data->nama_supplier }}</td>
+                                                <td>{{ $data->nama_supplier }}</td>
                                                 <td><a href="{{ route('purchase_kredit_detail', $data->nomor_transaksi) }}" class="btn btn-warning">Detail</a></td>
                                             </tr>
                                             @php

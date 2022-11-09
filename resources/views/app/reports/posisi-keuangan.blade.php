@@ -26,7 +26,7 @@
                             <tbody>
                                 <!-- ASSET LANCAR -->
                                 <tr>
-                                    <th scope="row"><strong>Asset Lancar</strong></td>
+                                    <th scope="row"><strong>Aset Lancar</strong></td>
                                 </tr>
                                 @php
                                     $assetLancar = 0;
@@ -100,7 +100,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Modal</td>
-                                    <td>@currency($modal[0]->harga_modal)</td>
+                                    <td>@currency($modal[0]->harga_modal + $modal_awal[0]->harga_modal)</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">&emsp; • &nbsp;Prive Modal</td>

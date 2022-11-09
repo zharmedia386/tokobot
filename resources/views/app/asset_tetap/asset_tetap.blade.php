@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between pb-0 border-0">
                 <div class="header-title">
-                    <h4 class="card-title">Asset Tetap</h4>
+                    <h4 class="card-title">Aset Tetap</h4>
                 </div> 
             </div>
             <!--<div class="card-body">
@@ -33,7 +33,7 @@
                         <thead>
                             <tr>
                                 <th>Nomor </th>
-                                <th>Nama Asset Tetap</th>
+                                <th>Nama Aset Tetap</th>
                                 <th>Harga Perolehan</th>
                                 <th>Umur Ekonomis</th>
                                 <th>Masa Penggunaan</th>

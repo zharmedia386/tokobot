@@ -56,8 +56,8 @@
                 <input type="text" class="form-control" id="exampleInputText1" name="diskonPembelian" placeholder="Masukkan Diskon Pembelian.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Produk yang dibeli</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="produkYangDibeli" placeholder="Masukkan Produk yang dibeli.." />
+                <label class="form-label" for="exampleInputText1">Nama Produk yang dibeli</label>
+                <input type="text" class="form-control" id="exampleInputText1" name="produkYangDibeli" placeholder="Masukkan Nama Produk yang dibeli.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Pajak (%)</label>

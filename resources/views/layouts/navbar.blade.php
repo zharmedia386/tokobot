@@ -2010,9 +2010,9 @@
                         </defs>
                     </svg>
                 </div>
-                <div class="logo-hover">
+                <!-- <div class="logo-hover">
                     <img src="{{ asset('assets/images/favicon.png') }}" class="img-fluid logo-img" alt="img4" />
-                </div>
+                </div> -->
 
                 <!--logo End-->
             </a>

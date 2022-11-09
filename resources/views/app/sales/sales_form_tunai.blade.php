@@ -32,8 +32,8 @@
                 <input type="text" class="form-control" name="diskonPenjualan" id="exampleInputText1" placeholder="Masukkan Diskon Penjualan.." />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Produk yang terjual</label>
-                <input type="text" class="form-control" name="produkYangTerjual" id="exampleInputText1" placeholder="Masukkan Produk yang terjual.." />
+                <label class="form-label" for="exampleInputText1">Nama Produk yang terjual</label>
+                <input type="text" class="form-control" name="produkYangTerjual" id="exampleInputText1" placeholder="Masukkan Nama Produk yang terjual.." />
             </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Pajak (%)</label>

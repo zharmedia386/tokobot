@@ -68,7 +68,7 @@
                                         @if($user_id == $data->user_id)
                                             <tr>
                                                 <td>{{ $data->nomor_utang }}</td>
-                                                <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal),"d/m/Y") }}</td>
                                                 <td>{{ $data->nama }}</td>
                                                 <td>{{ $data->nama_supplier }}</td>
                                                 <td class="text-end">@currency($data->jumlah_utang)</td>
@@ -145,7 +145,7 @@
                                         @if($user_id == $data->user_id)
                                             <tr>
                                                 <td>{{ $data->nomor_piutang }}</td>
-                                                <td>{{ date_format(date_create($data->tanggal),"Y/m/d") }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal),"d/m/Y") }}</td>
                                                 <td>{{ $data->nama }}</td>
                                                 <td>{{ $data->nama_kreditur }}</td>
                                                 <td class="text-end">@currency($data->jumlah_piutang)</td>

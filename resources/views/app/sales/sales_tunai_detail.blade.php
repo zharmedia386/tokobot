@@ -31,7 +31,7 @@
                 <input type="text" class="form-control" name="diskonPenjualan" id="exampleInputText1" disabled value="{{ $sales_form_tunai[0]->diskon_penjualan }}" />
             </div>
             <div class="form-group">
-                <label class="form-label" for="exampleInputText1">Produk yang terjual</label>
+                <label class="form-label" for="exampleInputText1">Nama Produk yang terjual</label>
                 <input type="text" class="form-control" name="produkYangTerjual" id="exampleInputText1" disabled value="{{ $sales_form_tunai[0]->produk_yang_terjual }}" />
             </div>
             <div class="form-group">

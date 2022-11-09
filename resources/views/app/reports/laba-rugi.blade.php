@@ -28,10 +28,12 @@
                             <tbody>
                                 @foreach($buku_kas as $data)
                                     @if($user_id == $data->user_id)
-                                    <tr>
-                                        <td>{{ $data->nama_pemasukkan }}</td>
-                                        <td>@currency($data->harga_pemasukkan )</td>
-                                    </tr>
+                                        @if(isset($data->nama_pemasukkan) & isset($data->harga_pemasukkan))
+                                            <tr>
+                                                <td>{{ $data->nama_pemasukkan }}</td>
+                                                <td>@currency($data->harga_pemasukkan )</td>
+                                            </tr>
+                                        @endif
                                     @endif
                                     @php
                                         $totalPendapatan += $data->harga_pemasukkan;
@@ -60,10 +62,12 @@
                             <tbody>
                                 @foreach($buku_kas as $data)
                                     @if($user_id == $data->user_id)
-                                    <tr>
-                                        <td>{{ $data->nama_pengeluaran }}</td>
-                                        <td>@currency($data->harga_pengeluaran )</td>
-                                    </tr>
+                                        @if(isset($data->nama_pengeluaran) & isset($data->harga_pengeluaran))
+                                        <tr>
+                                            <td>{{ $data->nama_pengeluaran }}</td>
+                                            <td>@currency($data->harga_pengeluaran )</td>
+                                        </tr>
+                                        @endif
                                     @endif
                                     @php
                                         $totalBeban += $data->harga_pengeluaran;

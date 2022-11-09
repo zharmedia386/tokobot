@@ -37,11 +37,12 @@
                     <option name="pengeluaran" value="Pengeluaran di luar usaha" selected="">{{ $buku_kas[0]->nama_pengeluaran }}</option>
                     <option name="pengeluaran" value="Pengeluaran di luar usaha">Pengeluaran di luar usaha</option>
                     <option name="pengeluaran" value="Biaya operasional">Biaya operasional</option>
+                    <option name="pengeluaran" value="Pembayaran Utang">Pembayaran Utang</option>
                     <option name="pengeluaran" value="Gaji/bonus karyawan">Gaji/bonus karyawan</option>
                     <option name="pengeluaran" value="Pemberian utang">Pemberian utang</option>
                     <option name="pengeluaran" value="Pembayaran utang">Pembayaran utang</option>
                     <option name="pengeluaran" value="Pengeluaran lain-lain">Pengeluaran lain-lain</option>
-                    <option name="pengeluaran" value="Penarikan Sebagian asset/modal untuk keperluan pribadi">Penarikan Sebagian asset/modal untuk keperluan pribadi</option>
+                    <option name="pengeluaran" value="Penarikan Sebagian asset/modal untuk keperluan pribadi">Penarikan Sebagian aset/modal untuk keperluan pribadi</option>
                 </select>
             </div>
             <div class="form-group">

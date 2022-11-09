@@ -69,7 +69,7 @@
                                         @if($user_id == $data->user_id)
                                             <tr>
                                                 <td>{{ $data->nomor_transaksi }}</td>
-                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"d/m/Y") }}</td>
                                                 <td>{{ $data->produk_yang_dibeli }}</td>
                                                 <td>{{ $data->jumlah_barang }}</td>
                                                 <td class="text-end">@currency($data->harga_satuan)</td>
@@ -149,7 +149,7 @@
                                         @if($user_id == $data->user_id)
                                             <tr>
                                                 <td>{{ $data->nomor_transaksi }}</td>
-                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"Y/m/d") }}</td>
+                                                <td>{{ date_format(date_create($data->tanggal_transaksi),"d/m/Y") }}</td>
                                                 <td>{{ $data->produk_yang_dibeli }}</td>
                                                 <td>{{ $data->jumlah_barang }}</td>
                                                 <td class="text-end">@currency($data->harga_satuan)</td>

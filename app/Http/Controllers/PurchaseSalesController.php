@@ -358,6 +358,15 @@ class PurchaseSalesController extends Controller
         }
 
 
+        // MODAL
+        // $modal = new Modal();
+        // $modal->user_id = session()->get('user_id');
+        // $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
+        // $modal->nama_modal = "Persediaan barang dagang";
+        // $modal->harga_modal = (($sales_form_tunai->jumlah_barang* $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        // $modal->save();
+
+
         // BUKU KAS
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
@@ -383,6 +392,7 @@ class PurchaseSalesController extends Controller
 
     public function sales_form_kredit_post(Request $request)
     {
+        $user_id = session()->get('user_id');
         // dd($request->metodePembayaran);
         // dd($request->umurUtang);
 

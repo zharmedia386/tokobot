@@ -99,18 +99,18 @@
                                     <td>@currency($utang[0]->jumlah_utang)</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Modal</td>
-                                    <td>@currency($modal[0]->harga_modal + $modal_awal[0]->harga_modal)</td>
+                                    <th scope="row">Modal Akhir</td>
+                                    <td>@currency($modal_akhir)</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">&emsp; • &nbsp;Prive Modal</td>
-                                    <td>@currency($prive_modal[0]->prive_modal)</td>
+                                    <td>@currency($prive_modal)</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
                                 <th><strong>Total Utang dan Modal</strong></th>
-                                <td><strong>@currency($utang[0]->jumlah_utang + $modal[0]->harga_modal - $prive_modal[0]->prive_modal)</strong></td>
+                                <td><strong>@currency($utang[0]->jumlah_utang + $modal_akhir - $prive_modal)</strong></td>
                                 </tr>
                             </tfoot>
                         </table>

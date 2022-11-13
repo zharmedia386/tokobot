@@ -134,6 +134,13 @@ class PurchaseSalesController extends Controller
 
         $buku_kas->save();
 
+        // UBAH UANG KAS DI ASET LANCAR
+        $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+        $kas = Asset::find($kas[0]->nomor_asset);
+        $kas->harga_asset -= (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $kas->update();
+        // dd($kas);
+
         return redirect()->route('purchase')->with('successPurchaseFormTunai', 'Pemasukan Pembayaran Secara Tunai Sukses!');
     }
 
@@ -338,7 +345,7 @@ class PurchaseSalesController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = (($sales_form_tunai->jumlah_barang* $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->harga_asset = -((($sales_form_tunai->jumlah_barang* $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak);
         $asset->save();
 
 
@@ -376,6 +383,14 @@ class PurchaseSalesController extends Controller
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
         $buku_kas->save();
+
+
+        // UBAH UANG KAS DI ASET LANCAR
+        $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+        $kas = Asset::find($kas[0]->nomor_asset);
+        $kas->harga_asset += (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $kas->update();
+        // dd($kas);
 
 
         return redirect()->route('sales')->with('successSalesFormTunai', 'Pemasukan Pembayaran Secara Tunai Sukses!');
@@ -445,7 +460,8 @@ class PurchaseSalesController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        $asset->harga_asset = -((($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak);
+        // dd($asset->harga_asset);
         $asset->save();
 
 

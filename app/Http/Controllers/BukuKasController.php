@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use App\Models\Buku_Kas;
+use App\Models\Asset;
 use App\Models\Buku_Utang_Form_Utang;
 use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Modal;
@@ -55,7 +56,14 @@ class BukuKasController extends Controller
         $buku_kas->save();
 
         // PENAGIHAN UTANG (PIUTANG)
-        // BELUM BERES (LANJUTIN)
+        if($request->pemasukkan == "Penagihan utang") {
+            // UBAH UANG KAS DI ASET LANCAR
+            $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+            $kas = Asset::find($kas[0]->nomor_asset);
+            $kas->harga_asset += $buku_kas->harga_pemasukkan;
+            $kas->update();
+            // dd($kas);
+        }
 
         return redirect()->route('buku_kas')->with('pemasukkanSuccess', 'Pemasukkan berhasil');
     }
@@ -109,6 +117,16 @@ class BukuKasController extends Controller
 
         //     $buku_utang_form_utang->save();
         // }
+
+        // PEMBAYARAN UTANG 
+        if($request->pengeluaran == "Pembayaran Utang" || $request->pengeluaran == "Gaji/bonus karyawan" || $request->pengeluaran == "Penarikan Sebagian asset/modal untuk keperluan pribadi") {
+            // UBAH UANG KAS DI ASET LANCAR
+            $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+            $kas = Asset::find($kas[0]->nomor_asset);
+            $kas->harga_asset -= $buku_kas->harga_pengeluaran;
+            $kas->update();
+            // dd($kas);
+        }
 
         return redirect()->route('buku_kas')->with('pengeluaranSuccess', 'Pengeluaran berhasil');
     }

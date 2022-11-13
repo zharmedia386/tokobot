@@ -11,5 +11,5 @@ class Asset extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'asset';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'nomor_asset';
 }

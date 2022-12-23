@@ -136,10 +136,12 @@ class PurchaseSalesController extends Controller
 
         // UBAH UANG KAS DI ASET LANCAR
         $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
-        $kas = Asset::find($kas[0]->nomor_asset);
-        $kas->harga_asset -= (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
-        $kas->update();
-        // dd($kas);
+        if($kas) {
+            $kas = Asset::find($kas[0]->nomor_asset);
+            $kas->harga_asset -= (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+            $kas->update();
+            // dd($kas);
+        }
 
         return redirect()->route('purchase')->with('successPurchaseFormTunai', 'Pemasukan Pembayaran Secara Tunai Sukses!');
     }
@@ -345,7 +347,13 @@ class PurchaseSalesController extends Controller
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = -((($sales_form_tunai->jumlah_barang* $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak);
+
+            // PENGURANGAN KE PERSEDIAAN BARANG DAGANG DARI HPP NYA
+            // HARGA PEMBELIAN DI MODAL AWAL DIKALI JUMLAH PENJUALAN
+        $harga_satuan_pembelian = DB::select('select harga_satuan from modal_awal where modal_awal.nama_modal = ?', [Str::lower($request->produkYangTerjual)] );
+        $hpp = $sales_form_tunai->jumlah_barang * $harga_satuan_pembelian[0]->harga_satuan;
+
+        $asset->harga_asset = -$hpp;
         $asset->save();
 
 
@@ -454,14 +462,30 @@ class PurchaseSalesController extends Controller
         $sales_form_kredit->save();
 
 
-        // ASSET LANCAR
+        // ASSET LANCAR UNTUK PIUTANG
+        $asset = new Asset();
+        $asset->user_id = session()->get('user_id');
+        $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+        $asset->nama_asset = "Piutang";
+        $asset->jenis_asset = "Asset Lancar";
+        $asset->harga_asset = ((($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak);
+        // dd($asset->harga_asset);
+        $asset->save();
+
+
+        // ASSET LANCAR UNTUK PERSEDIAAN BARANG DAGANG
         $asset = new Asset();
         $asset->user_id = session()->get('user_id');
         $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
         $asset->nama_asset = "Persediaan barang dagang";
         $asset->jenis_asset = "Asset Lancar";
-        $asset->harga_asset = -((($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak);
-        // dd($asset->harga_asset);
+
+            // PENGURANGAN KE PERSEDIAAN BARANG DAGANG DARI HPP NYA
+            // HARGA PEMBELIAN DI MODAL AWAL DIKALI JUMLAH PENJUALAN
+        $harga_satuan_pembelian = DB::select('select harga_satuan from modal_awal where modal_awal.nama_modal = ?', [Str::lower($request->produkYangTerjual)] );
+        $hpp = $sales_form_kredit->jumlah_barang * $harga_satuan_pembelian[0]->harga_satuan;
+
+        $asset->harga_asset = -$hpp;
         $asset->save();
 
 

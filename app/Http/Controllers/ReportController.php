@@ -49,7 +49,8 @@ class ReportController extends Controller
             // PRIVE MODAL
             $cond3 = "Penarikan Sebagian asset/modal untuk keperluan pribadi";
             $prive_modal = DB::select('select sum(harga_pengeluaran) as prive_modal from buku_kas where buku_kas.nama_pengeluaran = ? and buku_kas.user_id = ?', [$cond3, $user_id]);
-
+            $prive_modal = $prive_modal[0]->prive_modal;
+            
             // Pendapatan
             $penjualan_tunai = DB::select('select sum(total_penjualan) as sales_tunai from sales_form_tunai where sales_form_tunai.user_id = ' . $user_id);
             $penjualan_tunai= $penjualan_tunai[0]->sales_tunai;
@@ -96,27 +97,29 @@ class ReportController extends Controller
             $laba_kotor = $pendapatan_atas_penjualan - $harga_pokok_penjualan;
             // dd($laba_kotor);
 
-
+            $modal_akhir=0;
             // BEBAN GAJI
             $beban_gaji = DB::select('select * from buku_kas where buku_kas.nama_pengeluaran = "Gaji/bonus karyawan"');
-            $beban_gaji = $beban_gaji[0]->harga_pengeluaran;
-            // dd($beban_gaji);
-                        
-            
-            /////////////////////////////////
-            /// LABA BERSIH
-            $laba_bersih = $laba_kotor - $beban_gaji;
-            // dd($laba_bersih);
-            
-            
-            $prive_modal = $prive_modal[0]->prive_modal;
-            // dd($prive_modal);
+            if($beban_gaji) {
+                $beban_gaji = $beban_gaji[0]->harga_pengeluaran;
+                // dd($beban_gaji);
+                            
+                
+                /////////////////////////////////
+                /// LABA BERSIH
+                $laba_bersih = $laba_kotor - $beban_gaji;
+                // dd($laba_bersih);
+                
+                
+                // $prive_modal = $prive_modal[0]->prive_modal;
+                // dd($prive_modal);
 
 
-            // MODAL AKHIR
-            // modal_awal + laba bersih - prive modal
-            // dikurangi prive modal nya nanti di frontend
-            $modal_akhir = $modal + $laba_bersih;
+                // MODAL AKHIR
+                // modal_awal + laba bersih - prive modal
+                // dikurangi prive modal nya nanti di frontend
+                $modal_akhir = $modal + $laba_bersih;
+            }
 
             return view('app/reports/posisi-keuangan', compact('asset_lancar','asset_tetap', 'user_id', 'utang', 'modal_akhir', 'prive_modal', 'modal_awal'));
         } 
@@ -450,7 +453,8 @@ class ReportController extends Controller
         $modal_awal->user_id = session()->get('user_id');
         $modal_awal->modal_awal_id = DB::selectOne("select getNewId('modal_awal') as value from dual")->value;
         $modal_awal->nama_modal = Str::lower($request->produkYangDibeli);
-        $modal_awal->jenis_modal = "Persediaan Barang Dagang";
+        $modal_awal->jenis_modal = "Persediaan barang dagang";
+        $modal_awal->harga_satuan = $purchase_form_tunai->harga_satuan;
         $modal_awal->harga_modal = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
 
         $modal_awal->save();

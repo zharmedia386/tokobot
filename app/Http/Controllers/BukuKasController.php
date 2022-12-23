@@ -63,6 +63,16 @@ class BukuKasController extends Controller
             $kas->harga_asset += $buku_kas->harga_pemasukkan;
             $kas->update();
             // dd($kas);
+
+            // MENGURANGI DAFTAR PIUTANG DI ASET LANCAR
+            $asset = new Asset();
+            $asset->user_id = session()->get('user_id');
+            $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+            $asset->nama_asset = "Piutang";
+            $asset->jenis_asset = "Asset Lancar";
+            $asset->harga_asset = -$buku_kas->harga_pemasukkan;
+            // dd($asset->harga_asset);
+            $asset->save();
         }
 
         return redirect()->route('buku_kas')->with('pemasukkanSuccess', 'Pemasukkan berhasil');
@@ -94,6 +104,18 @@ class BukuKasController extends Controller
         $buku_kas->harga_pengeluaran = (int)($buku_kas->harga_pengeluaran);
 
         $buku_kas->save();
+
+        // JIKA PEMBAYARAN UTANG, DIMASUKKAN SEBAGAI PENAMBAHAN KE PERSEDIAAN BARANG DAGANG
+        if($request->pengeluaran == "Pembayaran Utang") {
+            $asset = new Asset();
+            $asset->user_id = session()->get('user_id');
+            $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+            $asset->nama_asset = "Persediaan barang dagang";
+            $asset->jenis_asset = "Asset Lancar";
+            $asset->harga_asset = $buku_kas->harga_pengeluaran;
+            // dd($asset->harga_asset);
+            $asset->save();
+        }
 
         // JIKA PEMBERIAN UTANG (PIUTANG) DAN PEMBAYARAN UTANG DI BUKU KAS PENGELUARAN DIPILIH, MASUK KE BUKU UTANG (NERACA)
         // if($request->pengeluaran == "Pemberian utang (Piutang)") {

@@ -11,5 +11,5 @@ class Sales_Form_Tunai extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'sales_form_tunai';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'nomor_transaksi';
 }

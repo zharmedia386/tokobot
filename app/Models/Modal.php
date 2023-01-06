@@ -11,5 +11,5 @@ class Modal extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'modal';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'modal_id';
 }

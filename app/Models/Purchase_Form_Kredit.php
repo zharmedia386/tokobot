@@ -11,5 +11,5 @@ class Purchase_Form_Kredit extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'purchase_form_kredit';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'nomor_transaksi';
 }

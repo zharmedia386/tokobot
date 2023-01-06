@@ -11,5 +11,5 @@ class Buku_Kas extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'buku_kas';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'kas_id';
 }

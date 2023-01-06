@@ -11,5 +11,5 @@ class Sales_Form_Kredit extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'sales_form_kredit';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'nomor_transaksi';
 }

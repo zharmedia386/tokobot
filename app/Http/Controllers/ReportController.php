@@ -227,6 +227,12 @@ class ReportController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
+    public function asset_delete($nomor_asset) {
+        $asset = Asset::find($nomor_asset);
+        $asset->delete();
+        return redirect('/app/asset');
+    }
+
     // KEWAJIBAN
     public function kewajiban()
     {
@@ -280,6 +286,13 @@ class ReportController extends Controller
             return view('app/kewajiban/kewajiban_detail', compact('kewajiban'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function kewajiban_delete($nomor_kewajiban) {
+        // dd($nomor_kewajiban);
+        $kewajiban = Kewajiban::find($nomor_kewajiban);
+        $kewajiban->delete();
+        return redirect('/app/kewajiban');
     }
 
     // MODAL AWAL
@@ -462,6 +475,13 @@ class ReportController extends Controller
         return redirect()->route('modal_awal')->with('successAddModal', 'Pemasukan Modal Sukses!');
     }
 
+    public function modal_awal_delete($modal_awal_id) {
+        // dd($modal_awal_id);
+        $modal_awal = Modal_Awal::find($modal_awal_id);
+        $modal_awal->delete();
+        return redirect('/app/modal_awal');
+    }
+
     // MODAL
     public function modal()
     {
@@ -520,6 +540,13 @@ class ReportController extends Controller
             return view('app/modal/modal_detail', compact('modal'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function modal_delete($modal_id) {
+        // dd($modal_id);
+        $modal = Modal::find($modal_id);
+        $modal->delete();
+        return redirect('/app/modal');
     }
 
     // BEBAN USAHA
@@ -629,5 +656,12 @@ class ReportController extends Controller
             return view('app/stok_barang/stok_barang_detail', compact('stok_barang'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function stok_barang_delete($stok_id) {
+        // dd($stok_id);
+        $stok_barang = Stok_Barang::find($stok_id);
+        $stok_barang->delete();
+        return redirect('/app/stok_barang');
     }
 }

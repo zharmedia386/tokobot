@@ -32,10 +32,10 @@ class BukuUtangController extends Controller
     {
         if (session()->has('hasLogin')) {
             $nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
-            $supplier = DB::table('supplier')->get();
+            $buku_utang_utang = DB::table('buku_utang_utang')->get();
             $user_id = session()->get('user_id');
 
-            return view('app/buku_utang/buku_utang_form_utang', compact('nomor_utang', 'user_id', 'supplier'));
+            return view('app/buku_utang/buku_utang_form_utang', compact('nomor_utang', 'user_id', 'buku_utang_utang'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -51,7 +51,7 @@ class BukuUtangController extends Controller
         $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
         $buku_utang_form_utang->tanggal = $request->tanggal;
         $buku_utang_form_utang->nama = $request->nama;
-        $buku_utang_form_utang->nama_supplier = $request->namaSupplier;
+        $buku_utang_form_utang->nama_buku_utang_utang = $request->namaSupplier;
 
         // HARGA SATUAN
         $buku_utang_form_utang->jumlah_utang = $request->jumlahUtang;
@@ -125,5 +125,19 @@ class BukuUtangController extends Controller
             return view('app/buku_utang/buku_utang_piutang_detail', compact('buku_utang_form_piutang'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function buku_utang_utang_delete($nomor_utang) {
+        // dd($nomor_utang);
+        $buku_utang_utang = Buku_Utang_Form_Utang::find($nomor_utang);
+        $buku_utang_utang->delete();
+        return redirect('/app/buku_utang');
+    }
+
+    public function buku_utang_piutang_delete($nomor_piutang) {
+        // dd($nomor_piutang);
+        $buku_utang_piutang = Buku_Utang_Form_Piutang::find($nomor_piutang);
+        $buku_utang_piutang->delete();
+        return redirect('/app/buku_utang');
     }
 }

@@ -284,6 +284,20 @@ class PurchaseSalesController extends Controller
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
+    public function purchase_tunai_delete($nomor_transaksi) {
+        // dd($nomor_transaksi);
+        $purchase_tunai = Purchase_Form_Tunai::find($nomor_transaksi);
+        $purchase_tunai->delete();
+        return redirect('/app/purchase');
+    }
+
+    public function purchase_kredit_delete($nomor_transaksi) {
+        // dd($nomor_transaksi);
+        $purchase_kredit = Purchase_Form_Kredit::find($nomor_transaksi);
+        $purchase_kredit->delete();
+        return redirect('/app/purchase');
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // SALES
     public function sales()
@@ -547,5 +561,19 @@ class PurchaseSalesController extends Controller
             return view('app/sales/sales_kredit_detail', compact('sales_form_kredit'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function sales_tunai_delete($nomor_transaksi) {
+        // dd($nomor_transaksi);
+        $sales_tunai = Sales_Form_Tunai::find($nomor_transaksi);
+        $sales_tunai->delete();
+        return redirect('/app/sales');
+    }
+
+    public function sales_kredit_delete($nomor_transaksi) {
+        // dd($nomor_transaksi);
+        $sales_kredit = Sales_Form_Kredit::find($nomor_transaksi);
+        $sales_kredit->delete();
+        return redirect('/app/sales');
     }
 }

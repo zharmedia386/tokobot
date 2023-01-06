@@ -11,5 +11,5 @@ class Buku_Utang_Form_Utang extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'buku_utang_form_utang';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'nomor_utang';
 }

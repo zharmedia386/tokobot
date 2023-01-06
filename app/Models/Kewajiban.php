@@ -11,5 +11,5 @@ class Kewajiban extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $table = 'kewajiban';
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'nomor_kewajiban';
 }

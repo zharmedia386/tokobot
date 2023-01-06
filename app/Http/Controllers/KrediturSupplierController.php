@@ -44,6 +44,13 @@ class KrediturSupplierController extends Controller
         return redirect()->route('kreditur')->with('successAddKreditur', 'Pemasukan Kreditur Sukses!');
     }
 
+    public function kreditur_delete($kreditur_id) {
+        // dd($kreditur_id);
+        $kreditur = Kreditur::find($kreditur_id);
+        $kreditur->delete();
+        return redirect('/app/kreditur');
+    }
+
     // SUPPLIER
     public function supplier()
     {
@@ -76,5 +83,12 @@ class KrediturSupplierController extends Controller
         $supplier->save();
 
         return redirect()->route('supplier')->with('successAddsupplier', 'Pemasukan Supplier Sukses!');
+    }
+
+    public function supplier_delete($supplier_id) {
+        // dd($supplier_id);
+        $supplier = Supplier::find($supplier_id);
+        $supplier->delete();
+        return redirect('/app/supplier');
     }
 }

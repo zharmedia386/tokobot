@@ -123,7 +123,7 @@ class BukuKasController extends Controller
         //     $buku_utang_form_utang->user_id = session()->get('user_id');
         //     $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
         //     $buku_utang_form_utang->nama = "Pemberian Utang (Piutang)";
-        //     $buku_utang_form_utang->nama_supplier = "-";
+        //     $buku_utang_form_utang->nama_buku_kas = "-";
         //     $buku_utang_form_utang->tanggal = $request->tanggal;
         //     $buku_utang_form_utang->jumlah_utang = $buku_kas->harga_pengeluaran;
 
@@ -133,7 +133,7 @@ class BukuKasController extends Controller
         //     $buku_utang_form_utang->user_id = session()->get('user_id');
         //     $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
         //     $buku_utang_form_utang->nama = "Pembayaran utang";
-        //     $buku_utang_form_utang->nama_supplier = "-";
+        //     $buku_utang_form_utang->nama_buku_kas = "-";
         //     $buku_utang_form_utang->tanggal = $request->tanggal;
         //     $buku_utang_form_utang->jumlah_utang = $buku_kas->harga_pengeluaran;
 
@@ -161,5 +161,12 @@ class BukuKasController extends Controller
             return view('app/buku_kas/buku_kas_detail', compact('buku_kas'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
+    public function buku_kas_delete($kas_id) {
+        // dd($kas_id);
+        $buku_kas = Buku_Kas::find($kas_id);
+        $buku_kas->delete();
+        return redirect('/app/buku_kas');
     }
 }

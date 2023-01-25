@@ -126,6 +126,15 @@ class BukuKasController extends Controller
             // dd($asset->harga_asset);
             $asset->save();
 
+            
+            // UBAH UTANG KAS DI BUKU PIUTANG BERDASARKAN NAMA SUPPLIER
+            $namaSupplier = $request->namaSupplier;
+            $utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nama_supplier = ?', [$namaSupplier]);
+            $utang = Buku_Utang_Form_Utang::find($utang[0]->nomor_utang);
+            $utang->jumlah_utang -= $buku_kas->harga_pengeluaran;
+            $utang->update();
+
+
             // UBAH UTANG KAS DI BUKU UTANG BERDASARKAN NAMA
             // $namaSupplier = $request->namaSupplier;
             // $utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nama_supplier = ?', [$namaSupplier]);

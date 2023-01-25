@@ -41,12 +41,16 @@
                                 @endforeach
                                 @if($user_id == $penjualan_kredit[0]->user_id)
                                         <tr>
-                                            <td>'Penjualan Kredit</td>
+                                            <td>Penjualan Kredit</td>
                                             <td>@currency($total_penjualan_kredit)</td>
                                         </tr>
                                 @endif
+                                <tr>
+                                    <td>Harga Pokok Penjualan</td>
+                                    <td>@currency($harga_pokok_penjualan)</td>
+                                </tr>
                                 @php
-                                    $totalPendapatan += $total_penjualan_kredit;
+                                    $totalPendapatan += $total_penjualan_kredit - $harga_pokok_penjualan;
                                 @endphp
                             </tbody>
                             <tfoot>

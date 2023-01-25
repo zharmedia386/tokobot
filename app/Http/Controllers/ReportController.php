@@ -95,7 +95,7 @@ class ReportController extends Controller
             $harga_pokok_penjualan = $hpp1 + $hpp2;
             
             $laba_kotor = $pendapatan_atas_penjualan - $harga_pokok_penjualan;
-            // dd($laba_kotor);
+            // dd($harga_pokok_penjualan);
 
             $modal_akhir=0;
             // BEBAN GAJI
@@ -141,6 +141,40 @@ class ReportController extends Controller
         if (session()->has('hasLogin')) {
             // PEMASUKKAN DAN PENGELUARAN (BUKU KAS)
             $user_id  = session()->get('user_id');
+            // Harga Pokok Penjualan -> Jumlah yang terjual x Harga Pembelian
+            $sales_form_tunai = DB::select('select * from sales_form_tunai where sales_form_tunai.user_id = ' . $user_id);
+            $sales_form_kredit = DB::select('select * from sales_form_kredit where sales_form_kredit.user_id = ' . $user_id);
+            $purchase_form_tunai = DB::select('select * from purchase_form_tunai where purchase_form_tunai.user_id = ' . $user_id);
+            $purchase_form_kredit = DB::select('select * from purchase_form_kredit where purchase_form_kredit.user_id = ' . $user_id);
+
+            $hpp1 = 0;
+            $hpp2 = 0;
+                // Penjualan Tunai
+            foreach($sales_form_tunai as $sales_tunai) {
+                foreach($purchase_form_tunai as $purchase_tunai) {
+                    if(Str::lower($sales_tunai->produk_yang_terjual) == $purchase_tunai->produk_yang_dibeli) {
+                        $hpp1 += $sales_tunai->jumlah_barang * $purchase_tunai->harga_satuan;
+                        break;
+                    }
+                }
+            }
+            
+            // dd($hpp1);
+            
+                // Penjualan Kredit
+            foreach($sales_form_kredit as $sales_kredit) {
+                foreach($purchase_form_kredit as $purchase_kredit) {
+                    if($sales_kredit->produk_yang_terjual== $purchase_kredit->produk_yang_dibeli) {
+                        $hpp2 += $sales_kredit->jumlah_barang * $purchase_kredit->harga_satuan;
+                        break;
+                    }
+                }
+            }
+
+            // dd($hpp2);
+            $harga_pokok_penjualan = $hpp1 + $hpp2;
+
+
             $gaji_karyawan = new Buku_Kas;
             $total_pengeluaran = 0;
             $total_penjualan_kredit = 0;
@@ -169,7 +203,7 @@ class ReportController extends Controller
             // dd($gaji_karyawan_user_id);
             // $gaji_karyawan_harga_pengeluaran = $gaji_karyawan->harga_pengeluaran;
                 
-            return view('app/reports/laba-rugi', compact('penjualan_tunai','total_penjualan_kredit','penjualan_kredit', 'gaji_karyawan_user_id','gaji_karyawan_nama_pengeluaran','gaji_karyawan_harga_pengeluaran', 'user_id'));
+            return view('app/reports/laba-rugi', compact('harga_pokok_penjualan','penjualan_tunai','total_penjualan_kredit','penjualan_kredit', 'gaji_karyawan_user_id','gaji_karyawan_nama_pengeluaran','gaji_karyawan_harga_pengeluaran', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

@@ -93,11 +93,11 @@ Route::get('/app/asset/asset_detail/{user_id}', 'App\Http\Controllers\ReportCont
 Route::post('/app/asset/asset_delete/{nomor_asset}', 'App\Http\Controllers\ReportController@asset_delete')->name('asset_delete');
 
 // KEWAJIBAN
-Route::get('/app/kewajiban', 'App\Http\Controllers\ReportController@kewajiban')->name('kewajiban');
-Route::get('/app/kewajiban/kewajiban_form', 'App\Http\Controllers\ReportController@kewajiban_form')->name('kewajiban_form');
-Route::post('/app/kewajiban/kewajiban_form', 'App\Http\Controllers\ReportController@kewajiban_form_post')->name('kewajiban_form_post');
-Route::get('/app/kewajiban/kewajiban_detail/{user_id}', 'App\Http\Controllers\ReportController@kewajiban_detail')->name('kewajiban_detail');
-Route::post('/app/kewajiban/kewajiban_delete/{nomor_kewajiban}', 'App\Http\Controllers\ReportController@kewajiban_delete')->name('kewajiban_delete');
+// Route::get('/app/kewajiban', 'App\Http\Controllers\ReportController@kewajiban')->name('kewajiban');
+// Route::get('/app/kewajiban/kewajiban_form', 'App\Http\Controllers\ReportController@kewajiban_form')->name('kewajiban_form');
+// Route::post('/app/kewajiban/kewajiban_form', 'App\Http\Controllers\ReportController@kewajiban_form_post')->name('kewajiban_form_post');
+// Route::get('/app/kewajiban/kewajiban_detail/{user_id}', 'App\Http\Controllers\ReportController@kewajiban_detail')->name('kewajiban_detail');
+// Route::post('/app/kewajiban/kewajiban_delete/{nomor_kewajiban}', 'App\Http\Controllers\ReportController@kewajiban_delete')->name('kewajiban_delete');
 
 // MODAL
 Route::get('/app/modal', 'App\Http\Controllers\ReportController@modal')->name('modal');

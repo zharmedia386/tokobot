@@ -656,7 +656,7 @@
                                 <span class="item-name">Aset</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link " href="{{ route('kewajiban') }}">
                                 <i class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
@@ -668,7 +668,7 @@
                                 <i class="sidenav-mini-icon"> K </i>
                                 <span class="item-name">Kewajiban</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link " href="{{ route('modal_awal') }}">
                                 <i class="icon">

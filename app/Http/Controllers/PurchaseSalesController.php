@@ -400,7 +400,7 @@ class PurchaseSalesController extends Controller
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
-        $buku_kas->nama_pemasukkan = "Penjualan";
+        $buku_kas->nama_pemasukkan = "Penjualan Tunai";
         $buku_kas->harga_pemasukkan = (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
 
@@ -531,14 +531,14 @@ class PurchaseSalesController extends Controller
 
 
         // BUKU KAS
-        $buku_kas = new Buku_Kas();
-        $buku_kas->user_id = session()->get('user_id');
-        $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
-        $buku_kas->nama_pemasukkan = "Penjualan";
-        $buku_kas->harga_pemasukkan = (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
-        $buku_kas->tanggal = $request->tanggalTransaksi;
+        // $buku_kas = new Buku_Kas();
+        // $buku_kas->user_id = session()->get('user_id');
+        // $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
+        // $buku_kas->nama_pemasukkan = "Penjualan";
+        // $buku_kas->harga_pemasukkan = (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        // $buku_kas->tanggal = $request->tanggalTransaksi;
 
-        $buku_kas->save();
+        // $buku_kas->save();
 
         return redirect()->route('sales')->with('successSalesFormKredit', 'Pemasukan Pembayaran Secara Kredit Sukses!');
     }

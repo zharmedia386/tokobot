@@ -26,7 +26,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($buku_kas as $data)
+                                @foreach($penjualan_tunai as $data)
                                     @if($user_id == $data->user_id)
                                         @if(isset($data->nama_pemasukkan) & isset($data->harga_pemasukkan))
                                             <tr>
@@ -60,7 +60,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($buku_kas as $data)
+                                @foreach($beban as $data)
                                     @if($user_id == $data->user_id)
                                         @if(isset($data->nama_pengeluaran) & isset($data->harga_pengeluaran))
                                         <tr>

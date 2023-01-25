@@ -18,8 +18,8 @@ class BukuKasController extends Controller
     public function buku_kas()
     {
         if (session()->has('hasLogin')) {
-            $buku_kas = DB::table('buku_kas')->get();
             $user_id = session()->get('user_id');
+            $buku_kas = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pemasukkan, buku_kas.nama_pengeluaran, buku_kas.tanggal, SUM(buku_kas.harga_pemasukkan) as harga_pemasukkan , SUM(buku_kas.harga_pengeluaran) as harga_pengeluaran from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pemasukkan, buku_kas.user_id, buku_kas.nama_pengeluaran', [$user_id]);
 
             return view('app/buku_kas/buku_kas', compact('buku_kas', 'user_id'));
         }
@@ -42,18 +42,11 @@ class BukuKasController extends Controller
     public function tambah_kas_pemasukkan_post(Request $request)
     {
         $buku_kas = new Buku_Kas();
-        $buku_kas->user_id = session()->get('user_id');
-        $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
-        $buku_kas->tanggal = $request->tanggal;
-        $buku_kas->nama_pemasukkan = $request->pemasukkan;
-
         // HARGA PENGELUARAN
         $buku_kas->harga_pemasukkan = $request->hargaPemasukkan;
         $buku_kas->harga_pemasukkan = Str::replace('.','',$buku_kas->harga_pemasukkan);
         $buku_kas->harga_pemasukkan = Str::replace('Rp ','',$buku_kas->harga_pemasukkan);
         $buku_kas->harga_pemasukkan = (int)($buku_kas->harga_pemasukkan);
-
-        $buku_kas->save();
 
         // PENAGIHAN UTANG (PIUTANG)
         if($request->pemasukkan == "Penagihan utang") {
@@ -73,6 +66,21 @@ class BukuKasController extends Controller
             $asset->harga_asset = -$buku_kas->harga_pemasukkan;
             // dd($asset->harga_asset);
             $asset->save();
+
+            // UBAH PIUTANG KAS DI BUKU PIUTANG BERDASARKAN NAMA
+            $namaKreditur = $request->namaKreditur;
+            $piutang = DB::select('select * from buku_utang_form_piutang where buku_utang_form_piutang.nama_kreditur = ?', [$namaKreditur]);
+            $piutang = Buku_Utang_Form_Piutang::find($piutang[0]->nomor_piutang);
+            $piutang->jumlah_piutang -= $buku_kas->harga_pemasukkan;
+            $piutang->update();
+
+        } else { // JIKA BUKAN PENAGIHAN UTANG, SAVE DI DATABASE BUKU KAS PEMASUKAN
+            $buku_kas->user_id = session()->get('user_id');
+            $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
+            $buku_kas->tanggal = $request->tanggal;
+            $buku_kas->nama_pemasukkan = $request->pemasukkan;
+
+            $buku_kas->save();
         }
 
         return redirect()->route('buku_kas')->with('pemasukkanSuccess', 'Pemasukkan berhasil');
@@ -83,8 +91,10 @@ class BukuKasController extends Controller
     {
         if (session()->has('hasLogin')) {
             $kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
+            $user_id = session()->get('user_id');
+            $supplier = DB::table('supplier')->get();
 
-            return view('app/buku_kas/form_buku_kas_pengeluaran', compact('kas_id'));
+            return view('app/buku_kas/form_buku_kas_pengeluaran', compact('kas_id', 'user_id', 'supplier'));
         }
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -115,6 +125,13 @@ class BukuKasController extends Controller
             $asset->harga_asset = $buku_kas->harga_pengeluaran;
             // dd($asset->harga_asset);
             $asset->save();
+
+            // UBAH UTANG KAS DI BUKU UTANG BERDASARKAN NAMA
+            // $namaSupplier = $request->namaSupplier;
+            // $utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nama_supplier = ?', [$namaSupplier]);
+            // $utang = Buku_Utang_Form_Utang::find($utang[0]->nomor_utang);
+            // $utang->jumlah_utang -= $buku_kas->harga_pengeluaran;
+            // $utang->update();
         }
 
         // JIKA PEMBERIAN UTANG (PIUTANG) DAN PEMBAYARAN UTANG DI BUKU KAS PENGELUARAN DIPILIH, MASUK KE BUKU UTANG (NERACA)

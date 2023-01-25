@@ -1,5 +1,5 @@
 $("#seeAnotherField").change(function() {
-    if ($(this).val() == "Penagihan utang") {
+    if ($(this).val() == "Penagihan utang" || $(this).val() == "Pembayaran Utang") {
         $('#otherFieldDiv').show();
         $('#otherField').attr('required','');
         $('#otherField').attr('data-error', 'This field is required.');

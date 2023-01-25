@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Kategori Pengeluaran</label>
-                <select class="form-select mb-3 shadow-none" name="pengeluaran">
+                <select class="form-select mb-3 shadow-none" name="pengeluaran" id="seeAnotherField">
                     <option name="pengeluaran" value="Pengeluaran di luar usaha" selected="">Pilih Kategori Pengeluaran</option>
                     <option name="pengeluaran" value="Pengeluaran di luar usaha">Pengeluaran di luar usaha</option>
                     <option name="pengeluaran" value="Biaya operasional">Biaya operasional</option>
@@ -31,6 +31,16 @@
                     <option name="pengeluaran" value="Pembayaran utang">Pembayaran utang</option> -->
                     <option name="pengeluaran" value="Pengeluaran lain-lain">Pengeluaran lain-lain</option>
                     <option name="pengeluaran" value="Penarikan Sebagian asset/modal untuk keperluan pribadi">Penarikan Sebagian aset/modal untuk keperluan pribadi</option>
+                </select>
+            </div>
+            <div class="form-group" id="otherFieldDiv">
+                <label class="form-label">Nama Supplier</label>
+                <select class="form-select mb-3 shadow-none" name="namaSupplier" id="otherField">
+                    @foreach($supplier as $data)
+                        @if($user_id == $data->user_id)
+                            <option name="namaSupplier" value="{{ $data->nama_supplier }}" selected=""> {{ $data->nama_supplier }} </option>
+                        @endif
+                    @endforeach
                 </select>
             </div>
             <div class="form-group">
@@ -44,7 +54,9 @@
 </div>
 
 @push('child-js')
-    <script src="{{ asset('format/rupiah_format.js') }}"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{{ asset('format/rupiah_format.js') }}"></script>
+<script src="{{ asset('form/hide-show-field.js') }}"></script>
 @endpush
 
 @endsection

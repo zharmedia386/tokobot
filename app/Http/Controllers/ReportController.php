@@ -140,10 +140,12 @@ class ReportController extends Controller
     {
         if (session()->has('hasLogin')) {
             // PEMASUKKAN DAN PENGELUARAN (BUKU KAS)
-            $buku_kas = DB::table('buku_kas')->get();
             $user_id = session()->get('user_id');
+            $penjualan_tunai = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pemasukkan, buku_kas.tanggal, SUM(buku_kas.harga_pemasukkan) as harga_pemasukkan from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pemasukkan, buku_kas.user_id', [$user_id]);
 
-            return view('app/reports/laba-rugi', compact('buku_kas', 'user_id'));
+            $beban = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pengeluaran, buku_kas.tanggal, SUM(buku_kas.harga_pengeluaran) as harga_pengeluaran from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pengeluaran, buku_kas.user_id', [$user_id]);
+
+            return view('app/reports/laba-rugi', compact('penjualan_tunai', 'beban', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -167,10 +169,18 @@ class ReportController extends Controller
     public function asset()
     {
         if (session()->has('hasLogin')) {
-            $asset = DB::table('asset')->get();
             $user_id = session()->get('user_id');
 
-            return view('app/asset/asset', compact('asset', 'user_id'));
+            // ASSET LANCAR DAN TETAP
+            $cond1 = "Asset Lancar";
+            $asset_lancar = DB::select('select asset.nomor_asset, asset.jenis_asset, asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id, asset.jenis_asset', [$cond1, $user_id]);
+            // dd($asset_lancar);
+            $cond2 = "Asset Tetap";
+            $asset_tetap = DB::select('select asset.nomor_asset, asset.jenis_asset, asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id, asset.jenis_asset',  [$cond2, $user_id]);
+
+            // $asset = DB::table('asset')->get();
+
+            return view('app/asset/asset', compact('asset_lancar', 'asset_tetap', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

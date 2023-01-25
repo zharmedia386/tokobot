@@ -39,6 +39,15 @@
                                         $totalPendapatan += $data->harga_pemasukkan;
                                     @endphp
                                 @endforeach
+                                @if($user_id == $penjualan_kredit[0]->user_id)
+                                        <tr>
+                                            <td>'Penjualan Kredit</td>
+                                            <td>@currency($total_penjualan_kredit)</td>
+                                        </tr>
+                                @endif
+                                @php
+                                    $totalPendapatan += $total_penjualan_kredit;
+                                @endphp
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -60,19 +69,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($beban as $data)
-                                    @if($user_id == $data->user_id)
-                                        @if(isset($data->nama_pengeluaran) & isset($data->harga_pengeluaran))
-                                        <tr>
-                                            <td>{{ $data->nama_pengeluaran }}</td>
-                                            <td>@currency($data->harga_pengeluaran )</td>
-                                        </tr>
-                                        @endif
+                                @if($user_id == $gaji_karyawan_user_id)
+                                    @if(isset($gaji_karyawan_nama_pengeluaran) & isset($gaji_karyawan_harga_pengeluaran))
+                                    <tr>
+                                        <td>{{ $gaji_karyawan_nama_pengeluaran }}</td>
+                                        <td>@currency($gaji_karyawan_harga_pengeluaran)</td>
+                                    </tr>
                                     @endif
-                                    @php
-                                        $totalBeban += $data->harga_pengeluaran;
-                                    @endphp
-                                @endforeach
+                                @endif
+                                @php
+                                    $totalBeban += $gaji_karyawan_harga_pengeluaran;
+                                @endphp
                             </tbody>
                             <tfoot>
                                 <tr>

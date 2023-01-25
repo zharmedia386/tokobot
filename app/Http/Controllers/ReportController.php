@@ -140,12 +140,36 @@ class ReportController extends Controller
     {
         if (session()->has('hasLogin')) {
             // PEMASUKKAN DAN PENGELUARAN (BUKU KAS)
-            $user_id = session()->get('user_id');
+            $user_id  = session()->get('user_id');
+            $gaji_karyawan = new Buku_Kas;
+            $total_pengeluaran = 0;
+            $total_penjualan_kredit = 0;
             $penjualan_tunai = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pemasukkan, buku_kas.tanggal, SUM(buku_kas.harga_pemasukkan) as harga_pemasukkan from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pemasukkan, buku_kas.user_id', [$user_id]);
+            $penjualan_kredit = DB::select('select * from sales_form_kredit');
+            foreach($penjualan_kredit as $data){
+                $total_penjualan_kredit += $data->total_penjualan;
+            }
 
             $beban = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pengeluaran, buku_kas.tanggal, SUM(buku_kas.harga_pengeluaran) as harga_pengeluaran from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pengeluaran, buku_kas.user_id', [$user_id]);
+            foreach ($beban as $beban_usaha) {
+                if($beban_usaha->nama_pengeluaran == "Gaji/bonus karyawan") {
+                    $gaji_karyawan->user_id = $beban_usaha->user_id;
+                    $gaji_karyawan->nama_pengeluaran = $beban_usaha->nama_pengeluaran;
+                    $gaji_karyawan->harga_pengeluaran = $beban_usaha->harga_pengeluaran;
+                }
+                $total_pengeluaran += $beban_usaha->harga_pengeluaran;
+            }
 
-            return view('app/reports/laba-rugi', compact('penjualan_tunai', 'beban', 'user_id'));
+            $gaji_karyawan = (object)$gaji_karyawan->getAttributes();
+            $gaji_karyawan_user_id = $gaji_karyawan->user_id;
+            $gaji_karyawan_nama_pengeluaran = $gaji_karyawan->nama_pengeluaran;
+            $gaji_karyawan_harga_pengeluaran = $gaji_karyawan->harga_pengeluaran;
+            
+            // dd($gaji_karyawan);
+            // dd($gaji_karyawan_user_id);
+            // $gaji_karyawan_harga_pengeluaran = $gaji_karyawan->harga_pengeluaran;
+                
+            return view('app/reports/laba-rugi', compact('penjualan_tunai','total_penjualan_kredit','penjualan_kredit', 'gaji_karyawan_user_id','gaji_karyawan_nama_pengeluaran','gaji_karyawan_harga_pengeluaran', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

@@ -39,19 +39,23 @@
                                         $totalPendapatan += $data->harga_pemasukkan;
                                     @endphp
                                 @endforeach
-                                @if($user_id == $penjualan_kredit[0]->user_id)
-                                        <tr>
-                                            <td>Penjualan Kredit</td>
-                                            <td>@currency($total_penjualan_kredit)</td>
-                                        </tr>
+                                @if(count($penjualan_kredit) > 0)
+                                    @if($user_id == $penjualan_kredit[0]->user_id)
+                                            <tr>
+                                                <td>Penjualan Kredit</td>
+                                                <td>@currency($total_penjualan_kredit)</td>
+                                            </tr>
+                                    @endif
                                 @endif
-                                <tr>
-                                    <td>Harga Pokok Penjualan</td>
-                                    <td>@currency($harga_pokok_penjualan)</td>
-                                </tr>
-                                @php
-                                    $totalPendapatan += $total_penjualan_kredit - $harga_pokok_penjualan;
-                                @endphp
+                                @if($harga_pokok_penjualan != 0)
+                                    <tr>
+                                        <td>Harga Pokok Penjualan</td>
+                                        <td>@currency($harga_pokok_penjualan)</td>
+                                    </tr>
+                                    @php
+                                        $totalPendapatan += $total_penjualan_kredit - $harga_pokok_penjualan;
+                                    @endphp
+                                @endif
                             </tbody>
                             <tfoot>
                                 <tr>

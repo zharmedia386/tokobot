@@ -6,6 +6,8 @@ use App\Models\Users;
 use App\Models\Orderlist;
 use App\Models\Customer;
 use App\Models\Purchase_Form_Tunai;
+use App\Models\Sales_Form_Tunai;
+use App\Models\Sales_Form_Kredit;
 use App\Models\Purchase_Form_Kredit;
 use App\Models\Asset;
 use App\Models\Kewajiban;
@@ -99,7 +101,7 @@ class ReportController extends Controller
 
             $modal_akhir=0;
             // BEBAN GAJI
-            $beban_gaji = DB::select('select * from buku_kas where buku_kas.nama_pengeluaran = "Gaji/bonus karyawan"');
+            $beban_gaji = DB::select('select * from buku_kas where buku_kas.nama_pengeluaran = "Gaji/bonus karyawan" and buku_kas.user_id = ' . $user_id);
             if($beban_gaji) {
                 $beban_gaji = $beban_gaji[0]->harga_pengeluaran;
                 // dd($beban_gaji);
@@ -173,13 +175,18 @@ class ReportController extends Controller
 
             // dd($hpp2);
             $harga_pokok_penjualan = $hpp1 + $hpp2;
+            dd($harga_pokok_penjualan);
 
 
             $gaji_karyawan = new Buku_Kas;
+            $penjualan_kredit = new Sales_Form_Kredit;
+            $gaji_karyawan_user_id = 0;
+            $gaji_karyawan_nama_pengeluaran = '';
+            $gaji_karyawan_harga_pengeluaran = 0;
             $total_pengeluaran = 0;
             $total_penjualan_kredit = 0;
             $penjualan_tunai = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pemasukkan, buku_kas.tanggal, SUM(buku_kas.harga_pemasukkan) as harga_pemasukkan from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pemasukkan, buku_kas.user_id', [$user_id]);
-            $penjualan_kredit = DB::select('select * from sales_form_kredit');
+            $penjualan_kredit = DB::select('select * from sales_form_kredit where sales_form_kredit.user_id = ?', [$user_id]);
             foreach($penjualan_kredit as $data){
                 $total_penjualan_kredit += $data->total_penjualan;
             }
@@ -195,9 +202,11 @@ class ReportController extends Controller
             }
 
             $gaji_karyawan = (object)$gaji_karyawan->getAttributes();
-            $gaji_karyawan_user_id = $gaji_karyawan->user_id;
-            $gaji_karyawan_nama_pengeluaran = $gaji_karyawan->nama_pengeluaran;
-            $gaji_karyawan_harga_pengeluaran = $gaji_karyawan->harga_pengeluaran;
+            if (isset($gaji_karyawan->user_id) and isset($gaji_karyawan->nama_pengeluaran) and isset($gaji_karyawan->harga_pengeluaran)){
+                $gaji_karyawan_user_id = $gaji_karyawan->user_id;
+                $gaji_karyawan_nama_pengeluaran = $gaji_karyawan->nama_pengeluaran;
+                $gaji_karyawan_harga_pengeluaran = $gaji_karyawan->harga_pengeluaran;
+            }
             
             // dd($gaji_karyawan);
             // dd($gaji_karyawan_user_id);

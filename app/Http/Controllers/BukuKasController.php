@@ -41,6 +41,7 @@ class BukuKasController extends Controller
 
     public function tambah_kas_pemasukkan_post(Request $request)
     {
+        $user_id = session()->get('user_id');
         $buku_kas = new Buku_Kas();
         // HARGA PENGELUARAN
         $buku_kas->harga_pemasukkan = $request->hargaPemasukkan;
@@ -69,7 +70,7 @@ class BukuKasController extends Controller
 
             // UBAH PIUTANG KAS DI BUKU PIUTANG BERDASARKAN NAMA
             $namaKreditur = $request->namaKreditur;
-            $piutang = DB::select('select * from buku_utang_form_piutang where buku_utang_form_piutang.nama_kreditur = ?', [$namaKreditur]);
+            $piutang = DB::select('select * from buku_utang_form_piutang where buku_utang_form_piutang.nama_kreditur = ? and buku_utang_form_piutang.user_id = ?', [$namaKreditur, $user_id]);
             $piutang = Buku_Utang_Form_Piutang::find($piutang[0]->nomor_piutang);
             $piutang->jumlah_piutang -= $buku_kas->harga_pemasukkan;
             $piutang->update();
@@ -101,6 +102,7 @@ class BukuKasController extends Controller
 
     public function tambah_kas_pengeluaran_post(Request $request)
     {
+        $user_id = session()->get('user_id');
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
         $buku_kas->kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
@@ -126,10 +128,10 @@ class BukuKasController extends Controller
             // dd($asset->harga_asset);
             $asset->save();
 
-            
+
             // UBAH UTANG KAS DI BUKU PIUTANG BERDASARKAN NAMA SUPPLIER
             $namaSupplier = $request->namaSupplier;
-            $utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nama_supplier = ?', [$namaSupplier]);
+            $utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nama_supplier = ? and buku_utang_form_utang.user_id = ?', [$namaSupplier, $user_id]);
             $utang = Buku_Utang_Form_Utang::find($utang[0]->nomor_utang);
             $utang->jumlah_utang -= $buku_kas->harga_pengeluaran;
             $utang->update();

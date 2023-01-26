@@ -39,7 +39,7 @@ class ReportController extends Controller
             $asset_tetap = DB::select('select asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id', [$cond2, $user_id]);
 
             // UTANG
-            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ' . $user_id);
+            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ? and buku_utang_form_utang.jumlah_utang >= 0', [$user_id]);
             
             // MODAL
             $modal = DB::select('select sum(harga_modal) as harga_modal from modal where modal.user_id = ' . $user_id);
@@ -175,7 +175,7 @@ class ReportController extends Controller
 
             // dd($hpp2);
             $harga_pokok_penjualan = $hpp1 + $hpp2;
-            dd($harga_pokok_penjualan);
+            // dd($harga_pokok_penjualan);
 
 
             $gaji_karyawan = new Buku_Kas;

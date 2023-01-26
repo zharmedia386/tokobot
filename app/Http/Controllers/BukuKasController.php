@@ -69,11 +69,21 @@ class BukuKasController extends Controller
             $asset->save();
 
             // UBAH PIUTANG KAS DI BUKU PIUTANG BERDASARKAN NAMA
-            $namaKreditur = $request->namaKreditur;
-            $piutang = DB::select('select * from buku_utang_form_piutang where buku_utang_form_piutang.nama_kreditur = ? and buku_utang_form_piutang.user_id = ?', [$namaKreditur, $user_id]);
-            $piutang = Buku_Utang_Form_Piutang::find($piutang[0]->nomor_piutang);
-            $piutang->jumlah_piutang -= $buku_kas->harga_pemasukkan;
-            $piutang->update();
+
+            // $namaKreditur = $request->namaKreditur;
+            // $piutang = DB::select('select * from buku_utang_form_piutang where buku_utang_form_piutang.nama_kreditur = ? and buku_utang_form_piutang.user_id = ?', [$namaKreditur, $user_id]);
+            // $piutang = Buku_Utang_Form_Piutang::find($piutang[0]->nomor_piutang);
+            // $piutang->jumlah_piutang -= $buku_kas->harga_pemasukkan;
+            // $piutang->update();
+
+            $piutang = new Buku_Utang_Form_Piutang();
+            $piutang->tanggal = $request->tanggal;
+            $piutang->nama = 'Penjualan Kredit';
+            $piutang->jumlah_piutang = -$buku_kas->harga_pemasukkan;
+            $piutang->user_id = session()->get('user_id');
+            $piutang->nomor_piutang = DB::selectOne("select getNewId('buku_utang_form_piutang') as value from dual")->value;
+            $piutang->nama_kreditur = $request->namaKreditur;
+            $piutang->save();
 
         } else { // JIKA BUKAN PENAGIHAN UTANG, SAVE DI DATABASE BUKU KAS PEMASUKAN
             $buku_kas->user_id = session()->get('user_id');
@@ -130,11 +140,21 @@ class BukuKasController extends Controller
 
 
             // UBAH UTANG KAS DI BUKU PIUTANG BERDASARKAN NAMA SUPPLIER
-            $namaSupplier = $request->namaSupplier;
-            $utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nama_supplier = ? and buku_utang_form_utang.user_id = ?', [$namaSupplier, $user_id]);
-            $utang = Buku_Utang_Form_Utang::find($utang[0]->nomor_utang);
-            $utang->jumlah_utang -= $buku_kas->harga_pengeluaran;
-            $utang->update();
+            
+            // $namaSupplier = $request->namaSupplier;
+            // $utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nama_supplier = ? and buku_utang_form_utang.user_id = ?', [$namaSupplier, $user_id]);
+            // $utang = Buku_Utang_Form_Utang::find($utang[0]->nomor_utang);
+            // $utang->jumlah_utang -= $buku_kas->harga_pengeluaran;
+            // $utang->update();
+
+            $utang = new Buku_Utang_Form_Utang();
+            $utang->tanggal = $request->tanggal;
+            $utang->nama = 'Persediaan barang dagang';
+            $utang->jumlah_utang = -$buku_kas->harga_pengeluaran;
+            $utang->user_id = session()->get('user_id');
+            $utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
+            $utang->nama_supplier = $request->namaSupplier;
+            $utang->save();
 
 
             // UBAH UTANG KAS DI BUKU UTANG BERDASARKAN NAMA

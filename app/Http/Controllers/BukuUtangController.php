@@ -19,9 +19,11 @@ class BukuUtangController extends Controller
     public function buku_utang()
     {
         if (session()->has('hasLogin')) {
-            $buku_utang_form_utang = DB::table('buku_utang_form_utang')->get();
-            $buku_utang_form_piutang = DB::table('buku_utang_form_piutang')->get();
             $user_id = session()->get('user_id');
+            $buku_utang_form_utang = DB::select('select buku_utang_form_utang.user_id, buku_utang_form_utang.tanggal, buku_utang_form_utang.nama, buku_utang_form_utang.nama_supplier, buku_utang_form_utang.nomor_utang, SUM(buku_utang_form_utang.jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ? GROUP BY buku_utang_form_utang.nama_supplier, buku_utang_form_utang.user_id', [$user_id]);
+            // $buku_utang_form_utang = DB::table('buku_utang_form_utang')->get();
+            $buku_utang_form_piutang = DB::select('select buku_utang_form_piutang.user_id, buku_utang_form_piutang.tanggal, buku_utang_form_piutang.nama, buku_utang_form_piutang.nama_kreditur, buku_utang_form_piutang.nomor_piutang, SUM(buku_utang_form_piutang.jumlah_piutang) as jumlah_piutang from buku_utang_form_piutang where buku_utang_form_piutang.user_id = ? GROUP BY buku_utang_form_piutang.nama_kreditur, buku_utang_form_piutang.user_id', [$user_id]);
+            // $buku_utang_form_piutang = DB::table('buku_utang_form_piutang')->get();
 
             return view('app/buku_utang/buku_utang', compact('buku_utang_form_utang', 'buku_utang_form_piutang', 'user_id'));
         } 

@@ -27,9 +27,9 @@ class PurchaseSalesController extends Controller
     public function purchase()
     {
         if (session()->has('hasLogin')) {
+            $user_id = session()->get('user_id');
             $purchase_form_tunai = DB::table('purchase_form_tunai')->get();
             $purchase_form_kredit = DB::table('purchase_form_kredit')->get();
-            $user_id = session()->get('user_id');
 
             return view('app/purchase/purchase', compact('purchase_form_tunai', 'purchase_form_kredit', 'user_id'));
         } 
@@ -135,7 +135,8 @@ class PurchaseSalesController extends Controller
         $buku_kas->save();
 
         // UBAH UANG KAS DI ASET LANCAR
-        $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+        $kas_temp = "Kas";
+        $kas = DB::select('select * from asset where asset.nama_asset = ? and asset.user_id = ?', [$kas_temp, $user_id]);
         if($kas) {
             $kas = Asset::find($kas[0]->nomor_asset);
             $kas->harga_asset -= (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
@@ -149,7 +150,8 @@ class PurchaseSalesController extends Controller
     public function purchase_tunai_detail($nomor_transaksi)
     {
         if (session()->has('hasLogin')) {
-            $purchase_form_tunai = DB::select('select * from purchase_form_tunai where purchase_form_tunai.nomor_transaksi = ' . $nomor_transaksi);
+            $user_id = session()->get('user_id');
+            $purchase_form_tunai = DB::select('select * from purchase_form_tunai where purchase_form_tunai.nomor_transaksi = ? and purchase_form_tunai.user_id = ?', [$nomor_transaksi, $user_id]);
             return view('app/purchase/purchase_tunai_detail', compact('purchase_form_tunai'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -277,7 +279,8 @@ class PurchaseSalesController extends Controller
     public function purchase_kredit_detail($nomor_transaksi)
     {
         if (session()->has('hasLogin')) {
-            $purchase_form_kredit = DB::select('select * from purchase_form_kredit where purchase_form_kredit.nomor_transaksi = ' . $nomor_transaksi);
+            $user_id = session()->get('user_id');
+            $purchase_form_kredit = DB::select('select * from purchase_form_kredit where purchase_form_kredit.nomor_transaksi = ? and purchase_form_kredit.user_id = ?', [$nomor_transaksi, $user_id]);
 
             return view('app/purchase/purchase_kredit_detail', compact('purchase_form_kredit'));
         } 
@@ -303,9 +306,9 @@ class PurchaseSalesController extends Controller
     public function sales()
     {
         if (session()->has('hasLogin')) {
+            $user_id = session()->get('user_id');
             $sales_form_tunai = DB::table('sales_form_tunai')->get();
             $sales_form_kredit = DB::table('sales_form_kredit')->get();
-            $user_id = session()->get('user_id');
 
             return view('app/sales/sales', compact('sales_form_tunai', 'sales_form_kredit', 'user_id'));
         } 
@@ -364,7 +367,7 @@ class PurchaseSalesController extends Controller
 
             // PENGURANGAN KE PERSEDIAAN BARANG DAGANG DARI HPP NYA
             // HARGA PEMBELIAN DI MODAL AWAL DIKALI JUMLAH PENJUALAN
-        $harga_satuan_pembelian = DB::select('select harga_satuan from modal_awal where modal_awal.nama_modal = ?', [Str::lower($request->produkYangTerjual)] );
+        $harga_satuan_pembelian = DB::select('select harga_satuan from modal_awal where modal_awal.nama_modal = ? and modal_awal.user_id = ?', [Str::lower($request->produkYangTerjual), $user_id] );
         $hpp = $sales_form_tunai->jumlah_barang * $harga_satuan_pembelian[0]->harga_satuan;
 
         $asset->harga_asset = -$hpp;
@@ -408,7 +411,8 @@ class PurchaseSalesController extends Controller
 
 
         // UBAH UANG KAS DI ASET LANCAR
-        $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+        $kas_temp = "Kas";
+        $kas = DB::select('select * from asset where asset.nama_asset = ? and asset.user_id = ?', [$kas_temp, $user_id]);
         $kas = Asset::find($kas[0]->nomor_asset);
         $kas->harga_asset += (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $kas->update();
@@ -421,7 +425,8 @@ class PurchaseSalesController extends Controller
     public function sales_tunai_detail($nomor_transaksi)
     {
         if (session()->has('hasLogin')) {
-            $sales_form_tunai = DB::select('select * from sales_form_tunai where sales_form_tunai.nomor_transaksi = ' . $nomor_transaksi);
+            $user_id = session()->get('user_id');
+            $sales_form_tunai = DB::select('select * from sales_form_tunai where sales_form_tunai.nomor_transaksi = ? and sales_form_tunai.user_id = ?', [$nomor_transaksi, $user_id]);
             return view('app/sales/sales_tunai_detail', compact('sales_form_tunai'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -496,7 +501,7 @@ class PurchaseSalesController extends Controller
 
             // PENGURANGAN KE PERSEDIAAN BARANG DAGANG DARI HPP NYA
             // HARGA PEMBELIAN DI MODAL AWAL DIKALI JUMLAH PENJUALAN
-        $harga_satuan_pembelian = DB::select('select harga_satuan from modal_awal where modal_awal.nama_modal = ?', [Str::lower($request->produkYangTerjual)] );
+        $harga_satuan_pembelian = DB::select('select harga_satuan from modal_awal where modal_awal.nama_modal = ? and modal_awal.user_id = ?', [Str::lower($request->produkYangTerjual), $user_id] );
         $hpp = $sales_form_kredit->jumlah_barang * $harga_satuan_pembelian[0]->harga_satuan;
 
         $asset->harga_asset = -$hpp;
@@ -546,9 +551,9 @@ class PurchaseSalesController extends Controller
     public function sales_form_kredit()
     {
         if (session()->has('hasLogin')) {
+            $user_id = session()->get('user_id');
             $nomor_transaksi = DB::selectOne("select getNewId('sales_form_kredit') as value from dual")->value;
             $kreditur = DB::table('kreditur')->get();
-            $user_id = session()->get('user_id');
             return view('app/sales/sales_form_kredit', compact('nomor_transaksi', 'kreditur', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -557,7 +562,8 @@ class PurchaseSalesController extends Controller
     public function sales_kredit_detail($nomor_transaksi)
     {
         if (session()->has('hasLogin')) {
-            $sales_form_kredit = DB::select('select * from sales_form_kredit where sales_form_kredit.nomor_transaksi = ' . $nomor_transaksi);
+            $user_id = session()->get('user_id');
+            $sales_form_kredit = DB::select('select * from sales_form_kredit where sales_form_kredit.nomor_transaksi = ? and sales_form_kredit.user_id = ?', [$nomor_transaksi, $user_id]);
             return view('app/sales/sales_kredit_detail', compact('sales_form_kredit'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');

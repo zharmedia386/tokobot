@@ -30,9 +30,9 @@ class BukuKasController extends Controller
     public function tambah_kas_pemasukkan()
     {
         if (session()->has('hasLogin')) {
+            $user_id = session()->get('user_id');
             $kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
             $kreditur = DB::table('kreditur')->get();
-            $user_id = session()->get('user_id');
 
             return view('app/buku_kas/form_buku_kas_pemasukkan', compact('kas_id', 'kreditur', 'user_id'));
         }
@@ -52,7 +52,8 @@ class BukuKasController extends Controller
         // PENAGIHAN UTANG (PIUTANG)
         if($request->pemasukkan == "Penagihan utang") {
             // UBAH UANG KAS DI ASET LANCAR
-            $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+            $kas_temp = "Kas";
+            $kas = DB::select('select * from asset where asset.nama_asset = ? and asset.user_id = ?', [$kas_temp, $user_id]);
             $kas = Asset::find($kas[0]->nomor_asset);
             $kas->harga_asset += $buku_kas->harga_pemasukkan;
             $kas->update();
@@ -101,8 +102,8 @@ class BukuKasController extends Controller
     public function tambah_kas_pengeluaran()
     {
         if (session()->has('hasLogin')) {
-            $kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
             $user_id = session()->get('user_id');
+            $kas_id = DB::selectOne("select getNewId('buku_kas') as value from dual")->value;
             $supplier = DB::table('supplier')->get();
 
             return view('app/buku_kas/form_buku_kas_pengeluaran', compact('kas_id', 'user_id', 'supplier'));
@@ -191,7 +192,8 @@ class BukuKasController extends Controller
         // PEMBAYARAN UTANG 
         if($request->pengeluaran == "Pembayaran Utang" || $request->pengeluaran == "Gaji/bonus karyawan" || $request->pengeluaran == "Penarikan Sebagian asset/modal untuk keperluan pribadi") {
             // UBAH UANG KAS DI ASET LANCAR
-            $kas = DB::select('select * from asset where asset.nama_asset = "Kas"');
+            $kas_temp = "Kas";
+            $kas = DB::select('select * from asset where asset.nama_asset = ? and asset.user_id = ?', [$kas_temp, $user_id]);
             $kas = Asset::find($kas[0]->nomor_asset);
             $kas->harga_asset -= $buku_kas->harga_pengeluaran;
             $kas->update();
@@ -204,7 +206,8 @@ class BukuKasController extends Controller
     public function buku_kas_detail($kas_id)
     {
         if (session()->has('hasLogin')) {
-            $buku_kas = DB::select('select * from buku_kas where buku_kas.kas_id = ' . $kas_id);
+            $user_id = session()->get('user_id');
+            $buku_kas = DB::select('select * from buku_kas where buku_kas.kas_id = ? and buku_kas.user_id = ?', [$kas_id, $user_id]);
 
             return view('app/buku_kas/buku_kas_detail', compact('buku_kas'));
         } 

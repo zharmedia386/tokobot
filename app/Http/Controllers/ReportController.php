@@ -298,7 +298,8 @@ class ReportController extends Controller
     public function asset_detail($nomor_asset)
     {
         if (session()->has('hasLogin')) {
-            $asset = DB::select('select * from asset where asset.nomor_asset = ' . $nomor_asset);
+            $user_id = session()->get('user_id');
+            $asset = DB::select('select * from asset where asset.nomor_asset = ? asset.user_id = ?', [$nomor_asset, $user_id]);
             return view('app/asset/asset_detail', compact('asset'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -358,7 +359,8 @@ class ReportController extends Controller
     public function kewajiban_detail($nomor_kewajiban)
     {
         if (session()->has('hasLogin')) {
-            $kewajiban = DB::select('select * from kewajiban where kewajiban.nomor_kewajiban = ' . $nomor_kewajiban);
+            $user_id = session()->get('user_id');
+            $kewajiban = DB::select('select * from kewajiban where kewajiban.nomor_kewajiban = ? kewajiban.user_id = ?', [$nomor_kewajiban, $user_id]);
             
             return view('app/kewajiban/kewajiban_detail', compact('kewajiban'));
         } 
@@ -407,8 +409,7 @@ class ReportController extends Controller
 
     public function modal_awal_aset_form_post(Request $request)
     {
-        // $test = DB::selectOne("select getNewId('as') as value from dual")->value;
-        // dd($test);
+        $user_id = session()->get('user_id');
 
         // Asset
         $asset = new Asset();
@@ -612,7 +613,8 @@ class ReportController extends Controller
     public function modal_detail($modal_id)
     {
         if (session()->has('hasLogin')) {
-            $modal = DB::select('select * from modal where modal.modal_id = ' . $modal_id);
+            $user_id = session()->get('user_id');
+            $modal = DB::select('select * from modal where modal.modal_id = ? and modal.user_id = ?', [$modal_id, $user_id]);
 
             return view('app/modal/modal_detail', compact('modal'));
         } 
@@ -669,7 +671,8 @@ class ReportController extends Controller
     public function beban_usaha_detail($beban_usaha_id)
     {
         if (session()->has('hasLogin')) {
-            $beban_usaha = DB::select('select * from beban_usaha where beban_usaha.beban_usaha_id = ' . $beban_usaha_id);
+            $user_id = session()->get('user_id');
+            $beban_usaha = DB::select('select * from beban_usaha where beban_usaha.beban_usaha_id = ? and beban_usaha.user_id = ?', [$beban_usaha_id, $user_id]);
             
             return view('app/beban_usaha/beban_usaha_detail', compact('beban_usaha'));
         } 
@@ -709,11 +712,10 @@ class ReportController extends Controller
 
     public function stok_barang_form_post(Request $request)
     {
-        // $test = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
-        // dd($test);
+        $user_id = session()->get('user_id');
 
         $stok_barang = new Stok_Barang();
-        $stok_barang->user_id = session()->get('user_id');
+        $stok_barang->user_id = $user_id;
         $stok_barang->stok_id = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
         $stok_barang->kode_barang = generateRandomString(6);
         $stok_barang->nama_barang = $request->namaBarang;
@@ -728,7 +730,8 @@ class ReportController extends Controller
 
     public function stok_barang_detail($stok_id) {
         if (session()->has('hasLogin')) {
-            $stok_barang = DB::select('select * from stok_barang where stok_barang.stok_id = ' . $stok_id);
+            $user_id = session()->get('user_id');
+            $stok_barang = DB::select('select * from stok_barang where stok_barang.stok_id = ? stok_barang.user_id = ?', [$stok_id, $user_id]);
             
             return view('app/stok_barang/stok_barang_detail', compact('stok_barang'));
         } 

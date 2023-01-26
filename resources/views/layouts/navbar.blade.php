@@ -2023,7 +2023,7 @@
                     </svg>
                 </i>
             </div>
-            <div class="input-group search-input">
+            {{-- <div class="input-group search-input">
                 <span class="input-group-text" id="search-input">
                     <svg width="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
@@ -2038,10 +2038,10 @@
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                 </span>
-            </button>
+            </button> --}}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto align-items-center navbar-list mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <a href="#" class="nav-link" id="notification-drop" data-bs-toggle="dropdown">
                             <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -2117,8 +2117,8 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
-                    <li class="nav-item dropdown">
+                    </li> --}}
+                    {{-- <li class="nav-item dropdown">
                         <a href="#" class="nav-link" id="mail-drop2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -2199,7 +2199,7 @@
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{ asset('assets/images/avatars/01.png') }}" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded" />
@@ -2209,9 +2209,9 @@
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('edit_profile') }}">Profile</a></li>
+                            {{-- <li><a class="dropdown-item" href="{{ route('edit_profile') }}">Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('privacy_setting') }}">Privacy Setting</a></li>
-                            <li><hr class="dropdown-divider" /></li>
+                            <li><hr class="dropdown-divider" /></li> --}}
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="dropdown-item has-icon text-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>

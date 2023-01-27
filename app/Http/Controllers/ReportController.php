@@ -72,32 +72,42 @@ class ReportController extends Controller
             $hpp1 = 0;
             $hpp2 = 0;
                 // Penjualan Tunai
-            foreach($sales_form_tunai as $sales_tunai) {
-                foreach($purchase_form_tunai as $purchase_tunai) {
-                    if(Str::lower($sales_tunai->produk_yang_terjual) == $purchase_tunai->produk_yang_dibeli) {
+            foreach($purchase_form_tunai as $purchase_tunai) {
+                foreach($sales_form_tunai as $sales_tunai) {
+                    if(Str::lower($sales_tunai->produk_yang_terjual) == Str::lower($purchase_tunai->produk_yang_dibeli)) {
                         $hpp1 += $sales_tunai->jumlah_barang * $purchase_tunai->harga_satuan;
-                        break;
                     }
                 }
             }
             
-            // dd($hpp1);
-            
-                // Penjualan Kredit
+            // Penjualan Kredit
             foreach($sales_form_kredit as $sales_kredit) {
                 foreach($purchase_form_kredit as $purchase_kredit) {
-                    if($sales_kredit->produk_yang_terjual== $purchase_kredit->produk_yang_dibeli) {
-                        $hpp2 += $sales_kredit->jumlah_barang * $purchase_kredit->harga_satuan;
-                        break;
+                    if(Str::lower($sales_kredit->produk_yang_terjual) == Str::lower($purchase_kredit->produk_yang_dibeli)) {
+                        $hpp1 += $sales_kredit->jumlah_barang * $purchase_kredit->harga_satuan;
                     }
                 }
             }
 
-            // dd($hpp2);
-            $harga_pokok_penjualan = $hpp1 + $hpp2;
+            foreach($sales_form_tunai as $sales_tunai) {
+                foreach($purchase_form_kredit as $purchase_kredit) {
+                    if(Str::lower($sales_tunai->produk_yang_terjual) == Str::lower($purchase_kredit->produk_yang_dibeli)) {
+                        $hpp1 += $sales_tunai->jumlah_barang * $purchase_kredit->harga_satuan;
+                    }
+                }
+            }
+
+            foreach($sales_form_kredit as $sales_kredit) {
+                foreach($purchase_form_tunai as $purchase_tunai) {
+                    if(Str::lower($sales_kredit->produk_yang_terjual) == Str::lower($purchase_tunai->produk_yang_dibeli)) {
+                        $hpp1 += $sales_kredit->jumlah_barang * $purchase_tunai->harga_satuan;
+                    }
+                }
+            }
+
+            $harga_pokok_penjualan = $hpp1;
             
             $laba_kotor = $pendapatan_atas_penjualan - $harga_pokok_penjualan;
-            // dd($harga_pokok_penjualan);
 
             $modal_akhir=0;
             // BEBAN GAJI
@@ -143,6 +153,7 @@ class ReportController extends Controller
         if (session()->has('hasLogin')) {
             // PEMASUKKAN DAN PENGELUARAN (BUKU KAS)
             $user_id  = session()->get('user_id');
+
             // Harga Pokok Penjualan -> Jumlah yang terjual x Harga Pembelian
             $sales_form_tunai = DB::select('select * from sales_form_tunai where sales_form_tunai.user_id = ' . $user_id);
             $sales_form_kredit = DB::select('select * from sales_form_kredit where sales_form_kredit.user_id = ' . $user_id);
@@ -152,30 +163,43 @@ class ReportController extends Controller
             $hpp1 = 0;
             $hpp2 = 0;
                 // Penjualan Tunai
-            foreach($sales_form_tunai as $sales_tunai) {
-                foreach($purchase_form_tunai as $purchase_tunai) {
-                    if(Str::lower($sales_tunai->produk_yang_terjual) == $purchase_tunai->produk_yang_dibeli) {
+            foreach($purchase_form_tunai as $purchase_tunai) {
+                foreach($sales_form_tunai as $sales_tunai) {
+                    if(Str::lower($sales_tunai->produk_yang_terjual) == Str::lower($purchase_tunai->produk_yang_dibeli)) {
                         $hpp1 += $sales_tunai->jumlah_barang * $purchase_tunai->harga_satuan;
-                        break;
                     }
                 }
             }
             
-            // dd($hpp1);
-            
-                // Penjualan Kredit
+            // Penjualan Kredit
             foreach($sales_form_kredit as $sales_kredit) {
                 foreach($purchase_form_kredit as $purchase_kredit) {
-                    if($sales_kredit->produk_yang_terjual== $purchase_kredit->produk_yang_dibeli) {
-                        $hpp2 += $sales_kredit->jumlah_barang * $purchase_kredit->harga_satuan;
+                    if(Str::lower($sales_kredit->produk_yang_terjual) == Str::lower($purchase_kredit->produk_yang_dibeli)) {
+                        $hpp1 += $sales_kredit->jumlah_barang * $purchase_kredit->harga_satuan;
                         break;
                     }
                 }
             }
 
-            // dd($hpp2);
-            $harga_pokok_penjualan = $hpp1 + $hpp2;
-            // dd($harga_pokok_penjualan);
+            foreach($purchase_form_kredit as $purchase_kredit) {
+                foreach($sales_form_tunai as $sales_tunai) {
+                    if(Str::lower($sales_tunai->produk_yang_terjual) == Str::lower($purchase_kredit->produk_yang_dibeli)) {
+                        $hpp1 += $sales_tunai->jumlah_barang * $purchase_kredit->harga_satuan;
+                        break;
+                    }
+                }
+            }
+
+            foreach($sales_form_kredit as $sales_kredit) {
+                foreach($purchase_form_tunai as $purchase_tunai) {
+                    if(Str::lower($sales_kredit->produk_yang_terjual) == Str::lower($purchase_tunai->produk_yang_dibeli)) {
+                        $hpp1 += $sales_kredit->jumlah_barang * $purchase_tunai->harga_satuan;
+                        break;
+                    }
+                }
+            }
+
+            $harga_pokok_penjualan = $hpp1;
 
 
             $gaji_karyawan = new Buku_Kas;

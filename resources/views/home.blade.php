@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="iq-header-img">
-                <img src="../../assets/images/User-profile/15.jpg" alt="header" class="img-fluid w-100 rounded" style="object-fit: contain;" />
+                <img src="../../assets/images/User-profile/17.png" alt="header" class="img-fluid w-100 rounded" style="object-fit: contain;" />
             </div>
         </div>
     </div>

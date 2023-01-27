@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="col-md-12 col-lg-5 col-xl-7 d-lg-block d-none vh-100 overflow-hidden">
-                <img src="{{ asset('assets/images/auth/09.png') }}" class="img-fluid sign-in-img" alt="images" />
+                <img src="{{ asset('assets/images/auth/11.png') }}" class="img-fluid sign-in-img" alt="images" />
             </div>
         </div>
     </section>

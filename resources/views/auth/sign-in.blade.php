@@ -55,7 +55,7 @@
                                     <input type="checkbox" class="form-check-input" id="customCheck1" />
                                     <label class="form-check-label" for="customCheck1">Ingat saya</label>
                                 </div>
-                                <a href="recoverpw.html">Lupa Password?</a>
+                                {{-- <a href="recoverpw.html">Lupa Password?</a> --}}
                             </div>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="col-md-12 col-lg-5 col-xl-7 d-lg-block d-none vh-100 overflow-hidden">
-                <img src="{{ asset('assets/images/auth/09.png') }}" class="img-fluid sign-in-img" alt="images" />
+                <img src="{{ asset('assets/images/auth/11.png') }}" class="img-fluid sign-in-img" alt="images" />
             </div>
         </div>
     </section>

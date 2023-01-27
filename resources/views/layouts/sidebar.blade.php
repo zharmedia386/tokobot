@@ -494,7 +494,7 @@
                     </a>
                 </li>
                 <!-- AUTHENTICATION -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-auth" role="button" aria-expanded="false" aria-controls="sidebar-user">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -550,9 +550,9 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- USERS -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-user" role="button" aria-expanded="false" aria-controls="sidebar-user">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -599,7 +599,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- FITUR -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-icons" role="button" aria-expanded="false" aria-controls="sidebar-user">
@@ -867,7 +867,7 @@
                     </ul>
                 </li>
                 <!-- SETTINGS -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-table" role="button" aria-expanded="false" aria-controls="sidebar-table">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -917,7 +917,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li><hr class="hr-horizontal"></li>
                 <br><br>
             </ul>

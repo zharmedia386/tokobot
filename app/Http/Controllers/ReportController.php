@@ -29,13 +29,13 @@ class ReportController extends Controller
     // POSISI KEUANGAN
     public function posisi_keuangan()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
-            $user_id = session()->get('user_id');
-
             // ASSET LANCAR DAN TETAP
             $cond1 = "Asset Lancar";
             $asset_lancar = DB::select('select asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id', [$cond1, $user_id]);
@@ -129,8 +129,10 @@ class ReportController extends Controller
     // ARUS KAS BULAN
     public function arus_kas_bulan()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
@@ -142,14 +144,14 @@ class ReportController extends Controller
     // LABA RUGI
     public function laba_rugi()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
             // PEMASUKKAN DAN PENGELUARAN (BUKU KAS)
-            $user_id  = session()->get('user_id');
-
             // Harga Pokok Penjualan -> Jumlah yang terjual x Harga Pembelian
             $stok_barang_dagang = DB::select('select * from stok_barang where stok_barang.user_id = ' . $user_id);
             $sales_form_tunai = DB::select('select * from sales_form_tunai where sales_form_tunai.user_id = ' . $user_id);
@@ -221,13 +223,13 @@ class ReportController extends Controller
     // PERUBAHAN MODAL
     public function perubahan_modal()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
-            $user_id = session()->get('user_id');
-
             $modal_awal = DB::select('select sum(harga_asset) as modal_awal from asset where asset.user_id = ' . $user_id);
             // dd($modal_awal);
             $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas where buku_kas.user_id = ' . $user_id);
@@ -240,13 +242,13 @@ class ReportController extends Controller
     // ASSET
     public function asset()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
-            $user_id = session()->get('user_id');
-
             // ASSET LANCAR DAN TETAP
             $cond1 = "Asset Lancar";
             $asset_lancar = DB::select('select asset.nomor_asset, asset.jenis_asset, asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id, asset.jenis_asset', [$cond1, $user_id]);
@@ -330,8 +332,10 @@ class ReportController extends Controller
     // KEWAJIBAN
     public function kewajiban()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
@@ -622,15 +626,15 @@ class ReportController extends Controller
     // MODAL
     public function modal()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
             // DATA MODAL
             $modal = DB::table('modal')->get();
-            $user_id = session()->get('user_id');
-
 
             // PERUBAHAN MODAL
             $modal_awal = DB::select('select sum(harga_modal) as modal_awal from modal_awal where modal_awal.user_id = ' . $user_id);
@@ -704,13 +708,14 @@ class ReportController extends Controller
     // BEBAN USAHA
     public function beban_usaha()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
             $beban_usaha = DB::table('beban_usaha')->get();
-            $user_id = session()->get('user_id');
 
             return view('app/beban_usaha/beban_usaha', compact('user_id', 'beban_usaha'));
         } 
@@ -768,8 +773,10 @@ class ReportController extends Controller
     // ASSET TETAP
     public function asset_tetap()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
@@ -781,13 +788,14 @@ class ReportController extends Controller
     // STOK BARANG
     public function stok_barang()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
             $stok_barang = DB::table('stok_barang')->get();
-            $user_id = session()->get('user_id');
 
             return view('app/stok_barang/stok_barang', compact('stok_barang', 'user_id'));
         } 

@@ -20,12 +20,13 @@ class BukuUtangController extends Controller
     // BUKU UTANG
     public function buku_utang()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
-            $user_id = session()->get('user_id');
             $buku_utang_form_utang = DB::select('select buku_utang_form_utang.user_id, buku_utang_form_utang.tanggal, buku_utang_form_utang.nama, buku_utang_form_utang.nama_supplier, buku_utang_form_utang.nomor_utang, SUM(buku_utang_form_utang.jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ? GROUP BY buku_utang_form_utang.nama_supplier, buku_utang_form_utang.user_id', [$user_id]);
             // $buku_utang_form_utang = DB::table('buku_utang_form_utang')->get();
             $buku_utang_form_piutang = DB::select('select buku_utang_form_piutang.user_id, buku_utang_form_piutang.tanggal, buku_utang_form_piutang.nama, buku_utang_form_piutang.nama_kreditur, buku_utang_form_piutang.nomor_piutang, SUM(buku_utang_form_piutang.jumlah_piutang) as jumlah_piutang from buku_utang_form_piutang where buku_utang_form_piutang.user_id = ? GROUP BY buku_utang_form_piutang.nama_kreditur, buku_utang_form_piutang.user_id', [$user_id]);

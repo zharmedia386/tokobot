@@ -19,12 +19,13 @@ class BukuKasController extends Controller
     // BUKU KAS
     public function buku_kas()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
-            $user_id = session()->get('user_id');
             $kas_temp = "Kas";
             $kas = DB::select('select * from asset where asset.nama_asset = ? and asset.user_id = ?', [$kas_temp, $user_id]);
             $buku_kas = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pemasukkan, buku_kas.nama_pengeluaran, buku_kas.tanggal, SUM(buku_kas.harga_pemasukkan) as harga_pemasukkan , SUM(buku_kas.harga_pengeluaran) as harga_pengeluaran from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pemasukkan, buku_kas.user_id, buku_kas.nama_pengeluaran', [$user_id]);

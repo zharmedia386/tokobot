@@ -15,13 +15,14 @@ class KrediturSupplierController extends Controller
     // KREDITUR
     public function kreditur()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
             $kreditur = DB::table('kreditur')->get();
-            $user_id = session()->get('user_id');
 
             return view('app/kreditur/kreditur', compact('kreditur', 'user_id'));
         } 
@@ -69,13 +70,14 @@ class KrediturSupplierController extends Controller
     // SUPPLIER
     public function supplier()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
             $supplier = DB::table('supplier')->get();
-            $user_id = session()->get('user_id');
 
             return view('app/supplier/supplier', compact('supplier', 'user_id'));
         } 

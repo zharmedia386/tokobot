@@ -32,14 +32,15 @@ class PurchaseSalesController extends Controller
 
     public function purchase()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
         
         // checks the user's session status to determine if the user has logged in
         if (session()->has('hasLogin')) {
             // retrieves all the data from the purchase_form_tunai and purchase_form_kredit tables using the DB facade
-            $user_id = session()->get('user_id');
             $purchase_form_tunai = DB::table('purchase_form_tunai')->get();
             $purchase_form_kredit = DB::table('purchase_form_kredit')->get();
 
@@ -336,12 +337,13 @@ class PurchaseSalesController extends Controller
     // SALES
     public function sales()
     {
+        $user_id = session()->get('user_id');
+        
         // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
-        if (!Modal_Awal::exists()) 
+        if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
         if (session()->has('hasLogin')) {
-            $user_id = session()->get('user_id');
             $sales_form_tunai = DB::table('sales_form_tunai')->get();
             $sales_form_kredit = DB::table('sales_form_kredit')->get();
 

@@ -21,7 +21,7 @@
             </div>
             <div class="card-body">
                 <br>
-                <!-- <p>Saldo : @currency($kas[0]->harga_asset)</p> -->
+                {{-- <p>Saldo : @currency($kas[0]->harga_asset)</p> --}}
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">
                         <thead>

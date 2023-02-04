@@ -9,6 +9,16 @@
         </div>
     </div>
     <div class="card-body">
+        <!-- ALERT MAKING SURE THERE'S NO EMPTY FIELDS-->
+        @if (session()->has('emptyFields'))
+        <div id="alerts-disimissible-component">
+            <div class="alert alert-left alert-info  alert-dismissible fade show fs-7" role="alert">
+                {{ session('emptyFields') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+            </div>
+        </div>
+        @endif
+        
         <form action="{{ route('sales_form_tunai_post') }}" method="POST">
             @csrf
             <div class="form-group">

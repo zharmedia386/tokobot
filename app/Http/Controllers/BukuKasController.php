@@ -8,15 +8,21 @@ use App\Models\Asset;
 use App\Models\Buku_Utang_Form_Utang;
 use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Modal;
+use App\Models\Modal_Awal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class BukuKasController extends Controller
 {
     // BUKU KAS
     public function buku_kas()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $kas_temp = "Kas";
@@ -43,6 +49,16 @@ class BukuKasController extends Controller
 
     public function tambah_kas_pemasukkan_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, hargaPemasukkan, dan nama pemasukkan)
+        $validator = Validator::make($request->all(), [
+            'tanggal' => 'required',
+            'hargaPemasukkan' => 'required',
+            'pemasukkan' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('tambah_kas_pemasukkan')->with('emptyFields', 'Pastikan isian tanggal, hargaPemasukkan, dan nama pemasukkan tidak kosong');
+
         $user_id = session()->get('user_id');
         $buku_kas = new Buku_Kas();
         // HARGA PENGELUARAN
@@ -115,6 +131,16 @@ class BukuKasController extends Controller
 
     public function tambah_kas_pengeluaran_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, hargaPengeluaran, dan nama pengeluaran)
+        $validator = Validator::make($request->all(), [
+            'tanggal' => 'required',
+            'hargaPengeluaran' => 'required',
+            'pengeluaran' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('tambah_kas_pengeluaran')->with('emptyFields', 'Pastikan isian tanggal, hargaPengeluaran, dan nama pengeluaran tidak kosong');
+
         $user_id = session()->get('user_id');
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');

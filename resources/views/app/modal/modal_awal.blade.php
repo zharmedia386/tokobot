@@ -20,6 +20,16 @@
                 </div>
             </div>
             <div class="card-body">
+                <!-- ALERT IF MODAL AWAL IS EMPTY -->
+                @if (session()->has('emptyModalAwal'))
+                <div id="alerts-disimissible-component">
+                    <div class="alert alert-left alert-info  alert-dismissible fade show fs-7" role="alert">
+                        {{ session('emptyModalAwal') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
+                    </div>
+                </div>
+                @endif
+
                 <br>
                 <div class="table-responsive">
                     <table id="datatable" class="table table-striped" data-toggle="data-table">

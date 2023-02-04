@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use App\Models\Kreditur;
 use App\Models\Supplier;
+use App\Models\Modal_Awal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class KrediturSupplierController extends Controller
 {
     // KREDITUR
     public function kreditur()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $kreditur = DB::table('kreditur')->get();
             $user_id = session()->get('user_id');
@@ -33,6 +39,15 @@ class KrediturSupplierController extends Controller
 
     public function tambah_kreditur_post(Request $request)
     {
+        // Validate if there's no empty fields (alamat, nama kreditur)
+        $validator = Validator::make($request->all(), [
+            'alamat' => 'required',
+            'namaKreditur' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('tambah_kreditur')->with('emptyFields', 'Pastikan isian alamat, nama kreditur tidak kosong');
+
         $kreditur = new Kreditur();
         $kreditur->user_id = session()->get('user_id');
         $kreditur->kreditur_id = DB::selectOne("select getNewId('kreditur') as value from dual")->value;
@@ -54,6 +69,10 @@ class KrediturSupplierController extends Controller
     // SUPPLIER
     public function supplier()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $supplier = DB::table('supplier')->get();
             $user_id = session()->get('user_id');
@@ -74,6 +93,15 @@ class KrediturSupplierController extends Controller
 
     public function tambah_supplier_post(Request $request)
     {
+        // Validate if there's no empty fields (alamat, nama supplier)
+        $validator = Validator::make($request->all(), [
+            'alamat' => 'required',
+            'namaSupplier' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('tambah_supplier')->with('emptyFields', 'Pastikan isian alamat, nama supplier tidak kosong');
+
         $supplier = new Supplier();
         $supplier->user_id = session()->get('user_id');
         $supplier->supplier_id = DB::selectOne("select getNewId('supplier') as value from dual")->value;

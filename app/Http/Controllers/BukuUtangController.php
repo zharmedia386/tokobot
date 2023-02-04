@@ -8,9 +8,11 @@ use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Sales_Form_Tunai;
 use App\Models\Sales_Form_Kredit;
 use App\Models\Asset;
+use App\Models\Modal_Awal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class BukuUtangController extends Controller
 {
@@ -18,6 +20,10 @@ class BukuUtangController extends Controller
     // BUKU UTANG
     public function buku_utang()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $buku_utang_form_utang = DB::select('select buku_utang_form_utang.user_id, buku_utang_form_utang.tanggal, buku_utang_form_utang.nama, buku_utang_form_utang.nama_supplier, buku_utang_form_utang.nomor_utang, SUM(buku_utang_form_utang.jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ? GROUP BY buku_utang_form_utang.nama_supplier, buku_utang_form_utang.user_id', [$user_id]);
@@ -44,8 +50,16 @@ class BukuUtangController extends Controller
 
     public function buku_utang_form_utang_post(Request $request)
     {
-        // $test = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
-        // dd($test);
+        // Validate if there's no empty fields (tanggal, supplier, nama utang, dan jumlah utang)
+        $validator = Validator::make($request->all(), [
+            'tanggal' => 'required',
+            'nama' => 'required',
+            'jumlahUtang' => 'required',
+            'namaSupplier' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('buku_utang_form_utang')->with('emptyFields', 'Pastikan isian tanggal, supplier, nama utang, dan jumlah utang tidak kosong');
 
         // Buku Utang Form Tunai
         $buku_utang_form_utang = new Buku_Utang_Form_Utang();
@@ -80,6 +94,17 @@ class BukuUtangController extends Controller
 
     public function buku_utang_form_piutang_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, kreditur, nama piutang, dan jumlah piutang)
+        $validator = Validator::make($request->all(), [
+            'tanggal' => 'required',
+            'nama' => 'required',
+            'jumlahPiutang' => 'required',
+            'namaKreditur' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('buku_utang_form_utang')->with('emptyFields', 'Pastikan isian tanggal, kreditur, nama piutang, dan jumlah piutang tidak kosong');
+
         $user_id = session()->get('user_id');
 
         // Buku Utang Form Piutang

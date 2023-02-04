@@ -10,10 +10,12 @@ use App\Models\Sales_Form_Kredit;
 use App\Models\Buku_Kas;
 use App\Models\Asset;
 use App\Models\Modal;
+use App\Models\Modal_Awal;
 use App\Models\Buku_Utang_Form_Utang;
 use App\Models\Buku_Utang_Form_Piutang;
 use App\Models\Stok_Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -21,18 +23,30 @@ use Carbon\Carbon;
 class PurchaseSalesController extends Controller
 {
     ////////////////////////////////////////////////////////////
-    // PENJUALAN
+    //// Purchase:
+    ////
+    ////
+    ////
+    ////
+    ////////////////////////////////////////////////////////////
 
-    // PURCHASE
     public function purchase()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+        
+        // checks the user's session status to determine if the user has logged in
         if (session()->has('hasLogin')) {
+            // retrieves all the data from the purchase_form_tunai and purchase_form_kredit tables using the DB facade
             $user_id = session()->get('user_id');
             $purchase_form_tunai = DB::table('purchase_form_tunai')->get();
             $purchase_form_kredit = DB::table('purchase_form_kredit')->get();
 
             return view('app/purchase/purchase', compact('purchase_form_tunai', 'purchase_form_kredit', 'user_id'));
         } 
+
+        // If the user has not logged in, the code returns a redirect to the login route along with a flash message
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
 
@@ -47,9 +61,17 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_tunai_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, produk yang dibeli, dan jumlah barang)
+        $validator = Validator::make($request->all(), [
+            'tanggalTransaksi' => 'required',
+            'produkYangDibeli' => 'required',
+            'jumlahBarang' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('purchase_form_tunai')->with('emptyFields', 'Pastikan isian tanggal, produk yang dibeli, dan jumlah barang tidak kosong');
+
         $user_id = session()->get('user_id');
-        // $test = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
-        // dd($test);
 
         // Purchase Form Tunai
         $purchase_form_tunai = new Purchase_Form_Tunai();
@@ -159,9 +181,18 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_kredit_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, produk yang dibeli, dan jumlah barang)
+        $validator = Validator::make($request->all(), [
+            'tanggalTransaksi' => 'required',
+            'produkYangDibeli' => 'required',
+            'jumlahBarang' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('purchase_form_kredit')->with('emptyFields', 'Pastikan isian tanggal, produk yang dibeli, dan jumlah barang tidak kosong');
+
+
         $user_id = session()->get('user_id');
-        // dd($request->metodePembayaran);
-        // dd($request->umurUtang);
 
         // Purchase Form Kredit
         $purchase_form_kredit = new Purchase_Form_Kredit();
@@ -305,6 +336,10 @@ class PurchaseSalesController extends Controller
     // SALES
     public function sales()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $sales_form_tunai = DB::table('sales_form_tunai')->get();
@@ -326,9 +361,18 @@ class PurchaseSalesController extends Controller
 
     public function sales_form_tunai_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, produk yang terjual, dan jumlah barang)
+        $validator = Validator::make($request->all(), [
+            'tanggalTransaksi' => 'required',
+            'produkYangTerjual' => 'required',
+            'jumlahBarang' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('sales_form_tunai')->with('emptyFields', 'Pastikan isian tanggal, produk yang terjual, dan jumlah barang tidak kosong');
+
+
         $user_id = session()->get('user_id');
-        // $test = DB::selectOne("select getNewId('sales_form_tunai') as value from dual")->value;
-        // dd($test);
 
         // Sales Form Tunai
         $sales_form_tunai = new Sales_Form_Tunai();
@@ -434,9 +478,18 @@ class PurchaseSalesController extends Controller
 
     public function sales_form_kredit_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, produk yang terjual, dan jumlah barang)
+        $validator = Validator::make($request->all(), [
+            'tanggalTransaksi' => 'required',
+            'produkYangTerjual' => 'required',
+            'jumlahBarang' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('sales_form_kredit')->with('emptyFields', 'Pastikan isian tanggal, produk yang terjual, dan jumlah barang tidak kosong');
+
+
         $user_id = session()->get('user_id');
-        // dd($request->metodePembayaran);
-        // dd($request->umurUtang);
 
         // Sales Form Kredit
         $sales_form_kredit = new Sales_Form_Kredit();

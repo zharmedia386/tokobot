@@ -19,6 +19,7 @@ use App\Models\Stok_Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class ReportController extends Controller
 {
@@ -28,6 +29,10 @@ class ReportController extends Controller
     // POSISI KEUANGAN
     public function posisi_keuangan()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
 
@@ -124,6 +129,10 @@ class ReportController extends Controller
     // ARUS KAS BULAN
     public function arus_kas_bulan()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             return view('app/reports/arus-kas-bulan');
         } 
@@ -133,6 +142,10 @@ class ReportController extends Controller
     // LABA RUGI
     public function laba_rugi()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             // PEMASUKKAN DAN PENGELUARAN (BUKU KAS)
             $user_id  = session()->get('user_id');
@@ -208,6 +221,10 @@ class ReportController extends Controller
     // PERUBAHAN MODAL
     public function perubahan_modal()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
 
@@ -223,6 +240,10 @@ class ReportController extends Controller
     // ASSET
     public function asset()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
 
@@ -251,8 +272,15 @@ class ReportController extends Controller
 
     public function asset_form_post(Request $request)
     {
-        // $test = DB::selectOne("select getNewId('as') as value from dual")->value;
-        // dd($test);
+        // Validate if there's no empty fields (nama, harga, dan jenis asset)
+        $validator = Validator::make($request->all(), [
+            'namaAsset' => 'required',
+            'hargaAsset' => 'required',
+            'jenisAsset' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('asset_form')->with('emptyFields', 'Pastikan isian nama, harga, dan jenis asset tidak kosong');
 
         // Purchase Form Tunai
         $asset = new Asset();
@@ -302,6 +330,10 @@ class ReportController extends Controller
     // KEWAJIBAN
     public function kewajiban()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $kewajiban = DB::table('kewajiban')->get();
             $user_id = session()->get('user_id');
@@ -323,8 +355,15 @@ class ReportController extends Controller
 
     public function kewajiban_form_post(Request $request)
     {
-        // $test = DB::selectOne("select getNewId('kewajiban') as value from dual")->value;
-        // dd($test);
+        // Validate if there's no empty fields (nama, jenis, dan nominal kewajiban)
+        $validator = Validator::make($request->all(), [
+            'namaKewajiban' => 'required',
+            'jenisKewajiban' => 'required',
+            'nominal' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('kewajiban_form')->with('emptyFields', 'Pastikan isian nama, jenis, dan nominal kewajiban tidak kosong');
 
         // Kewajiban Form Tunai
         $kewajiban = new Kewajiban();
@@ -397,6 +436,17 @@ class ReportController extends Controller
 
     public function modal_awal_aset_form_post(Request $request)
     {
+        // Validate if there's no empty fields (nama, harga, dan jenis asset)
+        $validator = Validator::make($request->all(), [
+            'namaAsset' => 'required',
+            'hargaAsset' => 'required',
+            'jenisAsset' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('modal_awal_aset_usaha')->with('emptyFields', 'Pastikan isian nama, harga, dan jenis asset tidak kosong');
+
+
         $user_id = session()->get('user_id');
 
         // Asset
@@ -440,9 +490,19 @@ class ReportController extends Controller
 
     public function modal_awal_persediaan_form_post(Request $request)
     {
+        // Validate if there's no empty fields (tanggal, produk yang dibeli, jumlah barang, harga satuan)
+        $validator = Validator::make($request->all(), [
+            'tanggalTransaksi' => 'required',
+            'produkYangDibeli' => 'required',
+            'jumlahBarang' => 'required',
+            'hargaSatuan' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('modal_awal_persediaan_barang_dagang')->with('emptyFields', 'Pastikan isian tanggal, produk yang dibeli, jumlah barang, harga satuan tidak kosong');
+
+
         $user_id = session()->get('user_id');
-        // $test = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
-        // dd($test);
 
         // Purchase Form Tunai
         $purchase_form_tunai = new Purchase_Form_Tunai();
@@ -562,6 +622,10 @@ class ReportController extends Controller
     // MODAL
     public function modal()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             // DATA MODAL
             $modal = DB::table('modal')->get();
@@ -593,6 +657,16 @@ class ReportController extends Controller
 
     public function modal_form_post(Request $request)
     {
+        // Validate if there's no empty fields (nama dan harga modal)
+        $validator = Validator::make($request->all(), [
+            'namaModal' => 'required',
+            'hargaModal' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('tambah_modal')->with('emptyFields', 'Pastikan isian nama dan harga modal tidak kosong');
+
+
         $modal = new Modal();
         $modal->user_id = session()->get('user_id');
         $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
@@ -630,6 +704,10 @@ class ReportController extends Controller
     // BEBAN USAHA
     public function beban_usaha()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $beban_usaha = DB::table('beban_usaha')->get();
             $user_id = session()->get('user_id');
@@ -651,6 +729,15 @@ class ReportController extends Controller
 
     public function beban_usaha_form_post(Request $request)
     {
+        // Validate if there's no empty fields (nama dan harga beban usaha)
+        $validator = Validator::make($request->all(), [
+            'namaBebanUsaha' => 'required',
+            'hargaBebanUsaha' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('beban_usaha_form')->with('emptyFields', 'Pastikan isian nama dan harga beban usaha tidak kosong');
+
         $beban_usaha = new Beban_Usaha();
         $beban_usaha->user_id = session()->get('user_id');
         $beban_usaha->beban_usaha_id = DB::selectOne("select getNewId('beban_usaha') as value from dual")->value;
@@ -681,6 +768,10 @@ class ReportController extends Controller
     // ASSET TETAP
     public function asset_tetap()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             return view('app/asset_tetap/asset_tetap');
         } 
@@ -690,6 +781,10 @@ class ReportController extends Controller
     // STOK BARANG
     public function stok_barang()
     {
+        // Validate if modal_awal is still empty or not, if so redirect to modal_awal page
+        if (!Modal_Awal::exists()) 
+            return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
+
         if (session()->has('hasLogin')) {
             $stok_barang = DB::table('stok_barang')->get();
             $user_id = session()->get('user_id');
@@ -711,6 +806,17 @@ class ReportController extends Controller
 
     public function stok_barang_form_post(Request $request)
     {
+        // Validate if there's no empty fields (nama barang, harga satuan, dan jumlah stok)
+        $validator = Validator::make($request->all(), [
+            'namaBarang' => 'required',
+            'hargaSatuan' => 'required',
+            'jumlahStok' => 'required',
+        ]);
+    
+        if ($validator->fails())
+            return redirect()->route('stok_barang_form')->with('emptyFields', 'Pastikan isian nama barang, harga satuan, dan jumlah stok tidak kosong');
+
+
         $user_id = session()->get('user_id');
 
         $stok_barang = new Stok_Barang();

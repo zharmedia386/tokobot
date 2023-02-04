@@ -113,6 +113,7 @@ Route::post('/app/modal_awal_aset_usaha', 'App\Http\Controllers\ReportController
 Route::get('/app/modal_awal_persediaan_barang_dagang', 'App\Http\Controllers\ReportController@modal_awal_persediaan_barang_dagang')->name('modal_awal_persediaan_barang_dagang');
 Route::post('/app/modal_awal_persediaan_barang_dagang', 'App\Http\Controllers\ReportController@modal_awal_persediaan_form_post')->name('modal_awal_persediaan_barang_dagang_post');
 Route::post('/app/modal_awal/modal_awal_delete/{modal_awal_id}', 'App\Http\Controllers\ReportController@modal_awal_delete')->name('modal_awal_delete');
+Route::get('/app/modal_awal_detail/{modal_awal_id}', 'App\Http\Controllers\ReportController@modal_awal_detail')->name('modal_awal_detail');
 
 // PERUBAHAN MODAL
 Route::get('/app/perubahan_modal', 'App\Http\Controllers\ReportController@perubahan_modal')->name('perubahan_modal');

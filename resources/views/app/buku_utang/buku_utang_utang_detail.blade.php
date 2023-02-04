@@ -21,10 +21,14 @@
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Nama Utang</label>
                 <input type="text" class="form-control" name="nama" id="exampleInputText1" disabled value="{{ $buku_utang_form_utang[0]->nama }}" />
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="exampleInputText1">Supplier</label>
+                <input type="text" class="form-control" name="nama" id="exampleInputText1" disabled value="{{ $buku_utang_form_utang[0]->nama_supplier }}" />
+            </div>
             <div class="form-group">
                 <label class="form-label" for="exampleInputText1">Jumlah Utang</label>
-                <input type="text" class="form-control" id="exampleInputText1" name="jumlahUtang" disabled value="{{ $buku_utang_form_utang[0]->jumlah_utang }}" />
-            </div>
+                <input type="text" class="form-control" id="exampleInputText1" name="jumlahUtang" disabled value="{{ $harga_utang[0]->jumlah_utang }}" />
             </div>
             <a class="btn btn-danger rounded" href="{{ url()->previous() }}">Kembali</a>
         </form>

@@ -19,9 +19,11 @@ class BukuKasController extends Controller
     {
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
+            $kas_temp = "Kas";
+            $kas = DB::select('select * from asset where asset.nama_asset = ? and asset.user_id = ?', [$kas_temp, $user_id]);
             $buku_kas = DB::select('select buku_kas.user_id, buku_kas.kas_id, buku_kas.nama_pemasukkan, buku_kas.nama_pengeluaran, buku_kas.tanggal, SUM(buku_kas.harga_pemasukkan) as harga_pemasukkan , SUM(buku_kas.harga_pengeluaran) as harga_pengeluaran from buku_kas where buku_kas.user_id = ? GROUP BY buku_kas.nama_pemasukkan, buku_kas.user_id, buku_kas.nama_pengeluaran', [$user_id]);
 
-            return view('app/buku_kas/buku_kas', compact('buku_kas', 'user_id'));
+            return view('app/buku_kas/buku_kas', compact('buku_kas', 'user_id', 'kas'));
         }
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }    
@@ -130,14 +132,13 @@ class BukuKasController extends Controller
 
         // JIKA PEMBAYARAN UTANG, DIMASUKKAN SEBAGAI PENAMBAHAN KE PERSEDIAAN BARANG DAGANG
         if($request->pengeluaran == "Pembayaran Utang") {
-            $asset = new Asset();
-            $asset->user_id = session()->get('user_id');
-            $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
-            $asset->nama_asset = "Persediaan barang dagang";
-            $asset->jenis_asset = "Asset Lancar";
-            $asset->harga_asset = $buku_kas->harga_pengeluaran;
-            // dd($asset->harga_asset);
-            $asset->save();
+            // $asset = new Asset();
+            // $asset->user_id = session()->get('user_id');
+            // $asset->nomor_asset = DB::selectOne("select getNewId('asset') as value from dual")->value;
+            // $asset->nama_asset = "Persediaan barang dagang";
+            // $asset->jenis_asset = "Asset Lancar";
+            // $asset->harga_asset = $buku_kas->harga_pengeluaran;
+            // $asset->save();
 
 
             // UBAH UTANG KAS DI BUKU PIUTANG BERDASARKAN NAMA SUPPLIER

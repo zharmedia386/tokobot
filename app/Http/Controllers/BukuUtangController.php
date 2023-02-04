@@ -71,7 +71,9 @@ class BukuUtangController extends Controller
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $buku_utang_form_utang = DB::select('select * from buku_utang_form_utang where buku_utang_form_utang.nomor_utang = ? and buku_utang_form_utang.user_id = ?', [$nomor_utang, $user_id]);
-            return view('app/buku_utang/buku_utang_utang_detail', compact('buku_utang_form_utang'));
+            $harga_utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.nomor_utang = ? and buku_utang_form_utang.user_id = ?', [$nomor_utang, $user_id]);
+
+            return view('app/buku_utang/buku_utang_utang_detail', compact('buku_utang_form_utang','harga_utang'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }
@@ -125,7 +127,9 @@ class BukuUtangController extends Controller
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $buku_utang_form_piutang = DB::select('select * from buku_utang_form_piutang where buku_utang_form_piutang.nomor_piutang = ? and buku_utang_form_piutang.user_id = ?', [$nomor_piutang, $user_id]);
-            return view('app/buku_utang/buku_utang_piutang_detail', compact('buku_utang_form_piutang'));
+            $harga_piutang = DB::select('select sum(jumlah_piutang) as jumlah_piutang from buku_utang_form_piutang where buku_utang_form_piutang.nomor_piutang = ? and buku_utang_form_piutang.user_id = ?', [$nomor_piutang, $user_id]);
+
+            return view('app/buku_utang/buku_utang_piutang_detail', compact('buku_utang_form_piutang','harga_piutang'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
     }

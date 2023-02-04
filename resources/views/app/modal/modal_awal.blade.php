@@ -70,7 +70,7 @@
                                             </form>
                                         </div>
                                     </td>
-                                    <td><a href="{{ route('modal_detail', $data->modal_awal_id) }}" class="btn btn-warning">Detail</a></td>
+                                    <td><a href="{{ route('modal_awal_detail', $data->modal_awal_id) }}" class="btn btn-warning">Detail</a></td>
                                 </tr>
                                 @php
                                     $totalModal += $data->harga_modal;

@@ -39,7 +39,7 @@ class ReportController extends Controller
             $asset_tetap = DB::select('select asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id', [$cond2, $user_id]);
 
             // UTANG
-            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ? and buku_utang_form_utang.jumlah_utang >= 0', [$user_id]);
+            $utang = DB::select('select sum(jumlah_utang) as jumlah_utang from buku_utang_form_utang where buku_utang_form_utang.user_id = ?', [$user_id]);
             
             // MODAL
             $modal = DB::select('select sum(harga_modal) as harga_modal from modal where modal.user_id = ' . $user_id);
@@ -94,10 +94,10 @@ class ReportController extends Controller
 
             $modal_akhir=0;
             // BEBAN GAJI
-            $beban_gaji = DB::select('select * from buku_kas where buku_kas.nama_pengeluaran = "Gaji/bonus karyawan" and buku_kas.user_id = ' . $user_id);
+            $beban_gaji = DB::select('select sum(harga_pengeluaran) as beban_gaji from buku_kas where buku_kas.nama_pengeluaran = "Gaji/bonus karyawan" and buku_kas.user_id = ' . $user_id);
+
             if($beban_gaji) {
-                $beban_gaji = $beban_gaji[0]->harga_pengeluaran;
-                // dd($beban_gaji);
+                $beban_gaji = $beban_gaji[0]->beban_gaji;
                             
                 
                 /////////////////////////////////
@@ -287,7 +287,7 @@ class ReportController extends Controller
     {
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
-            $asset = DB::select('select * from asset where asset.nomor_asset = ? asset.user_id = ?', [$nomor_asset, $user_id]);
+            $asset = DB::select('select * from asset where asset.nomor_asset = ? and asset.user_id = ?', [$nomor_asset, $user_id]);
             return view('app/asset/asset_detail', compact('asset'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -548,6 +548,17 @@ class ReportController extends Controller
         return redirect('/app/modal_awal');
     }
 
+    public function modal_awal_detail($modal_awal_id)
+    {
+        if (session()->has('hasLogin')) {
+            $user_id = session()->get('user_id');
+            $modal_awal = DB::select('select * from modal_awal where modal_awal.modal_awal_id = ? and modal_awal.user_id = ?', [$modal_awal_id, $user_id]);
+
+            return view('app/modal/modal_awal_detail', compact('modal_awal', 'user_id'));
+        } 
+        return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
+    }
+
     // MODAL
     public function modal()
     {
@@ -719,7 +730,7 @@ class ReportController extends Controller
     public function stok_barang_detail($stok_id) {
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
-            $stok_barang = DB::select('select * from stok_barang where stok_barang.stok_id = ? stok_barang.user_id = ?', [$stok_id, $user_id]);
+            $stok_barang = DB::select('select * from stok_barang where stok_barang.stok_id = ? and stok_barang.user_id = ?', [$stok_id, $user_id]);
             
             return view('app/stok_barang/stok_barang_detail', compact('stok_barang'));
         } 

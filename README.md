@@ -1,13 +1,7 @@
 
-<<<<<<< HEAD
 # Tokobot
 
 The Community Partnership Program (PKM) with the title "Development of a Financial Management Application for Mosque-Owned Enterprises to Empower Mosque Congregants in Rancamulya Village" involves analysis, design, and implementation of the UMKM Masjid application, as well as socialization of its usage.
-=======
-# Delicacy Food - Healthy Food Restaurant Management System
-
-Aims to provide information systems for some kinda features and user's roles of any small business that focus on food sales and support SDGs by encouraging certain small business in around indonesia to have a decent work and economic growth
->>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
 
 
 ## Requirements

@@ -39,7 +39,11 @@ class ReportController extends Controller
             // ASSET LANCAR DAN TETAP
             $cond1 = "Asset Lancar";
             $asset_lancar = DB::select('select asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id', [$cond1, $user_id]);
+<<<<<<< HEAD
             
+=======
+            // dd($asset_lancar);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $cond2 = "Asset Tetap";
             $asset_tetap = DB::select('select asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id', [$cond2, $user_id]);
 
@@ -65,6 +69,11 @@ class ReportController extends Controller
             $penjualan_kredit = $penjualan_kredit[0]->sales_kredit;
 
             $pendapatan_atas_penjualan = $penjualan_tunai + $penjualan_kredit;
+<<<<<<< HEAD
+=======
+            // dd($pendapatan_atas_penjualan);
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
 
             // Harga Pokok Penjualan -> Jumlah yang terjual x Harga Pembelian
             $stok_barang_dagang = DB::select('select * from stok_barang where stok_barang.user_id = ' . $user_id);
@@ -92,18 +101,38 @@ class ReportController extends Controller
             }
 
             $harga_pokok_penjualan = $hpp1;
+<<<<<<< HEAD
             $laba_kotor = $pendapatan_atas_penjualan - $harga_pokok_penjualan;
             $modal_akhir=0;
 
+=======
+            
+            $laba_kotor = $pendapatan_atas_penjualan - $harga_pokok_penjualan;
+
+            $modal_akhir=0;
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             // BEBAN GAJI
             $beban_gaji = DB::select('select sum(harga_pengeluaran) as beban_gaji from buku_kas where buku_kas.nama_pengeluaran = "Gaji/bonus karyawan" and buku_kas.user_id = ' . $user_id);
 
             if($beban_gaji) {
                 $beban_gaji = $beban_gaji[0]->beban_gaji;
+<<<<<<< HEAD
+=======
+                            
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
                 
                 /////////////////////////////////
                 /// LABA BERSIH
                 $laba_bersih = $laba_kotor - $beban_gaji;
+<<<<<<< HEAD
+=======
+                // dd($laba_bersih);
+                
+                
+                // $prive_modal = $prive_modal[0]->prive_modal;
+                // dd($prive_modal);
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
 
                 // MODAL AKHIR
                 // modal_awal + laba bersih - prive modal
@@ -168,6 +197,11 @@ class ReportController extends Controller
             }
 
             $harga_pokok_penjualan = $hpp1;
+<<<<<<< HEAD
+=======
+            // dd($hpp1);
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
 
             $gaji_karyawan = new Buku_Kas;
             $penjualan_kredit = new Sales_Form_Kredit;
@@ -198,6 +232,13 @@ class ReportController extends Controller
                 $gaji_karyawan_nama_pengeluaran = $gaji_karyawan->nama_pengeluaran;
                 $gaji_karyawan_harga_pengeluaran = $gaji_karyawan->harga_pengeluaran;
             }
+<<<<<<< HEAD
+=======
+            
+            // dd($gaji_karyawan);
+            // dd($gaji_karyawan_user_id);
+            // $gaji_karyawan_harga_pengeluaran = $gaji_karyawan->harga_pengeluaran;
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
                 
             return view('app/reports/laba-rugi', compact('harga_pokok_penjualan','penjualan_tunai','total_penjualan_kredit','penjualan_kredit', 'gaji_karyawan_user_id','gaji_karyawan_nama_pengeluaran','gaji_karyawan_harga_pengeluaran', 'user_id'));
         } 
@@ -215,6 +256,10 @@ class ReportController extends Controller
 
         if (session()->has('hasLogin')) {
             $modal_awal = DB::select('select sum(harga_asset) as modal_awal from asset where asset.user_id = ' . $user_id);
+<<<<<<< HEAD
+=======
+            // dd($modal_awal);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas where buku_kas.user_id = ' . $user_id);
 
             return view('app/modal/perubahan_modal', compact('user_id', 'prive_pemilik', 'modal_awal'));
@@ -235,9 +280,18 @@ class ReportController extends Controller
             // ASSET LANCAR DAN TETAP
             $cond1 = "Asset Lancar";
             $asset_lancar = DB::select('select asset.nomor_asset, asset.jenis_asset, asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id, asset.jenis_asset', [$cond1, $user_id]);
+<<<<<<< HEAD
             $cond2 = "Asset Tetap";
             $asset_tetap = DB::select('select asset.nomor_asset, asset.jenis_asset, asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id, asset.jenis_asset',  [$cond2, $user_id]);
 
+=======
+            // dd($asset_lancar);
+            $cond2 = "Asset Tetap";
+            $asset_tetap = DB::select('select asset.nomor_asset, asset.jenis_asset, asset.user_id, asset.nama_asset, SUM(asset.harga_asset) as harga_asset from asset where asset.jenis_asset = ? and asset.user_id = ? GROUP BY asset.nama_asset, asset.user_id, asset.jenis_asset',  [$cond2, $user_id]);
+
+            // $asset = DB::table('asset')->get();
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             return view('app/asset/asset', compact('asset_lancar', 'asset_tetap', 'user_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -379,6 +433,10 @@ class ReportController extends Controller
     }
 
     public function kewajiban_delete($nomor_kewajiban) {
+<<<<<<< HEAD
+=======
+        // dd($nomor_kewajiban);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $kewajiban = Kewajiban::find($nomor_kewajiban);
         $kewajiban->delete();
         return redirect('/app/kewajiban');
@@ -526,10 +584,21 @@ class ReportController extends Controller
 
         // STOK BARANG
         $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
+<<<<<<< HEAD
         $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
         
         if($barang_yang_sama) { // TAMBAH STOK
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+=======
+        // $barang_yang_sama = Stok_Barang::select('*')->where('user_id' , '=', $user_id)->where('nama_barang' , '=', $lower_produkYangDibeli)->get();
+        // $barang_yang_sama = $barang_yang_sama[0];
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
             $barang_yang_sama->total_harga += (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
@@ -581,6 +650,10 @@ class ReportController extends Controller
     }
 
     public function modal_awal_delete($modal_awal_id) {
+<<<<<<< HEAD
+=======
+        // dd($modal_awal_id);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $modal_awal = Modal_Awal::find($modal_awal_id);
         $modal_awal->delete();
         return redirect('/app/modal_awal');
@@ -616,6 +689,10 @@ class ReportController extends Controller
             $total_modal = $modal_awal[0]->modal_awal + $modal_tambahan[0]->modal_tambahan;
             $prive_pemilik = DB::select('select sum(harga_pengeluaran) as prive_pemilik from buku_kas where buku_kas.user_id = ' . $user_id);
             $modal_akhir = $total_modal - $prive_pemilik[0]->prive_pemilik;
+<<<<<<< HEAD
+=======
+            // dd($modal_awal);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
 
             return view('app/modal/modal', compact('user_id', 'modal', 'prive_pemilik', 'modal_awal', 'modal_tambahan', 'total_modal', 'modal_akhir'));
         } 
@@ -672,6 +749,10 @@ class ReportController extends Controller
     }
 
     public function modal_delete($modal_id) {
+<<<<<<< HEAD
+=======
+        // dd($modal_id);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $modal = Modal::find($modal_id);
         $modal->delete();
         return redirect('/app/modal');
@@ -824,6 +905,10 @@ class ReportController extends Controller
     }
 
     public function stok_barang_delete($stok_id) {
+<<<<<<< HEAD
+=======
+        // dd($stok_id);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $stok_barang = Stok_Barang::find($stok_id);
         $stok_barang->delete();
         return redirect('/app/stok_barang');

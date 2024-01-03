@@ -21,7 +21,10 @@ class KrediturSupplierController extends Controller
         if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
+<<<<<<< HEAD
             // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $kreditur = DB::table('kreditur')->get();
 
@@ -32,10 +35,15 @@ class KrediturSupplierController extends Controller
 
     public function tambah_kreditur()
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
         if (session()->has('hasLogin')) {
             $kreditur_id = DB::selectOne("select getNewId('kreditur') as value from dual")->value;
 
+=======
+        if (session()->has('hasLogin')) {
+            $kreditur_id = DB::selectOne("select getNewId('kreditur') as value from dual")->value;
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             return view('app/kreditur/form_kreditur', compact('kreditur_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -52,18 +60,29 @@ class KrediturSupplierController extends Controller
         if ($validator->fails())
             return redirect()->route('tambah_kreditur')->with('emptyFields', 'Pastikan isian alamat, nama kreditur tidak kosong');
 
+<<<<<<< HEAD
         // Create a new instance of the kreditur and save it to the database
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $kreditur = new Kreditur();
         $kreditur->user_id = session()->get('user_id');
         $kreditur->kreditur_id = DB::selectOne("select getNewId('kreditur') as value from dual")->value;
         $kreditur->nama_kreditur = $request->namaKreditur;
         $kreditur->alamat = $request->alamat;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $kreditur->save();
 
         return redirect()->route('kreditur')->with('successAddKreditur', 'Pemasukan Kreditur Sukses!');
     }
 
     public function kreditur_delete($kreditur_id) {
+<<<<<<< HEAD
+=======
+        // dd($kreditur_id);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $kreditur = Kreditur::find($kreditur_id);
         $kreditur->delete();
         return redirect('/app/kreditur');
@@ -78,7 +97,10 @@ class KrediturSupplierController extends Controller
         if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $supplier = DB::table('supplier')->get();
 
@@ -89,10 +111,15 @@ class KrediturSupplierController extends Controller
 
     public function tambah_supplier()
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
         if (session()->has('hasLogin')) {
             $supplier_id = DB::selectOne("select getNewId('supplier') as value from dual")->value;
 
+=======
+        if (session()->has('hasLogin')) {
+            $supplier_id = DB::selectOne("select getNewId('supplier') as value from dual")->value;
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             return view('app/supplier/form_supplier', compact('supplier_id'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -109,22 +136,36 @@ class KrediturSupplierController extends Controller
         if ($validator->fails())
             return redirect()->route('tambah_supplier')->with('emptyFields', 'Pastikan isian alamat, nama supplier tidak kosong');
 
+<<<<<<< HEAD
         // Create a new instance of the supplier and save it to the database
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $supplier = new Supplier();
         $supplier->user_id = session()->get('user_id');
         $supplier->supplier_id = DB::selectOne("select getNewId('supplier') as value from dual")->value;
         $supplier->nama_supplier = $request->namaSupplier;
         $supplier->alamat = $request->alamat;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $supplier->save();
 
         return redirect()->route('supplier')->with('successAddsupplier', 'Pemasukan Supplier Sukses!');
     }
 
+<<<<<<< HEAD
     // deletes an entry from the "supplier" table based on supplier_id as primary key
     public function supplier_delete($supplier_id) {
         $supplier = Supplier::find($supplier_id);
         $supplier->delete();
 
+=======
+    public function supplier_delete($supplier_id) {
+        // dd($supplier_id);
+        $supplier = Supplier::find($supplier_id);
+        $supplier->delete();
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         return redirect('/app/supplier');
     }
 }

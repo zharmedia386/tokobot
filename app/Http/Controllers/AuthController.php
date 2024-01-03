@@ -118,7 +118,23 @@ class AuthController extends Controller
         return view('auth.update_password');
     }
 
+    // PROFILE PAGE PELAKU UMKM :GET
     // Edit profile handler and save it to database
+    public function profile()
+    {
+        $pelaku_umkm_id = session()->get('user_id');
+        $pelaku_umkm_name = session()->get('username');
+        $pelaku_umkm_role = session()->get('role');
+        $pelaku_umkm_address = session()->get('pelaku_umkm_address');
+
+        // get saldo from pelaku_umkm table
+        $saldo = DB::select('select pelaku_umkm.saldo from pelaku_umkm inner join users on users.user_id = ?', [$pelaku_umkm_id])[0]->saldo;
+        $saldo == null ? $saldo = 0 : $saldo = $saldo;
+        // dd($saldo);
+        return view('auth.profile', compact('pelaku_umkm_name', 'saldo', 'pelaku_umkm_id', 'pelaku_umkm_role', 'pelaku_umkm_address'));
+    }
+
+    // EDIT PROFILE PELAKU UMKM :POST
     public function edit_profile(Request $request)
     {
         $pelaku_umkm_id = session()->get('user_id');
@@ -141,18 +157,4 @@ class AuthController extends Controller
         return redirect()->route('login')->with('editProfile', 'Edit Profile Success! Please Login Again');
     }
 
-    // redirecting to profile page
-    public function profile()
-    {
-        $pelaku_umkm_id = session()->get('user_id');
-        $pelaku_umkm_name = session()->get('username');
-        $pelaku_umkm_role = session()->get('role');
-        $pelaku_umkm_address = session()->get('pelaku_umkm_address');
-
-        // get saldo from pelaku_umkm table
-        $saldo = DB::select('select pelaku_umkm.saldo from pelaku_umkm inner join users on users.user_id = ?', [$pelaku_umkm_id])[0]->saldo;
-        $saldo == null ? $saldo = 0 : $saldo = $saldo;
-        
-        return view('auth.profile', compact('pelaku_umkm_name', 'saldo', 'pelaku_umkm_id', 'pelaku_umkm_role', 'pelaku_umkm_address'));
-    }
 }

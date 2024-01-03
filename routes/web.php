@@ -42,6 +42,7 @@ Route::get('/app/profile', 'App\Http\Controllers\AppController@user_profile')->n
 Route::get('/app/edit-profile', 'App\Http\Controllers\AppController@edit_profile')->name('edit_profile');
 Route::get('/app/privacy-setting', 'App\Http\Controllers\AppController@privacy_setting')->name('privacy_setting');
 
+// PENJUALAN
 //// PURCHASE
 Route::get('/app/purchase', 'App\Http\Controllers\PurchaseSalesController@purchase')->name('purchase');
 Route::get('/app/purchase/form_tunai', 'App\Http\Controllers\PurchaseSalesController@purchase_form_tunai')->name('purchase_form_tunai');

@@ -23,7 +23,15 @@ use Carbon\Carbon;
 class PurchaseSalesController extends Controller
 {
     ////////////////////////////////////////////////////////////
+<<<<<<< HEAD
     //// PURCHASE
+=======
+    //// Purchase:
+    ////
+    ////
+    ////
+    ////
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
     ////////////////////////////////////////////////////////////
 
     public function purchase()
@@ -49,7 +57,10 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_tunai()
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $nomor_transaksi = DB::selectOne("select getNewId('purchase_form_tunai') as value from dual")->value;
             return view('app/purchase/purchase_form_tunai', compact('nomor_transaksi'));
@@ -59,8 +70,11 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_tunai_post(Request $request)
     {
+<<<<<<< HEAD
         $user_id = session()->get('user_id');
 
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // Validate if there's no empty fields (tanggal, produk yang dibeli, dan jumlah barang)
         $validator = Validator::make($request->all(), [
             'tanggalTransaksi' => 'required',
@@ -71,6 +85,11 @@ class PurchaseSalesController extends Controller
         if ($validator->fails())
             return redirect()->route('purchase_form_tunai')->with('emptyFields', 'Pastikan isian tanggal, produk yang dibeli, dan jumlah barang tidak kosong');
 
+<<<<<<< HEAD
+=======
+        $user_id = session()->get('user_id');
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // Purchase Form Tunai
         $purchase_form_tunai = new Purchase_Form_Tunai();
         $purchase_form_tunai->user_id = session()->get('user_id');
@@ -80,20 +99,49 @@ class PurchaseSalesController extends Controller
         $purchase_form_tunai->diskon_pembelian = $request->diskonPembelian;
         $purchase_form_tunai->produk_yang_dibeli = Str::lower($request->produkYangDibeli);
         $purchase_form_tunai->pajak = $request->pajak;
+<<<<<<< HEAD
         // JUMLAH BARANG
         $satuanBarang = $request->satuanBarang;
         $purchase_form_tunai->jumlah_barang = $satuanBarang * $request->jumlahBarang;
         // HARGA SATUAN
+=======
+
+            // JUMLAH BARANG
+        $satuanBarang = $request->satuanBarang;
+        $purchase_form_tunai->jumlah_barang = $satuanBarang * $request->jumlahBarang;
+
+            // HARGA SATUAN
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $purchase_form_tunai->harga_satuan = $request->hargaSatuan;
         $purchase_form_tunai->harga_satuan = Str::replace('.','',$purchase_form_tunai->harga_satuan);
         $purchase_form_tunai->harga_satuan = Str::replace('Rp ','',$purchase_form_tunai->harga_satuan);
         $purchase_form_tunai->harga_satuan = (int)($purchase_form_tunai->harga_satuan);
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // HARGA TOTAL
         $persentaseDiskon = $request->diskonPembelian / 100 * ($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
         $purchase_form_tunai->total_pembelian = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+<<<<<<< HEAD
         $purchase_form_tunai->save();
 
+=======
+
+        $purchase_form_tunai->save();
+
+
+        // MODAL
+        // $modal = new Modal();
+        // $modal->user_id = session()->get('user_id');
+        // $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
+        // $modal->nama_modal = "Persediaan barang dagang";
+        // $modal->harga_modal = (($request->jumlahBarang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        // $modal->save();
+
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // ASSET LANCAR
         $asset = new Asset();
         $asset->user_id = session()->get('user_id');
@@ -103,12 +151,26 @@ class PurchaseSalesController extends Controller
         $asset->harga_asset = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $asset->save();
 
+<<<<<<< HEAD
         // STOK BARANG
         $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
         $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
         
         if($barang_yang_sama) { // TAMBAH STOK
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+=======
+
+        // STOK BARANG
+        $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
+        // $barang_yang_sama = Stok_Barang::select('*')->where('user_id' , '=', $user_id)->where('nama_barang' , '=', $lower_produkYangDibeli)->get();
+        // $barang_yang_sama = $barang_yang_sama[0];
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
             $barang_yang_sama->total_harga += (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
@@ -124,6 +186,10 @@ class PurchaseSalesController extends Controller
             $stok_barang->save();
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // BUKU KAS
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
@@ -131,6 +197,10 @@ class PurchaseSalesController extends Controller
         $buku_kas->nama_pengeluaran = "Persediaan barang dagang";
         $buku_kas->harga_pengeluaran = (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $buku_kas->save();
 
         // UBAH UANG KAS DI ASET LANCAR
@@ -140,6 +210,10 @@ class PurchaseSalesController extends Controller
             $kas = Asset::find($kas[0]->nomor_asset);
             $kas->harga_asset -= (($purchase_form_tunai->jumlah_barang * $purchase_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $kas->update();
+<<<<<<< HEAD
+=======
+            // dd($kas);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         }
 
         return redirect()->route('purchase')->with('successPurchaseFormTunai', 'Pemasukan Pembayaran Secara Tunai Sukses!');
@@ -147,7 +221,10 @@ class PurchaseSalesController extends Controller
 
     public function purchase_tunai_detail($nomor_transaksi)
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $purchase_form_tunai = DB::select('select * from purchase_form_tunai where purchase_form_tunai.nomor_transaksi = ? and purchase_form_tunai.user_id = ?', [$nomor_transaksi, $user_id]);
@@ -158,8 +235,11 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_kredit_post(Request $request)
     {
+<<<<<<< HEAD
         $user_id = session()->get('user_id');
 
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // Validate if there's no empty fields (tanggal, produk yang dibeli, dan jumlah barang)
         $validator = Validator::make($request->all(), [
             'tanggalTransaksi' => 'required',
@@ -170,6 +250,12 @@ class PurchaseSalesController extends Controller
         if ($validator->fails())
             return redirect()->route('purchase_form_kredit')->with('emptyFields', 'Pastikan isian tanggal, produk yang dibeli, dan jumlah barang tidak kosong');
 
+<<<<<<< HEAD
+=======
+
+        $user_id = session()->get('user_id');
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // Purchase Form Kredit
         $purchase_form_kredit = new Purchase_Form_Kredit();
         $purchase_form_kredit->user_id = session()->get('user_id');
@@ -177,35 +263,70 @@ class PurchaseSalesController extends Controller
         $purchase_form_kredit->tanggal_transaksi = $request->tanggalTransaksi;
         $purchase_form_kredit->metode_pembayaran = $request->metodePembayaran;
         $purchase_form_kredit->umur_utang = $request->umurUtang;
+<<<<<<< HEAD
         // PENAMBAHAN TANGGAL DARI UMUR UTANG 
+=======
+            
+            // PENAMBAHAN TANGGAL DARI UMUR UTANG 
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $days_add = (int)$request->umurUtang;
         $tanggalTransaksi = Carbon::createFromFormat('Y-m-d', $request->tanggalTransaksi);
         $batasPembayaranUtang = $tanggalTransaksi->addDays($days_add);
         $purchase_form_kredit->batas_pembayaran_utang = $batasPembayaranUtang;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $purchase_form_kredit->diskon_pembelian = $request->diskonPembelian;
         $purchase_form_kredit->produk_yang_dibeli = $request->produkYangDibeli;
         $purchase_form_kredit->pajak = $request->pajak;
         $purchase_form_kredit->nama_supplier = $request->namaSupplier;
+<<<<<<< HEAD
         // JUMLAH BARANG
         $satuanBarang = $request->satuanBarang;
         $purchase_form_kredit->jumlah_barang = $satuanBarang * $request->jumlahBarang;
         // DENDA KETERLAMBATAN
+=======
+
+            // JUMLAH BARANG
+        $satuanBarang = $request->satuanBarang;
+        $purchase_form_kredit->jumlah_barang = $satuanBarang * $request->jumlahBarang;
+
+            // DENDA KETERLAMBATAN
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $purchase_form_kredit->denda_keterlambatan = $request->dendaKeterlambatan;
         $purchase_form_kredit->denda_keterlambatan = Str::replace('.','',$purchase_form_kredit->denda_keterlambatan);
         $purchase_form_kredit->denda_keterlambatan = Str::replace('Rp ','',$purchase_form_kredit->denda_keterlambatan);
         $purchase_form_kredit->denda_keterlambatan = (int)($purchase_form_kredit->denda_keterlambatan);
+<<<<<<< HEAD
         // HARGA SATUAN
+=======
+
+            // HARGA SATUAN
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $purchase_form_kredit->harga_satuan = $request->hargaSatuan;
         $purchase_form_kredit->harga_satuan = Str::replace('.','',$purchase_form_kredit->harga_satuan);
         $purchase_form_kredit->harga_satuan = Str::replace('Rp ','',$purchase_form_kredit->harga_satuan);
         $purchase_form_kredit->harga_satuan = (int)($purchase_form_kredit->harga_satuan);
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // HARGA TOTAL
         $persentaseDiskon = $request->diskonPembelian / 100 * ($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
         $purchase_form_kredit->total_pembelian = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+<<<<<<< HEAD
         $purchase_form_kredit->save();
 
         // BUKU UTAN
+=======
+
+        $purchase_form_kredit->save();
+
+
+        // BUKU UTANG
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $buku_utang_form_utang = new Buku_Utang_Form_Utang();
         $buku_utang_form_utang->user_id = session()->get('user_id');
         $buku_utang_form_utang->nomor_utang = DB::selectOne("select getNewId('buku_utang_form_utang') as value from dual")->value;
@@ -215,6 +336,10 @@ class PurchaseSalesController extends Controller
         $buku_utang_form_utang->jumlah_utang = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_utang_form_utang->save();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // ASSET LANCAR
         $asset = new Asset();
         $asset->user_id = session()->get('user_id');
@@ -224,17 +349,33 @@ class PurchaseSalesController extends Controller
         $asset->harga_asset = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $asset->save();
 
+<<<<<<< HEAD
         // STOK BARANG
         $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
         $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
         
         if($barang_yang_sama) { // TAMBAH STOK
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+=======
+
+        // STOK BARANG
+        $lower_produkYangDibeli = Str::lower($request->produkYangDibeli);
+        $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangDibeli, $user_id]);
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $barang_yang_sama->jumlah_stok += $satuanBarang * $request->jumlahBarang;
             $barang_yang_sama->total_harga += (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
         } else { // Tambah Barang Baru
             $stok_barang = new Stok_Barang();
+<<<<<<< HEAD
+=======
+            // dd($stok_barang);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $stok_barang->user_id = session()->get('user_id');
             $stok_barang->stok_id = DB::selectOne("select getNewId('stok_barang') as value from dual")->value;
             $stok_barang->kode_barang = generateRandomString(6);
@@ -252,6 +393,10 @@ class PurchaseSalesController extends Controller
         $buku_kas->nama_pengeluaran = "Persediaan barang dagang";
         $buku_kas->harga_pengeluaran = (($purchase_form_kredit->jumlah_barang * $purchase_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $buku_kas->save();
 
         return redirect()->route('purchase')->with('successPurchaseFormKredit', 'Pemasukan Pembayaran Secara Kredit Sukses!');
@@ -259,7 +404,10 @@ class PurchaseSalesController extends Controller
 
     public function purchase_form_kredit()
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $nomor_transaksi = DB::selectOne("select getNewId('purchase_form_kredit') as value from dual")->value;
             $supplier = DB::table('supplier')->get();
@@ -272,7 +420,10 @@ class PurchaseSalesController extends Controller
 
     public function purchase_kredit_detail($nomor_transaksi)
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $purchase_form_kredit = DB::select('select * from purchase_form_kredit where purchase_form_kredit.nomor_transaksi = ? and purchase_form_kredit.user_id = ?', [$nomor_transaksi, $user_id]);
@@ -283,13 +434,20 @@ class PurchaseSalesController extends Controller
     }
 
     public function purchase_tunai_delete($nomor_transaksi) {
+<<<<<<< HEAD
         $purchase_tunai = Purchase_Form_Tunai::find($nomor_transaksi);
         $purchase_tunai->delete();
 
+=======
+        // dd($nomor_transaksi);
+        $purchase_tunai = Purchase_Form_Tunai::find($nomor_transaksi);
+        $purchase_tunai->delete();
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         return redirect('/app/purchase');
     }
 
     public function purchase_kredit_delete($nomor_transaksi) {
+<<<<<<< HEAD
         $purchase_kredit = Purchase_Form_Kredit::find($nomor_transaksi);
         $purchase_kredit->delete();
 
@@ -299,6 +457,16 @@ class PurchaseSalesController extends Controller
     ////////////////////////////////////////////////////////////
     //// SALES
     ////////////////////////////////////////////////////////////
+=======
+        // dd($nomor_transaksi);
+        $purchase_kredit = Purchase_Form_Kredit::find($nomor_transaksi);
+        $purchase_kredit->delete();
+        return redirect('/app/purchase');
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // SALES
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
     public function sales()
     {
         $user_id = session()->get('user_id');
@@ -307,7 +475,10 @@ class PurchaseSalesController extends Controller
         if (!Modal_Awal::where('user_id', $user_id)->exists())
             return redirect()->route('modal_awal')->with('emptyModalAwal', 'Pastikan Modal Awal diisikan terlebih dahulu, sebelum mengisi yang lainnya');
 
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $sales_form_tunai = DB::table('sales_form_tunai')->get();
             $sales_form_kredit = DB::table('sales_form_kredit')->get();
@@ -319,10 +490,15 @@ class PurchaseSalesController extends Controller
 
     public function sales_form_tunai()
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
         if (session()->has('hasLogin')) {
             $nomor_transaksi = DB::selectOne("select getNewId('sales_form_tunai') as value from dual")->value;
             
+=======
+        if (session()->has('hasLogin')) {
+            $nomor_transaksi = DB::selectOne("select getNewId('sales_form_tunai') as value from dual")->value;
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             return view('app/sales/sales_form_tunai', compact('nomor_transaksi'));
         } 
         return redirect()->route('login')->with('loginFirst', 'Anda harus login terlebih dahulu');
@@ -330,8 +506,11 @@ class PurchaseSalesController extends Controller
 
     public function sales_form_tunai_post(Request $request)
     {
+<<<<<<< HEAD
         $user_id = session()->get('user_id');
 
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // Validate if there's no empty fields (tanggal, produk yang terjual, dan jumlah barang)
         $validator = Validator::make($request->all(), [
             'tanggalTransaksi' => 'required',
@@ -342,6 +521,12 @@ class PurchaseSalesController extends Controller
         if ($validator->fails())
             return redirect()->route('sales_form_tunai')->with('emptyFields', 'Pastikan isian tanggal, produk yang terjual, dan jumlah barang tidak kosong');
 
+<<<<<<< HEAD
+=======
+
+        $user_id = session()->get('user_id');
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // Sales Form Tunai
         $sales_form_tunai = new Sales_Form_Tunai();
         $sales_form_tunai->user_id = session()->get('user_id');
@@ -351,20 +536,40 @@ class PurchaseSalesController extends Controller
         $sales_form_tunai->diskon_penjualan = $request->diskonPenjualan;
         $sales_form_tunai->produk_yang_terjual = $request->produkYangTerjual;
         $sales_form_tunai->pajak = $request->pajak;
+<<<<<<< HEAD
         // JUMLAH BARANG
         $satuanBarang = $request->satuanBarang;
         $sales_form_tunai->jumlah_barang = $satuanBarang * $request->jumlahBarang;
         // HARGA SATUAN
+=======
+
+            // JUMLAH BARANG
+        $satuanBarang = $request->satuanBarang;
+        $sales_form_tunai->jumlah_barang = $satuanBarang * $request->jumlahBarang;
+        
+            // HARGA SATUAN
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $sales_form_tunai->harga_satuan = $request->hargaSatuan;
         $sales_form_tunai->harga_satuan = Str::replace('.','',$sales_form_tunai->harga_satuan);
         $sales_form_tunai->harga_satuan = Str::replace('Rp ','',$sales_form_tunai->harga_satuan);
         $sales_form_tunai->harga_satuan = (int)($sales_form_tunai->harga_satuan);
+<<<<<<< HEAD
+=======
+        
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // HARGA TOTAL
         $persentaseDiskon = $request->diskonPenjualan / 100 * ($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan);
         $persentasePajak = $request->pajak * $persentaseDiskon / 100;
         $sales_form_tunai->total_penjualan = (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+<<<<<<< HEAD
         $sales_form_tunai->save();
 
+=======
+
+        $sales_form_tunai->save();
+
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // ASSET LANCAR
         $asset = new Asset();
         $asset->user_id = session()->get('user_id');
@@ -384,9 +589,17 @@ class PurchaseSalesController extends Controller
         // STOK BARANG
         $lower_produkYangTerjual = Str::lower($request->produkYangTerjual);
         $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangTerjual, $user_id]);
+<<<<<<< HEAD
         
         if($barang_yang_sama) { // TAMBAH STOK
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+=======
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
             $barang_yang_sama->total_harga -= (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
@@ -394,6 +607,19 @@ class PurchaseSalesController extends Controller
             return redirect('/app/sales')->with('salesBelumDitambahkan', 'Barang Terjual yang diisikan belum ada di Stok Barang!');
         }
 
+<<<<<<< HEAD
+=======
+
+        // MODAL
+        // $modal = new Modal();
+        // $modal->user_id = session()->get('user_id');
+        // $modal->modal_id = DB::selectOne("select getNewId('modal') as value from dual")->value;
+        // $modal->nama_modal = "Persediaan barang dagang";
+        // $modal->harga_modal = (($sales_form_tunai->jumlah_barang* $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
+        // $modal->save();
+
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         // BUKU KAS
         $buku_kas = new Buku_Kas();
         $buku_kas->user_id = session()->get('user_id');
@@ -401,6 +627,10 @@ class PurchaseSalesController extends Controller
         $buku_kas->nama_pemasukkan = "Penjualan Tunai";
         $buku_kas->harga_pemasukkan = (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $buku_kas->tanggal = $request->tanggalTransaksi;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $buku_kas->save();
 
 
@@ -410,13 +640,21 @@ class PurchaseSalesController extends Controller
         $kas = Asset::find($kas[0]->nomor_asset);
         $kas->harga_asset += (($sales_form_tunai->jumlah_barang * $sales_form_tunai->harga_satuan) - $persentaseDiskon) + $persentasePajak;
         $kas->update();
+<<<<<<< HEAD
+=======
+        // dd($kas);
+
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
 
         return redirect()->route('sales')->with('successSalesFormTunai', 'Pemasukan Pembayaran Secara Tunai Sukses!');
     }
 
     public function sales_tunai_detail($nomor_transaksi)
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $sales_form_tunai = DB::select('select * from sales_form_tunai where sales_form_tunai.nomor_transaksi = ? and sales_form_tunai.user_id = ?', [$nomor_transaksi, $user_id]);
@@ -490,6 +728,10 @@ class PurchaseSalesController extends Controller
         $asset->nama_asset = "Piutang";
         $asset->jenis_asset = "Asset Lancar";
         $asset->harga_asset = ((($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak);
+<<<<<<< HEAD
+=======
+        // dd($asset->harga_asset);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $asset->save();
 
 
@@ -523,9 +765,17 @@ class PurchaseSalesController extends Controller
         // STOK BARANG
         $lower_produkYangTerjual = Str::lower($request->produkYangTerjual);
         $barang_yang_sama = DB::select('select * from stok_barang where stok_barang.nama_barang = ? and stok_barang.user_id = ?', [$lower_produkYangTerjual, $user_id]);
+<<<<<<< HEAD
         
         if($barang_yang_sama) { // TAMBAH STOK
             $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+=======
+        // dd($barang_yang_sama);
+        
+        if($barang_yang_sama) { // TAMBAH STOK
+            $barang_yang_sama = Stok_Barang::find($barang_yang_sama[0]->stok_id);
+            // dd($barang_yang_sama);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
             $barang_yang_sama->jumlah_stok -= $satuanBarang * $request->jumlahBarang;
             $barang_yang_sama->total_harga -= (($sales_form_kredit->jumlah_barang * $sales_form_kredit->harga_satuan) - $persentaseDiskon) + $persentasePajak;
             $barang_yang_sama->update();
@@ -549,7 +799,10 @@ class PurchaseSalesController extends Controller
 
     public function sales_form_kredit()
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $nomor_transaksi = DB::selectOne("select getNewId('sales_form_kredit') as value from dual")->value;
@@ -561,7 +814,10 @@ class PurchaseSalesController extends Controller
 
     public function sales_kredit_detail($nomor_transaksi)
     {
+<<<<<<< HEAD
         // checks if the user is already logged in by checking the session status
+=======
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         if (session()->has('hasLogin')) {
             $user_id = session()->get('user_id');
             $sales_form_kredit = DB::select('select * from sales_form_kredit where sales_form_kredit.nomor_transaksi = ? and sales_form_kredit.user_id = ?', [$nomor_transaksi, $user_id]);
@@ -571,12 +827,20 @@ class PurchaseSalesController extends Controller
     }
 
     public function sales_tunai_delete($nomor_transaksi) {
+<<<<<<< HEAD
+=======
+        // dd($nomor_transaksi);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $sales_tunai = Sales_Form_Tunai::find($nomor_transaksi);
         $sales_tunai->delete();
         return redirect('/app/sales');
     }
 
     public function sales_kredit_delete($nomor_transaksi) {
+<<<<<<< HEAD
+=======
+        // dd($nomor_transaksi);
+>>>>>>> c465d62cfca7b4032b4cd5560b34f1f36993b1f2
         $sales_kredit = Sales_Form_Kredit::find($nomor_transaksi);
         $sales_kredit->delete();
         return redirect('/app/sales');

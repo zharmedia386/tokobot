@@ -1,7 +1,7 @@
 
-# Delicacy Food - Healthy Food Restaurant Management System
+# Tokobot
 
-Aims to provide information systems for some kinda features and user's roles of any small business that focus on food sales and support SDGs by encouraging certain small business in around indonesia to have a decent work and economic growth
+The Community Partnership Program (PKM) with the title "Development of a Financial Management Application for Mosque-Owned Enterprises to Empower Mosque Congregants in Rancamulya Village" involves analysis, design, and implementation of the UMKM Masjid application, as well as socialization of its usage.
 
 
 ## Requirements
@@ -14,7 +14,7 @@ Aims to provide information systems for some kinda features and user's roles of 
 ## Installation
 
 * Install [Composer](https://getcomposer.org/download) and [Npm](https://nodejs.org/en/download)
-* Clone the repository: `git clone https://github.com/DelicacyFood/delicacyfood_mysql.git`
+* Clone the repository: `git clone https://github.com/zharmedia386/tokobot.git`
 * Install dependencies: `composer install ; npm install ; npm run dev`
 * Run `cp .env.example .env` for create .env file
 * Run `php artisan migrate --seed` for migration database
@@ -25,74 +25,31 @@ Aims to provide information systems for some kinda features and user's roles of 
 
 ## Features
 
-### 1. Customer
-- Login/logout and register
-- See all of the food menus
-- Order the menus
-- Confirm the order
-- Top up saldo
-- Purchase the products
-- Download CSV invoice files
-- Check all of the own sales
-- Edit user's profile
-- Update password
-- Make a chat with WhatsApp bot
+### 1. Register Account
+Users can register on the application.
 
-### 2. Waiter
-- Login/logout and register 
-- Confirm users's payment
-- Confirm users's top up
-- Check all of sales and orders from the all users
-- See the details orders of any users
-- Update password
+### 2. View product data
+Users can view product details.
 
-### 3. Manager
-- Login/logout and register 
-- Check all of sales and orders from the all users
-- See the details orders of any users
-- Download sales record as an CSV files format
-- Update password
-- Analyze order records in certain times
+### 3. Record sales 
+Users can record sales transactions.
 
-### 4. Driver
-- Login/logout and register 
-- Confirm to deliver any 'payment completed' sales
-- Update password
-  
-## Menus
-- Avocado Salad
-- Fettucini
-- Fusilli
-- Linguine
-- Drained Grain
-- Protein Grain
-- Oat
-- Cocktail
-- Mint Squash
-- Milked Iced Coffee
-- Bread Soup 
-- Carrot Soup
-- Curry Soup
-- Barbeque Salad
-- Home Salad
-- Salad Bowl
-- Fish Salad
-- Spinach Salad
-- Ice Cream
-- Yoghurt
-- Smoothies
-- Fruit Salad
+### 4. View sales data
+Users can view detailed sales transactions.
 
-## Flow Application
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/data-flow.png" />
+### 5. Record purchases
+Users can record purchase transactions.
 
-## Relational Data Model 
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/relational-data-model.png" />
+### 6. View purchase data
+Users can view purchase transactions in detail.
+
+### 7. Generate financial reports
+Users can view financial reports in the form of balance sheets, cash flow statements, and profit and loss statements.
 
 ## Demo
 
 Here's the quick demo of the app :
-https://youtu.be/yUGmpEjEkdk
+https://youtu.be/a8nPGJGxiV4
 
 
 ## License
@@ -101,32 +58,24 @@ https://youtu.be/yUGmpEjEkdk
 
 ## Screenshots
 
+### Authentication Page
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Sign In — Tokobot.png" />\
+
 ### Home Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/home-page.png" />
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Home — Tokobot.png" />
 
-### Dashboard Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/dashboard-page.png" />
-
-### Menu Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/menu-page.png" />
-
-### Cart Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/cart-page.png" />
+### Asset Page
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Asset — Tokobot.png" />
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Form Asset — Tokobot.png" />
 
 ### Invoice Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/invoice-page.png" />
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Purchase Invoice — Tokobot (1).png" />
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Purchase Invoice — Tokobot.png" />
 
-### Driver Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/driver-page.png" />
+### Sales Page
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Penjualan — Tokobot (1).png" />
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Penjualan — Tokobot.png" />
 
-### Restaurant Sales Record Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/manager-1.png" />
-
-### Top up Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/top-up-page.png" />
-
-### User Profile Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/profile-page.png" />
-
-### Analyze Order Records Page
-<img src="https://github.com/DelicacyFood/delicacyfood_mysql/blob/master/public/image-readme/manager-2.png" />
+### Purchase Page
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Pembelian — Tokobot (1).png" />
+<img src="https://github.com/zharmedia386/tokobot/blob/master/public/image-readme/Pembelian — Tokobot.png" />
